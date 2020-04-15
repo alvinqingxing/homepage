@@ -8,4 +8,4 @@ He received his Ph.D. in Political Science from the University of Hawaii at Mano
 
 ### Coding Projects
 
-1. [Number Guesser](https://alvinqingxing.github.io/Number-Guesser/) // [Source Code](https://alvinqingxing.github.io/Number-Guesser/) 
+1. [Number Guesser](https://alvinqingxing.github.io/Number-Guesser/) // [Source Code](https://github.com/alvinqingxing/Number-Guesser) 
