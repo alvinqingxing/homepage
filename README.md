@@ -1,6 +1,6 @@
-## Alvin is a writer and a former educator
+<img src="Alvin.jpg" width="150" height="150" align="right">
 
-<img src="Alvin.jpg" width="150" height="150" align="left">
+## Alvin is a writer and a former educator
 
 He received his Ph.D. in Political Science from the University of Hawaii at Manoa in 2011, and he has taught at Pannasastra University of Cambodia, the University of Hawaii at Manoa, and the American University of Nigeria.
 
