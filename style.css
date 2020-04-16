@@ -130,3 +130,33 @@ img {
 #Academia {
 	text-align: center;
 }
+input[type=text], select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+input[type=submit] {
+  color: #4A4A4A;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.3);
+  padding: 8px 24px;
+  font-weight: lighter;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  outline-offset: -1px;
+  outline-color: #C7D6D5;
+}
+input[type=submit]:hover {
+  opacity: 1;
+}
+label {
+  font-family: 'Open Sans', sans-serif;
+  color: #7A7D7D;
+  font-size: 14
+  font-weight: lighter;
+}

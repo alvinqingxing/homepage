@@ -41,6 +41,7 @@
       <button class="tablinks" onclick="openTab(event, 'Coder')" id="defaultOpen">Coder</button>
       <button class="tablinks" onclick="openTab(event, 'Educator')">Educator</button>
       <button class="tablinks" onclick="openTab(event, 'Writer')">Writer</button>
+      <button class="tablinks" onclick="openTab(event, 'Contact')"><i class="far fa-envelope"></i></button>
     </div>
     <div id="Coder" class="tabcontent">
       <img src="images/Alvin.jpg" alt="Alvin"  width="200">
@@ -122,10 +123,23 @@
       <p>Lim, A. C. H. (2010). <a href="https://muse.jhu.edu/article/407138" target="_blank">Breakfast with the Dictator: Memory, Atrocity, and Affect</a>. <em>Theory &amp; Event</em>, <em>13</em>(4).</p>
       <p id="Academia">Visit <a href="https://manoa-hawaii.academia.edu/AlvinLim" target="_blank">Alvin's Academia.edu page</a> for the full list of his publications.</p>
     </div>
+    <div id="Contact" class="tabcontent">
+		<div class="container">
+			<h4>Contact me</h4>
+		  	<form action="https://formspree.io/xpzjezya" method="POST">
+		    <label for="name"><i class="far fa-user-circle"></i> Name</label>
+		    <input type="text" id="name" name="name" placeholder="Your name..">
+		    <label for="email"><i class="fas fa-at"></i> Email</label>
+		    <input type="text" id="email" name="email" placeholder="Your email address..">
+		    <label for="message"><i class="far fa-keyboard"></i> Message</label>
+		    <textarea id="message" name="message" placeholder="Write something.." style="height:200px"></textarea>
+		    <input type="submit" value="Submit">
+		  	</form>
+		</div>
+	</div>
     <script type="text/javascript">document.getElementById("defaultOpen").click();</script>
     <div class="footer">
       <div class="footer-links">
-      	<a href="mailto:alvinch@hawaii.edu" alt="Email"><i class="far fa-envelope"></i></a>
         <a href="https://linkedin.com/in/alvinqingxing" alt="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
         <a href="https://orcid.org/0000-0001-9356-2122" alt="ORCID" target="_blank"><i class="fas fa-book"></i></a>
         <a href="https://manoa-hawaii.academia.edu/AlvinLim" alt="Academia.edu" target="_blank"><i class="fas fa-school"></i></a>
