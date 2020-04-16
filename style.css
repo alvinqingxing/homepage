@@ -1,0 +1,127 @@
+/* style.css */
+body{
+  background: #FFFBFE;
+  color: #565254;
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+}
+h1{
+  font-family: 'Roboto', sans-serif;
+  color: #7A7D7D;
+  font-weight: lighter;
+}
+h2 {
+  font-family: 'Roboto', sans-serif;
+  color: #7A7D7D;
+  font-size: 18
+  font-weight: lighter;
+}
+a {
+  color: #7A7D7D;
+}
+a:hover {
+  text-decoration: none;
+  color: #D0CFCF;
+}
+ol {
+  list-style-position: inside;
+}
+ul {
+  list-style-position: inside;
+}
+img {
+  float: left;
+  padding: 20px;
+}
+.books {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tab {
+  overflow: hidden;
+  border: none;
+  background-color: #f1f1f1;
+}
+.tab button {
+  color: #4A4A4A;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: lighter;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+.tab button:hover {
+  opacity: 1;
+}
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+#footer a {
+  color: #7A7D7D;
+}
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
+}
+.banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+}
+.banner p {
+  font-size: 20px;
+  color: white;
+  opacity: .7;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.tabs-underlined {
+  display: flex;
+  align-items: center;
+}
+.tabs-underlined .tab-underlined {
+  color: black;
+  padding: 8px;
+  margin: 8px 16px;
+  opacity: .4;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+}
+.tabs-underlined .tab-underlined.active {
+  opacity: 1;
+  border-bottom: 3px solid #555555;
+}
+.footer {
+  background: #F4F4F4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0px 50px;
+  color: rgba(0,0,0,0.3);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+.footer-links a {
+  color: black;
+  opacity: 0.15;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+.footer .fa-heart {
+  color: #D23333;
+}
