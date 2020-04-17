@@ -38,6 +38,9 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+.round {
+  border-radius: 50%;
+}
 .tab {
   overflow: hidden;
   border: none;
