@@ -127,7 +127,10 @@ img {
 .footer .fa-heart {
   color: #D23333;
 }
-#Academia {
+.biblio {
+  font-family: 'Noto Serif SC', serif;
+}
+.center {
 	text-align: center;
 }
 input[type=text], select, textarea {
