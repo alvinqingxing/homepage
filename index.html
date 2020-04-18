@@ -26,7 +26,8 @@
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
       }
-     </script>
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>Alvin Lim</title>
   </head>
   <body>
@@ -126,6 +127,7 @@
 		    <input type="text" id="email" name="email" placeholder="Your email address..">
 		    <label for="message"><i class="far fa-keyboard"></i> Message</label>
 		    <textarea id="message" name="message" placeholder="Write something.." style="height:200px"></textarea>
+		    <div class="g-recaptcha" data-sitekey="6Le1TYQUAAAAADAeaWouCMfQmAQA4ZYQL4nUxpMs"></div>
 		    <input type="submit" value="Submit">
 		  	</form>
 		</div>
