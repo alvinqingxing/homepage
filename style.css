@@ -128,10 +128,10 @@ img {
   font-family: 'Noto Serif SC', serif;
 }
 .center {
-	text-align: center;
+  text-align: center;
 }
 .g-recaptcha {
-  padding: 5px;
+  padding-bottom: 12px;
 }
 input[type=text], select, textarea {
   width: 100%; /* Full width */
