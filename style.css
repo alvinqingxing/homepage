@@ -164,8 +164,6 @@ label {
 }
 .card {
   overflow: hidden;
-  height: 120px;
-  display: flex;
-  align-items: center;
+  display: block;
 }
 
