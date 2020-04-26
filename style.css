@@ -22,15 +22,11 @@ a:hover {
   text-decoration: none;
   color: #D0CFCF;
 }
-ol {
-  list-style-position: inside;
-}
-ul {
-  list-style-position: inside;
-}
 img {
-  float: left;
   padding: 20px;
+}
+.left {
+  float: left;
 }
 .books {
   display: block;
@@ -39,6 +35,11 @@ img {
 }
 .round {
   border-radius: 50%;
+}
+.roundedge {
+  border-radius: 5%;
+  padding: 0;
+  box-shadow: 3px 3px 3px #888888;
 }
 .tab {
   overflow: hidden;
@@ -82,6 +83,10 @@ img {
   color: white;
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.card {
+  overflow: hidden;
+  display: block;
 }
 .tabs-underlined {
   display: flex;
@@ -162,8 +167,3 @@ label {
   font-size: 14;
   font-weight: lighter;
 }
-.card {
-  overflow: hidden;
-  display: block;
-}
-
