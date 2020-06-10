@@ -9,11 +9,12 @@ h2 {
   font-weight: lighter;
 }
 a {
-  color: #7A7D7D;
+  color: #564592;
+  font-weight: light;
 }
 a:hover {
   text-decoration: none;
-  color: #D0CFCF;
+  color: #7A7D7D;
 }
 body {
   background-color: #373E40;
@@ -105,15 +106,14 @@ ul {
 }
 .card-category {
   background-size: cover;
-  background-color: #F4F4F4;
+  background-color: #C5C392;
   background-position: center;
-  height: 400px;
+  height: 450px;
   justify-content: center;
   text-align: center;
   color: black;
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
-  font-weight: lighter;
   padding: 16px;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
