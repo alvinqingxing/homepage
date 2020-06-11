@@ -1,18 +1,19 @@
 h1 {
-  font-family: 'Ralway', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #7A7D7D;
   font-weight: lighter;
 }
 h2 {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #7A7D7D;
   font-weight: lighter;
 }
 a {
   color: #564592;
-  font-weight: light;
+  font-weight: normal;
 }
 a:hover {
+  font-weight: lighter;
   text-decoration: none;
   color: #7A7D7D;
 }
@@ -21,6 +22,7 @@ body {
 }
 img {
   padding: 20px;
+  width: 200px;
 }
 input[type=text], select, textarea {
   width: 100%;
@@ -37,7 +39,7 @@ input[type=submit] {
   border-radius: 20px;
   border: 1px solid rgba(0,0,0,0.3);
   padding: 8px 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
   opacity: 0.6;
   transition: opacity 0.3s ease;
@@ -112,7 +114,7 @@ ul {
   justify-content: center;
   text-align: center;
   color: black;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 15px;
   padding: 16px;
   border-radius: 5px;
