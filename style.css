@@ -1,7 +1,7 @@
 h1 {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #7A7D7D;
-  font-weight: lighter;
+  font-weight: normal;
 }
 h2 {
   font-family: 'Roboto', sans-serif;
@@ -64,10 +64,16 @@ ul {
 }
 .banner h1 {
   margin: 0;
-  color: white;
+  color: #F8F8F8;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
+  font-family: 'Raleway', sans-serif;
   font-weight: bold;
+  font-size: 32px;
+}
+.banner h2 {
+  font-family: 'Rubik', sans-serif;
+  opacity: 0.8;
+  font-weight: normal;
 }
 .banner p {
   font-size: 20px;
@@ -114,7 +120,7 @@ ul {
   justify-content: center;
   text-align: center;
   color: black;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 15px;
   padding: 16px;
   border-radius: 5px;
