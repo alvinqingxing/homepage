@@ -1,0 +1,22 @@
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
+}
+.banner h1 {
+  margin: 0;
+  color: #F8F8F8;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+  padding-left: 10px
+}
+.banner p {
+  font-size: 20px;
+  color: #F8F8F8;
+  opacity: .7;
+  font-family: 'Rubik', sans-serif;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  padding-left: 10px;
+}

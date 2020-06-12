@@ -1,0 +1,25 @@
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+input[type=submit] {
+  color: #4A4A4A;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.3);
+  padding: 8px 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  outline-offset: -1px;
+  outline-color: #C7D6D5;
+}
+input[type=submit]:hover {
+  opacity: 1;
+}
