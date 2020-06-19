@@ -5,20 +5,18 @@
 @import url('components/banner.css');
 
 a {
-  color: #564592;
+  color: #CFD8D7;
   font-weight: normal;
 }
 a:hover {
-  font-weight: lighter;
+  color: #F6F7F8;
   text-decoration: none;
-  color: #7A7D7D;
 }
 body {
-  background-color: white;
+  background-color: #0B132B;
 }
 img {
   padding: 20px;
-  width: 200px;
 }
 ul {
   list-style-type: none;
@@ -36,6 +34,7 @@ ul {
 }
 .round {
   border-radius: 50%;
+  width: 200px;
 }
 .g-recaptcha {
   padding-bottom: 12px;

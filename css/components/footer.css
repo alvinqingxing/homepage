@@ -1,5 +1,5 @@
 .footer {
-  background: #F4F4F4;
+  background: #0B132B;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -14,7 +14,7 @@
   align-items: center;
 }
 .footer-links a {
-  color: black;
+  color: #FCF7F8;
   opacity: 0.30;
   text-decoration: none;
   font-size: 20px;
