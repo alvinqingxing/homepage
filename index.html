@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131545679-2"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'UA-131545679-2');
-	</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131545679-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-131545679-2');
+    function openTab(evt, cityName) {
+      const tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      const tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+      }
+  </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-    <link href='style.css' rel='stylesheet'>
+    <link href='css/style.css' rel='stylesheet'>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <title>Alvin Lim</title>
   </head>
   <body>
     <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('images/stars.jpg');">
-      <div class="container">
+      <div class="container-banner">
         <h1>Alvin Lim</h1>
-        <p>Educator turned Coder</p>
+        <p>Ruby Developer</p>
+        </div>
       </div>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'home')" id="defaultOpen">About Me</button>
+      <button class="tablinks" onclick="openTab(event, 'code')">Coder</button>
+      <button class="tablinks" onclick="openTab(event, 'educator')">Educator</button>
+      <button class="tablinks" onclick="openTab(event, 'publications')">Publications</button>
+      <button class="tablinks" onclick="openTab(event, 'contact')">Contact Me</button>
     </div>
     <div class="container">
-      <div class="cards">
-        <div class="card-category">
-          <img src="images/Alvin.jpg" alt="Alvin" class="round">
+      <div id="home" class="tabcontent">
+        <img src="images/Alvin.jpg" alt="Alvin" class="round">
           <p>I am learning to code at <a href="https://www.lewagon.com/singapore" target="_blank">Le Wagon</a>.</p>
           <p>I received my Ph.D. in Political Science from the <a href="https://manoa.hawaii.edu/" target="_blank">University of Hawaii at Manoa</a> in 2011.</p>
-          </div>
-        <div class="card-category">
-          <img src="images/chuck.jpg" alt="Code" class="round">
+        </div>
+      <div id="code" class="tabcontent">
+        <img src="images/chuck.jpg" alt="Code" class="round">
           <p>Some of my recent coding projects include:</p>
            <ul>
              <li><a href="https://github.com/alvinqingxing/codewars" target="_blank">Codewars solutions</a></li>
@@ -44,34 +61,36 @@
              <li><a href="https://alvinqingxing.github.io/Color-a-Pegasus" target="_blank">Color-a-Pegasus</a> [<a href="https://github.com/alvinqingxing/Color-a-Pegasus" target="_blank">source code</a>]</li>
              <li><a href="https://alvinqingxing.github.io/Number-Guesser/" target="_blank">Number Guesser</a> [<a href="https://github.com/alvinqingxing/Number-Guesser" target="_blank">source code</a>]</li>
            </ul>
-          </div>
-        <div class="card-category">
-          <img src="images/AUN.jpg" alt="AUN" class="round">
+        </div>
+      <div id="educator" class="tabcontent">
+        <img src="images/AUN.jpg" alt="AUN" class="round">
           <p>During my career as an international educator, I taught at <a href="http://www.puc.edu.kh/" target="_blank">Pannasastra University of Cambodia</a>, the <a href="https://manoa.hawaii.edu/" target="_blank">University of Hawaii at Manoa</a>, and the <a href="https://www.aun.edu.ng/" target="_blank">American University of Nigeria</a>.</p>
           <p>Details of my career history can be found on my <a href="https://linkedin.com/in/alvinqingxing" alt="LinkedIn" target="_blank">LinkedIn profile</a>.</p>
-          </div>
-        <div class="card-category">
-          <img src="images/XJP.jpg" alt="China and Southeast Asia in the Xi Jinping Era">
-          <p>My publications include <em><a href="https://rowman.com/ISBN/9781498581110/China-and-Southeast-Asia-in-the-Xi-Jinping-Era" target="_blank">China and Southeast Asia in the Xi Jinping Era</a></em> and <em><a href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358" target="_blank">Cambodia and the Politics of Aesthetics</a></em>. My writing portfolio is available at my <a href="https://manoa-hawaii.academia.edu/AlvinLim" alt="Academia.edu" target="_blank">Academia.edu page</a>.</p>
-          </div>
-        <div class="card-category">
-            <h4><i class="far fa-envelope"></i> Contact Me</h4>
-            <form action="https://formspree.io/xpzjezya" method="POST">
-            <input type="text" id="email" name="email" placeholder="Your email address...">
-            <textarea id="message" name="message" placeholder="Your message..." style="height:120px"></textarea>
-            <div class="g-recaptcha" data-sitekey="6LcE_O0UAAAAAL19dqrwi7XVy4wEx3G1jv1mGh4z"></div>
-            <input type="submit" value="Submit">
-            </form>
-          </div>
         </div>
-      </div>
+      <div id="publications" class="tabcontent">
+        <img src="images/XJP.jpg" alt="China and Southeast Asia in the Xi Jinping Era">
+          <p>My publications include <em><a href="https://rowman.com/ISBN/9781498581110/China-and-Southeast-Asia-in-the-Xi-Jinping-Era" target="_blank">China and Southeast Asia in the Xi Jinping Era</a></em> and <em><a href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358" target="_blank">Cambodia and the Politics of Aesthetics</a></em>. My writing portfolio is available at my <a href="https://manoa-hawaii.academia.edu/AlvinLim" alt="Academia.edu" target="_blank">Academia.edu page</a>.</p>
+        </div>
+      <div id="contact" class="tabcontent">
+        <h4><i class="far fa-envelope"></i> Contact Me</h4>
+          <form action="https://formspree.io/xpzjezya" method="POST">
+          <input type="text" id="email" name="email" placeholder="Your email address...">
+          <textarea id="message" name="message" placeholder="Your message..." style="height:120px"></textarea>
+          <div class="g-recaptcha" data-sitekey="6LcE_O0UAAAAAL19dqrwi7XVy4wEx3G1jv1mGh4z"></div>
+          <input type="submit" value="Submit" class="submit">
+          </form>
+        </div>
+    </div>
     <div class="footer">
       <div class="footer-links">
         <a href="https://linkedin.com/in/alvinqingxing" alt="LinkedIn" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
         <a href="https://scholar.google.com/citations?user=-85i0iwAAAAJ" alt="Google Scholar" title="Google Scholar" target="_blank"><i class="fab fa-google"></i></a>
         <a href="https://manoa-hawaii.academia.edu/AlvinLim" alt="Academia.edu" title="Academia.edu" target="_blank"><i class="fas fa-book"></i></a>
         <a href="https://github.com/alvinqingxing/" target="_blank"><i class="fab fa-github" alt="GitHub" title="GitHub" target="_blank"></i></a>
-        </div>
+      </div>
     </div>
+    <script>
+      document.getElementById("defaultOpen").click();
+    </script>
   </body>
 </html>
