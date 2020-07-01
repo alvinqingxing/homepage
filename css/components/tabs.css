@@ -34,11 +34,12 @@
   padding: 6px 12px;
   animation: fadeEffect 1s;
   background-size: cover;
-  background-color: #0B132B;
+  background-color: rgba(11, 19, 43, .1);
   background-position: center;
   color: white;
   font-family: 'Poppins', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: normal;
   padding: 16px;
 }
 @keyframes fadeEffect {
