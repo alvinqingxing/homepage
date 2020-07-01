@@ -12,9 +12,20 @@ a:hover {
   color: #F6F7F8;
   text-decoration: none;
 }
-body {
+body, html {
+  height: 100%;
+  padding: 5px;
+  color: white;
   background-color: #0B132B;
+  background-image: url("../images/stars.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Poppins', cursive;
+  text-align: center;
 }
+
 img {
   padding: 20px;
 }

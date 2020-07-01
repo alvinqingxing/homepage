@@ -4,15 +4,16 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: #0B132B;
+  background: transparent;
   margin-bottom: 30px;
 }
 .tab button {
+  color: black;
   background-color: #CFD8D7;
   border: none;
   outline: none;
   cursor: pointer;
-  opacity: .4;
+  opacity: .6;
   padding: 14px 16px;
   transition: 0.3s;
 }
