@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Poppins:wght@300;400;700&display=swap');
 @import url('components/tabs.css');
 @import url('components/form.css');
 @import url('components/footer.css');
 @import url('components/banner.css');
+@import url('components/typing.css');
 
 a {
   color: #CFD8D7;
@@ -39,9 +40,6 @@ ul {
   text-align: center;
   justify-content: center;
   align-items: center;
-}
-.container-banner {
-  text-align: center;
 }
 .round {
   border-radius: 50%;
