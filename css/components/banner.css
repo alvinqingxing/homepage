@@ -1,6 +1,23 @@
 .banner {
-  padding: 80px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  padding: 40px 0;
+  font-weight: bold;
+}
+.banner h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  transition: opacity 1s ease;
+}
+.banner p {
+  font-size: 20px;
+  font-weight: bold;
+  transition: opacity 1s ease;
+}
+.banner h1:hover {
+  opacity: .6;
+}
+.banner p:hover {
+  opacity: .6;
 }
