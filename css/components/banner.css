@@ -8,11 +8,13 @@
   margin: 0;
   font-size: 32px;
   font-weight: bold;
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
   transition: opacity 1s ease;
 }
 .banner p {
   font-size: 20px;
   font-weight: bold;
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
   transition: opacity 1s ease;
 }
 .banner h1:hover {

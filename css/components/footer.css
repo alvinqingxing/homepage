@@ -13,12 +13,11 @@
   align-items: center;
 }
 .footer-links a {
-  color: white;
-  opacity: .5;
+  color: #fcccd4;
   text-decoration: none;
   font-size: 20px;
   padding: 0px 10px;
 }
 .footer-links a:hover {
-  opacity: 1;
+  color: white;
 }

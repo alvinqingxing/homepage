@@ -5,11 +5,11 @@
 @import url('components/banner.css');
 
 a {
-  color: #CFD8D7;
-  font-weight: normal;
+  color: #fcccd4;
+  text-decoration: none;
 }
 a:hover {
-  color: #F6F7F8;
+  color: white;
   text-decoration: none;
 }
 body, html {
@@ -25,9 +25,9 @@ body, html {
   font-family: 'Poppins', sans-serif;
   text-align: center;
 }
-
 img {
-  padding: 20px;
+  margin: 20px;
+  border: 1px solid #fcccd4;
 }
 ul {
   list-style-type: none;
