@@ -5,7 +5,7 @@
 @import url('components/banner.css');
 
 a {
-  color: #fcccd4;
+  color: #cce6ff;
   text-decoration: none;
 }
 a:hover {
@@ -17,12 +17,13 @@ body, html {
   padding: 5px;
   color: white;
   background-color: black;
-  background-image: url("https://res.cloudinary.com/dnxszleia/image/upload/v1594546141/background_bhti3i.jpg");
+  background-image: url("https://res.cloudinary.com/dnxszleia/image/upload/v1594607645/jellyfish_swruzd.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   font-family: 'Poppins', sans-serif;
+  font-weight: bold;
   text-align: center;
 }
 img {

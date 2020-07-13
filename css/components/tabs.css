@@ -9,7 +9,7 @@
 }
 .tab button {
   color: black;
-  background-color: #CFD8D7;
+  background-color: #cce6ff;
   border: none;
   outline: none;
   cursor: pointer;
@@ -36,10 +36,6 @@
   background-size: cover;
   background-color: transparent;
   background-position: center;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: normal;
   padding: 16px;
 }
 @keyframes fadeEffect {

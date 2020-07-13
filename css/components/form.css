@@ -13,14 +13,13 @@ input[type=text], select, textarea {
 }
 input[type=submit] {
   color: black;
+  background-color: #cce6ff;
   border-radius: 20px;
   padding: 8px 24px;
   font-family: 'Poppins', sans-serif;
   font-weight: normal;
   opacity: 0.7;
   transition: opacity 0.3s ease;
-  outline-offset: -1px;
-  outline-color: #C7D6D5;
 }
 input[type=submit]:hover {
   opacity: 1;
