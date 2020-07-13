@@ -3,18 +3,18 @@
 }
 .banner h1 {
   margin: 0;
+  color: #cce6ff;
   font-size: 32px;
-  font-weight: bold;
-  transition: opacity 1s ease;
+  font-weight: bolder;
 }
 .banner p {
+  color: #cce6ff;
   font-size: 20px;
-  font-weight: bold;
-  transition: opacity 1s ease;
+  font-weight: bolder;
 }
 .banner h1:hover {
-  opacity: .6;
+  color: white;
 }
 .banner p:hover {
-  opacity: .6;
+  color: white;
 }
