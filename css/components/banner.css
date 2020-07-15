@@ -4,8 +4,10 @@
 .banner h1 {
   margin: 0;
   color: #cce6ff;
-  font-size: 32px;
-  font-weight: bolder;
+  font-size: 48px;
+  font-family: 'Molle', cursive;
+  font-weight: bold;
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }
 .banner p {
   color: #cce6ff;
