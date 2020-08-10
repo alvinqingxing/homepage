@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Molle:ital@1&family=Poppins:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=Righteous&display=swap');
 @import url('components/tabs.css');
 @import url('components/form.css');
 @import url('components/footer.css');
@@ -16,14 +16,14 @@ body, html {
   height: 100%;
   padding: 5px;
   color: white;
-  background-color: black;
-  background-image: url("../images/background.jpg");
+  background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)),
+  url("../images/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  font-family: 'Poppins', sans-serif;
-  font-weight: normal;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: normal;
   text-align: center;
 }
 img {
