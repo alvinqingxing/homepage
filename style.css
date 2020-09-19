@@ -1,17 +1,16 @@
-@charset "UTF-8";
 @font-face {
   font-family: "untitled-font-1";
-  src: url(./fonts/untitled-font-1.woff);
+  src: url(fonts/untitled-font-1.woff);
   font-display: swap;
 }
 @font-face {
   font-family: "Ubuntu";
-  src: url(./fonts/ubuntu-regular-webfont.woff2);
+  src: url(fonts/ubuntu-regular-webfont.woff2);
   font-display: swap;
 }
 @font-face {
   font-family: "Righteous";
-  src: url(./fonts/righteous-regular-webfont.woff2);
+  src: url(fonts/righteous-regular-webfont.woff2);
   font-display: swap;
 }
 a {
@@ -28,7 +27,7 @@ html {
   padding: 5px;
   color: white;
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("../images/background.webp");
+    url("images/background.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
