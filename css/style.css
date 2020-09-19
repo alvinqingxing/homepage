@@ -1,9 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&family=Righteous&display=swap");
 @import url("components/tabs.css");
 @import url("components/form.css");
 @import url("components/footer.css");
 @import url("components/banner.css");
-
+@font-face {
+  font-family: Ubuntu;
+  src: url(../fonts/ubuntu-regular-webfont.woff2);
+}
+@font-face {
+  font-family: Righteous;
+  src: url(../fonts/righteous-regular-webfont.woff2);
+}
 a {
   color: #cce6ff;
   text-decoration: none;
@@ -24,7 +30,7 @@ html {
   background-size: cover;
   background-attachment: fixed;
   font-family: "Ubuntu", sans-serif;
-  font-size: normal;
+  font-size: large;
   text-align: center;
 }
 img {
