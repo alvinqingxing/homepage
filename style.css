@@ -78,7 +78,6 @@ input[type="submit"]:hover {
 }
 .round {
   border-radius: 50%;
-  width: 200px;
 }
 .g-recaptcha {
   padding-bottom: 12px;
