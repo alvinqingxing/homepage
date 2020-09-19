@@ -82,11 +82,6 @@ input[type="submit"]:hover {
 .round {
   border-radius: 50%;
 }
-.g-recaptcha {
-  padding-bottom: 12px;
-  display: inline-block;
-  text-align: center;
-}
 .submit {
   display: block;
   margin: auto;
