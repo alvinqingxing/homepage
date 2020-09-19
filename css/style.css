@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=Righteous&display=swap');
-@import url('components/tabs.css');
-@import url('components/form.css');
-@import url('components/footer.css');
-@import url('components/banner.css');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&family=Righteous&display=swap");
+@import url("components/tabs.css");
+@import url("components/form.css");
+@import url("components/footer.css");
+@import url("components/banner.css");
 
 a {
   color: #cce6ff;
@@ -12,17 +12,18 @@ a:hover {
   color: white;
   text-decoration: none;
 }
-body, html {
+body,
+html {
   height: 100%;
   padding: 5px;
   color: white;
-  background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)),
-  url("../images/background.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../images/background.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-size: normal;
   text-align: center;
 }
