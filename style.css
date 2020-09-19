@@ -2,14 +2,17 @@
 @font-face {
   font-family: "untitled-font-1";
   src: url(./fonts/untitled-font-1.woff);
+  font-display: swap;
 }
 @font-face {
   font-family: "Ubuntu";
   src: url(./fonts/ubuntu-regular-webfont.woff2);
+  font-display: swap;
 }
 @font-face {
   font-family: "Righteous";
   src: url(./fonts/righteous-regular-webfont.woff2);
+  font-display: swap;
 }
 a {
   color: #cce6ff;
@@ -135,14 +138,14 @@ input[type="submit"]:hover {
   font-weight: bold;
   text-shadow: 0 0 3px #ff0000, 0 0 5px #0000ff;
 }
-.banner h3 {
+.banner h2 {
   color: #cce6ff;
   font-weight: bolder;
 }
 .banner h1:hover {
   color: white;
 }
-.banner h3:hover {
+.banner h2:hover {
   color: white;
 }
 .footer {
