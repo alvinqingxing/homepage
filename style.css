@@ -1,0 +1,221 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "untitled-font-1";
+  src: url(./fonts/untitled-font-1.woff);
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url(./fonts/ubuntu-regular-webfont.woff2);
+}
+@font-face {
+  font-family: "Righteous";
+  src: url(./fonts/righteous-regular-webfont.woff2);
+}
+a {
+  color: #cce6ff;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+body,
+html {
+  height: 100%;
+  padding: 5px;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../images/background.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Ubuntu", sans-serif;
+  font-size: large;
+  text-align: center;
+}
+img {
+  margin: 20px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+form {
+  display: block;
+  text-align: center;
+}
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+input[type="submit"] {
+  color: black;
+  background-color: #cce6ff;
+  border-radius: 20px;
+  padding: 8px 24px;
+  font-family: "Ubuntu", sans-serif;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+input[type="submit"]:hover {
+  opacity: 1;
+}
+.container {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.round {
+  border-radius: 50%;
+  width: 200px;
+}
+.g-recaptcha {
+  padding-bottom: 12px;
+  display: inline-block;
+  text-align: center;
+}
+.submit {
+  display: block;
+  margin: auto;
+}
+[data-icon]:before {
+  font-family: "untitled-font-1" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "untitled-font-1" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-google:before {
+  content: "\61";
+}
+.icon-linkedin:before {
+  content: "\62";
+}
+.icon-github:before {
+  content: "\63";
+}
+.icon-feather:before {
+  content: "\64";
+}
+.banner {
+  padding: 40px 0;
+}
+.banner h1 {
+  margin: 0;
+  color: #cce6ff;
+  font-size: 70px;
+  font-family: "Righteous", cursive;
+  font-weight: bold;
+  text-shadow: 0 0 3px #ff0000, 0 0 5px #0000ff;
+}
+.banner h3 {
+  color: #cce6ff;
+  font-weight: bolder;
+}
+.banner h1:hover {
+  color: white;
+}
+.banner h3:hover {
+  color: white;
+}
+.footer {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  height: 50px;
+  padding: 0px 50px;
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+.footer-links a {
+  color: #cce6ff;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 0px 10px;
+  opacity: 0.8;
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+.tab {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: transparent;
+  margin-bottom: 30px;
+}
+.tab button {
+  color: black;
+  background-color: #cce6ff;
+  font-family: "Ubuntu", sans-serif;
+  font-size: large;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+.tab button:hover {
+  opacity: 1;
+  background-color: #ddd;
+}
+.tab button.active {
+  opacity: 1;
+  background-color: #ccc;
+}
+.tabcontent {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  padding: 6px 12px;
+  animation: fadeEffect 1s;
+  background-size: cover;
+  background-color: transparent;
+  background-position: center;
+  padding: 16px;
+}
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

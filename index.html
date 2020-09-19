@@ -5,15 +5,22 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-131545679-2"
     ></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href="style.css" as="style" />
+    <link rel="preload" href="./images/background.webp" as="image" />
+    <link rel="preload" href="./images/Alvin.webp" as="image" />
+    <link rel="preload" href="./images/SavvyGranny.webp" as="image" />
     <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      rel="preload"
+      href="./fonts/righteous-regular-webfont.woff2"
+      as="font"
     />
-    <link href="css/style.css" rel="stylesheet" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="preload" href="./fonts/ubuntu-regular-webfont.woff2" as="font" />
+    <link rel="preload" href="./fonts/untitled-font-1.woff" as="font" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -38,7 +45,7 @@
   <body>
     <div class="banner">
       <h1>alvin Lim</h1>
-      <p>Full-Stack Developer</p>
+      <h3>Full-Stack Developer</h3>
     </div>
     <div class="tab">
       <button
@@ -104,21 +111,8 @@
           >, and
           <a href="https://stripe.com/" target="_blank">payment</a> systems
         </p>
-        <br />
         <h2>Other projects</h2>
         <ul>
-          <li>
-            <a href="https://chuck-norris-php.herokuapp.com/" target="_blank"
-              >Chuck Norris Joke Generator</a
-            >
-            //
-            <a
-              href="https://github.com/alvinqingxing/chuck-norris-php"
-              target="_blank"
-              >source code</a
-            >
-            [PHP]
-          </li>
           <li>
             <a href="https://magic-8-ball-php.herokuapp.com/" target="_blank"
               >Magic 8-Ball</a
@@ -173,13 +167,13 @@
             <a href="https://todo-bubble-alvin.bubbleapps.io/" target="_blank"
               >Things to do</a
             >
-            // no-code [<a href="https://bubble.io" target="_blank">Bubble</a>]
+            // <a href="https://bubble.io" target="_blank">no-code</a> [Bubble]
           </li>
           <li>
             <a href="https://bubble-giphy-clone.bubbleapps.io/" target="_blank"
               >Giphy clone</a
             >
-            // no-code [<a href="https://bubble.io" target="_blank">Bubble</a>]
+            // <a href="https://bubble.io" target="_blank">no-code</a> [Bubble]
           </li>
           <li>
             <a
@@ -196,24 +190,30 @@
             [Rails]
           </li>
           <li>
+            <a href="https://chuck-norris-php.herokuapp.com/" target="_blank"
+              >Chuck Norris Joke Generator</a
+            >
+            //
+            <a
+              href="https://github.com/alvinqingxing/chuck-norris-php"
+              target="_blank"
+              >source code</a
+            >
+            [PHP]
+          </li>
+          <li>
             <a
               href="https://alvinqingxing.github.io/chuck-norris-front/"
               target="_blank"
               >Chuck Norris Joke API</a
             >
-            // source code:
+            //
             <a
               href="https://github.com/alvinqingxing/chuck-norris-api"
               target="_blank"
-              >API</a
+              >source code</a
             >
             [Rails]
-            <a
-              href="https://github.com/alvinqingxing/chuck-norris-front"
-              target="_blank"
-              >front</a
-            >
-            [JavaScript]
           </li>
           <li>
             <a href="https://alvinqingxing.github.io/rainbow/" target="_blank"
@@ -304,38 +304,51 @@
           alt="LinkedIn"
           title="LinkedIn"
           target="_blank"
-          ><i class="fab fa-linkedin"></i
+          ><i class="icon-linkedin"></i
         ></a>
         <a
           href="https://scholar.google.com/citations?user=-85i0iwAAAAJ"
           alt="Google Scholar"
           title="Google Scholar"
           target="_blank"
-          ><i class="fab fa-google"></i
+          ><i class="icon-google"></i
         ></a>
         <a
           href="https://manoa-hawaii.academia.edu/AlvinLim"
           alt="Academia.edu"
           title="Academia.edu"
           target="_blank"
-          ><i class="fas fa-feather-alt"></i
-        ></a>
-        <a
-          href="https://dev.to/alvinqingxing"
-          alt="DEV"
-          title="DEV"
-          target="_blank"
-          ><i class="fab fa-dev"></i
+          ><i class="icon-feather"></i
         ></a>
         <a
           href="https://github.com/alvinqingxing/"
           alt="GitHub"
           title="GitHub"
           target="_blank"
-          ><i class="fab fa-github"></i
+          ><i class="icon-github"></i
         ></a>
       </div>
     </div>
-    <script src="src/script.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-131545679-2");
+      function openTab(evt, tabName) {
+        const tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        const tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+      document.getElementById("defaultOpen").click();
+    </script>
   </body>
 </html>
