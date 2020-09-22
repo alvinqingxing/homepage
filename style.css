@@ -4,37 +4,37 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "Ubuntu";
-  src: url(fonts/ubuntu-regular-webfont.woff2);
+  font-family: "Knewave";
+  src: url(fonts/knewave-regular-webfont.woff2);
   font-display: swap;
 }
 @font-face {
-  font-family: "Righteous";
-  src: url(fonts/righteous-regular-webfont.woff2);
+  font-family: "Dancing Script";
+  src: url(fonts/dancingscript-variablefont_wght-webfont.woff2);
   font-display: swap;
 }
 a {
-  color: #cce6ff;
+  color: #9e2a2b;
+  opacity: 0.7;
   text-decoration: none;
 }
 a:hover {
-  color: white;
-  text-decoration: none;
+  color: #540b0e;
+  opacity: 1;
 }
-body,
-html {
+body {
+  width: 75%;
   height: 100%;
-  padding: 5px;
-  color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("images/background.webp");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  font-family: "Ubuntu", sans-serif;
-  font-size: large;
-  text-align: center;
+  padding: 50px;
+  color: #540b0e;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='Artboard-5' fill='%23e09f3e' fill-opacity='0.3' fill-rule='nonzero'%3E%3Cpath d='M6 18h12V6H6v12zM4 4h16v16H4V4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
+  text-align: left;
+}
+summary:focus {
+  outline: none;
 }
 img {
   margin: 20px;
@@ -46,44 +46,41 @@ ul {
 }
 form {
   display: block;
-  text-align: center;
+  text-align: left;
 }
 input[type="text"],
 select,
 textarea {
-  width: 100%;
+  width: 75%;
   padding: 12px;
   border-radius: 4px;
+  border: none;
   box-sizing: border-box;
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
 }
 input[type="submit"] {
-  color: black;
-  background-color: #cce6ff;
+  color: #9e2a2b;
+  background-color: whitesmoke;
+  border: none;
   border-radius: 20px;
   padding: 8px 24px;
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
   opacity: 0.8;
-  transition: opacity 0.3s ease;
 }
 input[type="submit"]:hover {
   opacity: 1;
 }
-.container {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+.submit {
+  display: block;
+  text-align: left;
 }
 .round {
   border-radius: 50%;
-}
-.submit {
-  display: block;
-  margin: auto;
 }
 [data-icon]:before {
   font-family: "untitled-font-1" !important;
@@ -121,97 +118,34 @@ input[type="submit"]:hover {
 .icon-feather:before {
   content: "\64";
 }
-.banner {
-  padding: 40px 0;
-}
 .banner h1 {
   margin: 0;
-  color: #cce6ff;
-  font-size: 70px;
-  font-family: "Righteous", cursive;
-  font-weight: bold;
-  text-shadow: 0 0 3px #ff0000, 0 0 5px #0000ff;
+  color: #9e2a2b;
+  font-size: 100px;
+  font-family: "Knewave", cursive;
 }
 .banner h2 {
-  color: #cce6ff;
+  color: #9e2a2b;
   font-weight: bolder;
 }
-.banner h1:hover {
-  color: white;
-}
-.banner h2:hover {
-  color: white;
-}
-.footer {
+footer {
   display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
+  justify-content: left;
   margin-top: 10px;
   height: 50px;
-  padding: 0px 50px;
 }
 .footer-links {
   display: flex;
-  align-items: center;
 }
 .footer-links a {
-  color: #cce6ff;
+  color: #9e2a2b;
   text-decoration: none;
-  font-size: 20px;
-  padding: 0px 10px;
-  opacity: 0.8;
+  font-size: 25px;
+  padding: 10px 10px;
+  opacity: 0.7;
 }
 .footer-links a:hover {
   opacity: 1;
-}
-.tab {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: transparent;
-  margin-bottom: 30px;
-}
-.tab button {
-  color: black;
-  background-color: #cce6ff;
-  font-family: "Ubuntu", sans-serif;
-  font-size: large;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  opacity: 0.6;
-  padding: 14px 16px;
-  transition: 0.3s;
-}
-.tab button:hover {
-  opacity: 1;
-  background-color: #ddd;
-}
-.tab button.active {
-  opacity: 1;
-  background-color: #ccc;
-}
-.tabcontent {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  padding: 6px 12px;
-  animation: fadeEffect 1s;
-  background-size: cover;
-  background-color: transparent;
-  background-position: center;
-  padding: 16px;
-}
-@keyframes fadeEffect {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  color: #540b0e;
 }

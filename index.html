@@ -34,75 +34,58 @@
       <h1>alvin Lim</h1>
       <h2>Full-Stack Developer</h2>
     </div>
-    <div class="tab">
-      <button
-        class="tablinks"
-        onclick="openTab(event, 'home')"
-        id="defaultOpen"
-      >
-        About Me
-      </button>
-      <button class="tablinks" onclick="openTab(event, 'code')">Code</button>
-      <button class="tablinks" onclick="openTab(event, 'contact')">
-        Contact Me
-      </button>
-    </div>
-    <div class="container">
-      <div id="home" class="tabcontent">
-        <img
-          src="images/Alvin.webp"
-          alt="Alvin"
-          class="round"
-          width="200"
-          height="200"
+    <article>
+      <img
+        src="images/Alvin.webp"
+        alt="Alvin"
+        class="round"
+        width="200"
+        height="200"
+      />
+      <p>
+        I am a software engineer at
+        <a href="https://www.interiio.sg/" target="_blank" rel="noopener"
+          >Interiio.sg</a
+        >. I learned to code at
+        <a
+          href="https://www.lewagon.com/singapore"
+          target="_blank"
+          rel="noopener"
+          >Le Wagon Singapore</a
+        >,
+        <a href="https://www.codecademy.com/" target="_blank" rel="noopener"
+          >Codecademy</a
+        >,
+        <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener"
+          >FreeCodeCamp</a
+        >, and
+        <a href="https://www.traversymedia.com/" target="_blank" rel="noopener"
+          >Traversy Media</a
+        >. My technical stack includes Ruby on Rails, JavaScript, PHP, and
+        Python.
+      </p>
+      <p>Before my career transition to technology, I was an educator.</p>
+      <p>
+        I received my Ph.D. in Political Science from the University of Hawaii
+        at Manoa, and I taught at Pannasastra University of Cambodia, the
+        University of Hawaii at Manoa, and the American University of Nigeria.
+      </p>
+      <p>
+        I occasionally blog on
+        <a href="https://dev.to/alvinqingxing" target="_blank" rel="noopener"
+          >DEV</a
+        >.
+      </p>
+    </article>
+    <details>
+      <summary>#code</summary>
+      <article>
+        <h2>Savvy Granny</h2>
+        <img src="images/SavvyGranny.webp" alt="Savvy Granny" width="300"
         />
         <p>
-          I am a software engineer at
-          <a href="https://www.interiio.sg/" target="_blank" rel="noopener"
-            >Interiio.sg</a
-          >. I learned to code at
-          <a
-            href="https://www.lewagon.com/singapore"
-            target="_blank"
-            rel="noopener"
-            >Le Wagon Singapore</a
-          >,
-          <a href="https://www.codecademy.com/" target="_blank" rel="noopener"
-            >Codecademy</a
-          >,
-          <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener"
-            >FreeCodeCamp</a
-          >, and
-          <a
-            href="https://www.traversymedia.com/"
-            target="_blank"
-            rel="noopener"
-            >Traversy Media</a
-          >. My technical stack includes Ruby on Rails, JavaScript, PHP, and
-          Python.
-        </p>
-        <p>Before my career transition to technology, I was an educator.</p>
-        <p>
-          I received my Ph.D. in Political Science from the University of Hawaii
-          at Manoa, and I taught at Pannasastra University of Cambodia, the
-          University of Hawaii at Manoa, and the American University of Nigeria.
-        </p>
-        <p>
-          I occasionally blog on
-          <a href="https://dev.to/alvinqingxing" target="_blank" rel="noopener"
-            >DEV</a
-          >.
-        </p>
-      </div>
-      >
-      <div id="code" class="tabcontent">
-        <h2>Savvy Granny</h2>
-        <a href="https://www.savvy-granny.com" target="_blank" rel="noopener"
-          ><img src="images/SavvyGranny.webp" width="300"
-        /></a>
-        <p>
           <a href="https://www.savvy-granny.com" target="_blank" rel="noopener"
-            >Savvy Granny</a
+          >Savvy Granny</a
           >
           [<a
             href="https://github.com/alvinqingxing/rails-savvy-granny"
@@ -131,7 +114,7 @@
           systems.
         </p>
         <h2>Other projects</h2>
-        <ul>
+        <p><ul>
           <li>
             <a
               href="https://magic-8-ball-php.herokuapp.com/"
@@ -342,28 +325,30 @@
               >My Codewars solutions</a
             >
           </li>
-        </ul>
-      </div>
-      <div id="contact" class="tabcontent">
-        <h2>Contact Me</h2>
-        <form action="https://formspree.io/xpzjezya" method="POST">
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Your email address..."
-          />
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Your message..."
-            style="height: 120px"
-          ></textarea>
-          <input type="submit" value="Submit" class="submit" />
-        </form>
-      </div>
-    </div>
-    <div class="footer">
+        </ul></p>
+      </article>
+    </details>
+    <details>
+      <summary>#contact</summary>
+      <form action="https://formspree.io/xpzjezya" method="POST">
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Your email address..."
+          width="300"
+        />
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Your message..."
+          width="300"
+          height="150"
+        ></textarea>
+        <input type="submit" value="Submit" class="submit" />
+      </form>
+    </details>
+    <footer>
       <div class="footer-links">
         <a
           href="https://linkedin.com/in/alvinqingxing"
@@ -398,21 +383,6 @@
           ><i class="icon-github"></i
         ></a>
       </div>
-    </div>
-    <script>
-      function openTab(evt, tabName) {
-        const tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-        const tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-      }
-      document.getElementById("defaultOpen").click();
-    </script>
+    </footer>
   </body>
 </html>
