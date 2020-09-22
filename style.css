@@ -135,13 +135,14 @@ input[type="submit"]:hover {
 .banner h1 {
   margin: 0;
   color: #9e2a2b;
-  font-size: 100px;
+  font-size: 70px;
   font-family: "bungee_shaderegular", cursive;
   font-weight: bolder;
 }
 .banner h2 {
   color: #9e2a2b;
   font-weight: bolder;
+  margin: 10px;
 }
 footer {
   margin-top: 10px;
