@@ -4,6 +4,11 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "Codystar";
+  src: url(fonts/codystar-regular-webfont.woff2);
+  font-display: swap;
+}
+@font-face {
   font-family: "untitled-font-1";
   src: url(fonts/untitled-font-1.woff);
   font-display: swap;
@@ -29,7 +34,7 @@ a:hover {
 }
 body {
   margin: 0 auto;
-  width: 60%;
+  width: 75%;
   height: 100%;
   padding: 50px;
   color: whitesmoke;
@@ -40,9 +45,6 @@ body {
   font-size: 24px;
   text-align: center;
 }
-summary:focus {
-  outline: none;
-}
 img {
   margin: 20px;
 }
@@ -51,19 +53,44 @@ ul {
   padding: 0;
   margin: 0;
 }
-summary, h2 {
+h1 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-family: 'Codystar', cursive;
+  font-size: 48px;
+}
+h2 {
   font-family: "Dancing Script", cursive;
   font-weight: bolder;
   font-size: 36px;
+}
+nav {
+  margin: 30px;
+}
+nav a {
+  margin: 20px;
+  padding: 10px;
+  color: #01112b;
+  background-color: antiquewhite;
+  border-radius: 30px;
+  opacity: 1;
+}
+nav a:hover {
+  color: #01112b;
+  opacity: 0.5;
 }
 form {
   display: block;
   text-align: center;
 }
+label {
+  display: block;
+  text-align: left;
+}
 input[type="text"],
 select,
 textarea {
-  width: 75%;
+  width: 100%;
   padding: 12px;
   border-radius: 4px;
   border: none;
@@ -75,11 +102,12 @@ textarea {
   resize: vertical;
 }
 input[type="submit"] {
-  color: antiquewhite;
-  background-color: #01112b;
+  color: #01112b;
+  background-color: antiquewhite;
   border: none;
-  border-radius: 20px;
-  padding: 8px 24px;
+  border-radius: 30px;
+  padding: 10px;
+  margin: 0 auto;
   font-family: "Patrick Hand", cursive;
   font-size: 28px;
   opacity: 1;
@@ -118,7 +146,17 @@ input[type="submit"]:hover {
   font-variant: normal !important;
   text-transform: none !important;
   speak: none;
-  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "untitled-font-1" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -137,6 +175,9 @@ input[type="submit"]:hover {
 .icon-codepen:before {
   content: "\65";
 }
+.icon-smile-o:before {
+  content: "\66";
+}
 .banner h1 {
   margin: 0;
   color: antiquewhite;
@@ -150,6 +191,7 @@ input[type="submit"]:hover {
   font-family: "Dancing Script", cursive;
   font-size: 50px;
   margin: 10px;
+  padding-bottom: 30px;
 }
 footer {
   margin-top: 10px;
