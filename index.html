@@ -23,9 +23,9 @@
     <h2>Full-Stack Developer</h2>
   </div>
   <nav>
-    <a href="#about" id="nav-about">#Hello <i class="icon-smile-o"></i></a>
-    <a href="#code" id="nav-code">#Code <i class="icon-codepen"></i></a>
-    <a href="#contact" id="nav-contact">#Contact <i class="icon-pencil"></i></a>
+    <a id="nav-about">#Hello <i class="icon-smile-o"></i></a>
+    <a id="nav-code">#Code <i class="icon-codepen"></i></a>
+    <a id="nav-contact">#Contact <i class="icon-pencil"></i></a>
   </nav>
   <article id="about">
     <img src="images/Alvin.webp" alt="Alvin" class="round" width="200" height="200" />
@@ -39,8 +39,8 @@
         target="_blank" rel="noopener">FreeCodeCamp</a> and
       <a href="https://www.traversymedia.com/" target="_blank" rel="noopener">Traversy Media</a>.
     </p>
-    <p>Before my career transition to technology, I was in academia.</p>
-    <p>I received my M.A. in Philosophy from the National University of Singapore and my Ph.D. in Political Science from
+    <p>Before my career transition to technology, I was in academia. I received my M.A. in Philosophy from the National
+      University of Singapore and my Ph.D. in Political Science from
       the University of Hawaii at Manoa.</p>
     <p>I taught subjects like Philosophy and Political Science at Pannasastra University of Cambodia, the University of
       Hawaii at Manoa, and the American University of Nigeria.
@@ -182,6 +182,7 @@
     </div>
   </footer>
   <script>
+    document.querySelector("nav").style.display = "flex";
     document.getElementById("about").style.display = "block";
     document.getElementById("code").style.display = "none";
     document.getElementById("contact").style.display = "none";
