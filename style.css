@@ -34,7 +34,9 @@
   font-display: swap;
 }
 
-* {
+html {
+	min-width: 360px;
+	line-height: 1.5;
 	box-sizing: border-box;
 }
 
@@ -221,10 +223,6 @@ input[type="submit"]:hover {
   content: "\66";
 }
 
-.banner {
-	height: 240px;
-}
-
 .banner h1 {
   margin: 0;
   color: antiquewhite;
@@ -263,3 +261,9 @@ footer {
 .footer-links a:hover {
   opacity: 0.5;
 }
+
+@media (min-width: 780px) {
+	.banner {
+		height: 240px;
+	}	
+  }
