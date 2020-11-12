@@ -265,5 +265,6 @@ footer {
 @media (min-width: 780px) {
 	.banner {
 		height: 240px;
+		line-height: 2;
 	}	
   }
