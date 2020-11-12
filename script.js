@@ -2,7 +2,7 @@ document.querySelector("nav").style.display = "flex";
 
 const about = document.getElementById("about");
 const code = document.getElementById("code");
-const contact = document.getElementById("contact")
+const contact = document.getElementById("contact");
 
 about.style.display = "block";
 code.style.display = "none";
