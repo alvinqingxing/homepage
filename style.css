@@ -11,7 +11,7 @@
 }
 
 @font-face {
-  font-family: "untitled-font-1";
+  font-family: "Icons";
   src: url(fonts/untitled-font-1.woff);
   font-display: swap;
 }
@@ -106,7 +106,7 @@ nav a {
 
 nav a:hover {
   color: #01112b;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 form {
@@ -145,7 +145,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .submit {
@@ -163,7 +163,7 @@ input[type="submit"]:hover {
 }
 
 [data-icon]:before {
-  font-family: "untitled-font-1" !important;
+  font-family: "Icons" !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -176,7 +176,7 @@ input[type="submit"]:hover {
 }
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "untitled-font-1" !important;
+  font-family: "Icons" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
@@ -187,7 +187,7 @@ input[type="submit"]:hover {
 }
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "untitled-font-1" !important;
+  font-family: "Icons" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
