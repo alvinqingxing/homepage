@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: "Icons";
-  src: url(fonts/untitled-font-1.woff);
+  src: url(fonts/icons.woff);
   font-display: swap;
 }
 
@@ -35,9 +35,9 @@
 }
 
 html {
-	min-width: 360px;
-	line-height: 1.5;
-	box-sizing: border-box;
+  min-width: 360px;
+  line-height: 1.5;
+  box-sizing: border-box;
 }
 
 a {
@@ -121,7 +121,9 @@ label {
   text-align: left;
 }
 
-input[type="text"], select, textarea {
+input[type="text"],
+select,
+textarea {
   width: 100%;
   padding: 12px;
   border-radius: 4px;
@@ -155,6 +157,11 @@ input[type="submit"]:hover {
   margin: 0 auto;
 }
 
+#academia {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+}
+
 .container {
   border-radius: 5px;
   padding: 20px;
@@ -165,35 +172,37 @@ input[type="submit"]:hover {
 }
 
 [data-icon]:before {
-  font-family: "Icons" !important;
+  font-family: "Icons";
   content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
   speak: none;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "Icons" !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "Icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
   speak: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "Icons" !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "Icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
   speak: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -263,8 +272,8 @@ footer {
 }
 
 @media (min-width: 780px) {
-	.banner {
-		height: 240px;
-		line-height: 2;
-	}	
+  .banner {
+    height: 240px;
+    line-height: 2;
   }
+}
