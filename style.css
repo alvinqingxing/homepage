@@ -83,6 +83,7 @@ h2 {
   font-family: "Dancing Script", cursive;
   font-weight: bolder;
   font-size: 36px;
+  color: gold;
 }
 
 nav {
@@ -135,18 +136,17 @@ textarea {
 
 input[type="submit"] {
   color: #01112b;
-  background-color: antiquewhite;
+  background-color: gold;
   border: none;
   border-radius: 30px;
   padding: 10px;
   margin: 0 auto;
   font-family: "Patrick Hand", cursive;
   font-size: 28px;
-  opacity: 1;
 }
 
 input[type="submit"]:hover {
-  opacity: 0.8;
+  background-color: antiquewhite;
 }
 
 .submit {
