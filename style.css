@@ -41,14 +41,12 @@ html {
 }
 
 a {
-  color: antiquewhite;
-  opacity: 0.8;
+  color: gold;
   text-decoration: none;
 }
 
 a:hover {
   color: antiquewhite;
-  opacity: 1;
 }
 
 body {
@@ -260,15 +258,14 @@ footer {
 }
 
 .footer-links a {
-  color: antiquewhite;
+  color: gold;
   text-decoration: none;
   font-size: 25px;
   padding: 20px 20px;
-  opacity: 1;
 }
 
 .footer-links a:hover {
-  opacity: 0.5;
+  color: antiquewhite;
 }
 
 @media (min-width: 780px) {
