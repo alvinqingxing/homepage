@@ -46,14 +46,14 @@ a {
 }
 
 a:hover {
-  color: antiquewhite;
+  color: floralwhite;
 }
 
 body {
   margin: 0 auto;
   width: 75%;
   height: 100%;
-  color: whitesmoke;
+  color: floralwhite;
   background-color: #16365a;
   background-image: url(images/background.svg);
   background-attachment: fixed;
@@ -107,7 +107,7 @@ nav a {
 
 nav a:hover {
   color: black;
-  background-color: antiquewhite;
+  background-color: floralwhite;
 }
 
 form {
@@ -118,6 +118,7 @@ form {
 label {
   display: block;
   text-align: left;
+  color: gold;
 }
 
 input[type="text"],
@@ -130,6 +131,7 @@ textarea {
   box-sizing: border-box;
   font-family: "Patrick Hand", cursive;
   font-size: 24px;
+  background-color: floralwhite;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
@@ -147,7 +149,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: antiquewhite;
+  background-color: floralwhite;
 }
 
 .submit {
@@ -265,7 +267,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: antiquewhite;
+  color: floralwhite;
 }
 
 @media (min-width: 780px) {
