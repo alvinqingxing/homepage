@@ -249,6 +249,26 @@ input[type="submit"]:hover {
   padding-bottom: 24px;
 }
 
+.boop {
+  animation: boop 0.6s forwards;
+}
+
+@keyframes boop {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
 footer {
   margin: 0;
   height: 50px;

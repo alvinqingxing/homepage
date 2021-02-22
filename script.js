@@ -1,3 +1,5 @@
+// Menu buttons
+
 document.querySelector("nav").style.display = "flex";
 
 const about = document.getElementById("about");
@@ -24,4 +26,16 @@ document.getElementById("nav-contact").addEventListener("click", function () {
   about.style.display = "none";
   code.style.display = "none";
   contact.style.display = "block";
+});
+
+// Alvin image animation
+
+const alvin = document.getElementById("alvin");
+
+alvin.addEventListener("mouseenter", () => {
+  alvin.classList.add("boop");
+});
+
+alvin.addEventListener("animationend", (e) => {
+  alvin.classList.remove("boop");
 });
