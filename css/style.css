@@ -97,11 +97,6 @@ ul {
   margin: 0;
 }
 
-svg {
-	visibility: hidden;
-	height: 0; 
-}
-
 .container {
   border-radius: 5px;
   padding: 20px;
@@ -109,6 +104,10 @@ svg {
 
 .round {
   border-radius: 50%;
+}
+
+#squigglevision {
+	height: 0; 
 }
 
 @media (min-width: 780px) {
