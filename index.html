@@ -21,7 +21,7 @@
 <body>
 	<div class="banner">
 		<h1>Alvin Lim</h1>
-		<h2>Full Stack Developer</h2>
+		<h2 class="squiggle">Full Stack Developer</h2>
 	</div>
 	<nav>
 		<a id="nav-about">#Hello <i class="icon-smile-o"></i></a>
@@ -209,6 +209,34 @@
 			<a href="https://dev.to/alvinqingxing"><i class="fab fa-dev" title="DEV"></i></a>
 		</div>
 	</footer>
+	<svg>
+		<filter id="turbulence-1">
+			<feTurbulence type="fractalNoise" baseFrequency="0.001" numOctaves="2" data-filterId="3" />
+			<feDisplacementMap xChannelSelector="R" yChannelSelector="G" in="SourceGraphic" scale="25" />
+		</filter>
+
+		<filter id="turbulence-2">
+			<feTurbulence type="fractalNoise" baseFrequency="0.0015" numOctaves="2" data-filterId="3" />
+			<feDisplacementMap xChannelSelector="R" yChannelSelector="G" in="SourceGraphic" scale="25" />
+		</filter>
+
+		<filter id="turbulence-3">
+			<feTurbulence type="fractalNoise" baseFrequency="0.002" numOctaves="2" data-filterId="3" />
+			<feDisplacementMap xChannelSelector="R" yChannelSelector="G" in="SourceGraphic" scale="25" />
+		</filter>
+
+		<filter id="turbulence-4">
+			<feTurbulence type="fractalNoise" baseFrequency="0.0025" numOctaves="2" data-filterId="3" />
+			<feDisplacementMap xChannelSelector="R" yChannelSelector="G" in="SourceGraphic" scale="25" />
+		</filter>
+
+		<filter id="turbulence-5">
+			<feTurbulence type="fractalNoise" baseFrequency="0.003" numOctaves="2" data-filterId="3" />
+			<feDisplacementMap xChannelSelector="R" yChannelSelector="G" in="SourceGraphic" scale="25" />
+		</filter>
+
+	</svg>
+
 	<script src="script.js"></script>
 </body>
 
