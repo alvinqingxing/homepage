@@ -2,6 +2,10 @@
 	animation: squigglevision 0.4s infinite alternate;
   }
 
+  #squigglevision {
+	height: 0; 
+}
+
 @keyframes squigglevision {
 	0% {
 	  filter: url("#turbulence-1");

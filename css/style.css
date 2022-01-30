@@ -1,10 +1,11 @@
+@import url("./academia.css");
+@import url("./banner.css");
+@import url("./books.css");
+@import url("./boop.css");
 @import url("./footer.css");
-@import url("./nav.css");
 @import url("./form.css");
 @import url("./icon.css");
-@import url("./banner.css");
-@import url("./boop.css");
-@import url("./academia.css");
+@import url("./nav.css");
 @import url("./squiggle.css");
 
 @font-face {
@@ -104,10 +105,6 @@ ul {
 
 .round {
   border-radius: 50%;
-}
-
-#squigglevision {
-	height: 0; 
 }
 
 @media (min-width: 780px) {
