@@ -1,8 +1,10 @@
 .menu {
     position: absolute;
     top: 0;
-    left: 0;
-    display: block;
+    left: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 2em;
 }
 

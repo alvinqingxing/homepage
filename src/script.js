@@ -37,6 +37,7 @@ codeToggle.addEventListener("click", () => {
   code.style.display = "block";
   contact.style.display = "none";
   savvygranny.style.display = "block";
+  savvygrannyToggle.style.opacity = "1";
   mrcocktail.style.display = "none";
   mrcocktailToggle.style.opacity = "0.5";
 });
