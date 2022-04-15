@@ -1,9 +1,8 @@
-#books {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+#books img {
+    height: 240px;
+    padding: 8px;
 }
 
 #books img:hover {
-	border: 0.5px solid slateblue;
+	border: 0.5px solid floralwhite;
 }

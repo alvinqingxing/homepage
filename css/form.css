@@ -1,12 +1,11 @@
 form {
   display: block;
-  text-align: center;
 }
 
 label {
   display: block;
   text-align: left;
-  color: gold;
+  color: white;
 }
 
 input[type="text"],
@@ -17,9 +16,8 @@ textarea {
   border-radius: 4px;
   border: none;
   box-sizing: border-box;
-  font-family: "Patrick Hand", cursive;
-  font-size: 24px;
-  background-color: floralwhite;
+  font-size: 1em;
+  background-color: white;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
@@ -29,19 +27,16 @@ input[type="submit"] {
   color: #01112b;
   background-color: gold;
   border: none;
-  border-radius: 30px;
+  border-radius: 8px;
   padding: 10px;
-  margin: 0 auto;
-  font-family: "Patrick Hand", cursive;
-  font-size: 28px;
+  font-size: 1em;
   cursor: pointer;
 }
 
 input[type="submit"]:hover {
-  background-color: floralwhite;
+  background-color: white;
 }
 
 .submit {
   display: block;
-  margin: 0 auto;
 }
