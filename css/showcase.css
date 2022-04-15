@@ -7,8 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #111 url('../images/jellyfish.jpg') no-repeat center center/cover;
-    transition: 0.5s;
+    background: #111;
     z-index: 2;
 }
 
