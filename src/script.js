@@ -1,17 +1,17 @@
-const showcase = document.querySelector(".showcase");
 const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const code = document.getElementById("code");
 const contact = document.getElementById("contact");
-const aboutToggle = document.getElementById("aboutMenuItem");
-const publicationsToggle = document.getElementById("publicationsMenuItem");
-const codeToggle = document.getElementById("codeMenuItem");
-const contactToggle = document.getElementById("contactMenuItem");
 
 about.style.display = "block";
 publications.style.display = "none";
 code.style.display = "none";
 contact.style.display = "none";
+
+const aboutToggle = document.getElementById("aboutMenuItem");
+const publicationsToggle = document.getElementById("publicationsMenuItem");
+const codeToggle = document.getElementById("codeMenuItem");
+const contactToggle = document.getElementById("contactMenuItem");
 
 aboutToggle.addEventListener("click", () => {
   about.style.display = "block";
