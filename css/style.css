@@ -26,6 +26,10 @@ a:hover {
 
 @media (max-width: 991px) {
 
+    .showcase {
+        padding-left: 2em;
+    }
+
     .text h2 {
         font-size: 3em;
     }
