@@ -24,6 +24,12 @@ a:hover {
     color: white;
 }
 
+
+#academiadotedu {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.3em;
+}
+
 @media (max-width: 991px) {
 
     .showcase,
