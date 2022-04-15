@@ -23,3 +23,8 @@
 .social li a:hover {
     color: gold;
 }
+
+.social li #academiadotedu {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.3em;
+}
