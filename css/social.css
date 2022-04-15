@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 2em;
 }
 
 .social li {
@@ -13,10 +14,10 @@
 
 .social li a {
     display: inline-block;
-    color: white;
+    color: floralwhite;
     text-decoration: none;
-    font-size: 25px;
-    margin-right: 20px;
+    font-size: 1.5em;
+    padding-left: 1em;
 }
 
 .social li a:hover {
