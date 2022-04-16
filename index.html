@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="form-action https://formspree.io"
+      content="form-action *.formspree.io"
     />
     <meta
       http-equiv="Content-Security-Policy"
-      content="media-src 'self' https://*.cloudinary.com"
+      content="media-src 'self' *.cloudinary.com *.cloudfront.net"
     />
     <meta
       http-equiv="Content-Security-Policy"
-      content="style-src 'self' https://fonts.googleapis.com"
+      content="style-src 'self' fonts.googleapis.com *.cloudfront.net"
     />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' *.cloudfront.net" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="Description"
