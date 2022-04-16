@@ -1,9 +1,9 @@
 .menu {
     position: absolute;
     top: 0;
-    left: 70px;
+    left: 1em;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 2em;
 }
