@@ -39,7 +39,7 @@ codeToggle.addEventListener("click", () => {
   savvygranny.style.display = "block";
   savvygrannyToggle.style.opacity = "1";
   mrcocktail.style.display = "none";
-  mrcocktailToggle.style.opacity = "0.5";
+  mrcocktailToggle.style.opacity = "0.3";
 });
 
 savvygrannyToggle.addEventListener("click", () => {
