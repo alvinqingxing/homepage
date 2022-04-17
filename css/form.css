@@ -37,10 +37,6 @@ input[type="submit"]:hover {
   background-color: floralwhite;
 }
 
-.hide {
-  height: 0em;
-}
-
 .submit {
   display: block;
 }
