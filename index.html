@@ -259,7 +259,13 @@
         <article id="contact">
           <h2>Write to me</h2>
           <div class="container">
-            <form name="Contact" method="POST" data-netlify-recaptcha="true" data-netlify="true">
+            <form
+              name="Contact"
+              method="POST"
+              data-netlify-recaptcha="true"
+              netlify-honeypot="bot-field"
+              data-netlify="true"
+            >
               <label for="email">Email</label>
               <input
                 type="text"
@@ -277,6 +283,12 @@
                 height="150"
               ></textarea>
               <div data-netlify-recaptcha="true"></div>
+              <p class="hidden">
+                <label>
+                  Don’t fill this out if you’re human:
+                  <input name="bot-field" />
+                </label>
+              </p>
               <input type="submit" value="Submit" class="submit" />
             </form>
           </div>

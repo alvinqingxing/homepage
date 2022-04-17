@@ -30,6 +30,10 @@ a:hover {
     font-weight: 800;
 }
 
+#hidden {
+    visibility: hidden;
+}
+
 @media (max-width: 991px) {
 
     .showcase {
