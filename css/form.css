@@ -37,6 +37,10 @@ input[type="submit"]:hover {
   background-color: floralwhite;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .submit {
   display: block;
 }
