@@ -19,9 +19,17 @@
     padding-left: 1em;
 }
 
-#source-code {
+span#source-code {
     position: absolute;
     z-index: 10;
     bottom: 20px;
     right: 2em;
+    color: floralwhite;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+span#source-code:hover {
+    color: gold;
 }
