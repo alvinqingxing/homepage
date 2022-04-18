@@ -1,26 +1,16 @@
-// declare variables
-
 const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const code = document.getElementById("code");
 const contact = document.getElementById("contact");
-const savvygranny = document.getElementById("savvygranny");
-const mrcocktail = document.getElementById("mrcocktail");
-const aboutToggle = document.getElementById("aboutMenuItem");
-const publicationsToggle = document.getElementById("publicationsMenuItem");
-const codeToggle = document.getElementById("codeMenuItem");
-const contactToggle = document.getElementById("contactMenuItem");
-const savvygrannyToggle = document.getElementById("savvygrannyToggle");
-const mrcocktailToggle = document.getElementById("mrcocktailToggle");
-
-// initialize landing page
 
 about.style.display = "block";
 publications.style.display = "none";
 code.style.display = "none";
 contact.style.display = "none";
 
-// set up event listeners
+const aboutToggle = document.getElementById("aboutMenuItem");
+const publicationsToggle = document.getElementById("publicationsMenuItem");
+const contactToggle = document.getElementById("contactMenuItem");
 
 aboutToggle.addEventListener("click", () => {
   about.style.display = "block";
@@ -35,6 +25,19 @@ publicationsToggle.addEventListener("click", () => {
   code.style.display = "none";
   contact.style.display = "none";
 });
+
+contactToggle.addEventListener("click", () => {
+  about.style.display = "none";
+  publications.style.display = "none";
+  code.style.display = "none";
+  contact.style.display = "block";
+});
+
+const codeToggle = document.getElementById("codeMenuItem");
+const savvygranny = document.getElementById("savvygranny");
+const mrcocktail = document.getElementById("mrcocktail");
+const savvygrannyToggle = document.getElementById("savvygrannyToggle");
+const mrcocktailToggle = document.getElementById("mrcocktailToggle");
 
 codeToggle.addEventListener("click", () => {
   about.style.display = "none";
@@ -59,11 +62,4 @@ mrcocktailToggle.addEventListener("click", () => {
   mrcocktail.style.display = "block";
   mrcocktailToggle.style.opacity = "1";
   savvygrannyToggle.style.opacity = "0.3";
-});
-
-contactToggle.addEventListener("click", () => {
-  about.style.display = "none";
-  publications.style.display = "none";
-  code.style.display = "none";
-  contact.style.display = "block";
 });
