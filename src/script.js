@@ -2,11 +2,24 @@ const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const code = document.getElementById("code");
 const contact = document.getElementById("contact");
+const sourceCode = document.getElementById("source-code");
 
 about.style.display = "block";
 publications.style.display = "none";
 code.style.display = "none";
 contact.style.display = "none";
+sourceCode.style.color = "floralwhite";
+sourceCode.style.fontFamily = "Courier";
+sourceCode.style.fontSize = "18px";
+sourceCode.style.fontWeight = "800";
+
+sourceCode.addEventListener("mouseover", () => {
+  sourceCode.style.color = "gold";
+});
+
+sourceCode.addEventListener("mouseout", () => {
+  sourceCode.style.color = "floralwhite";
+});
 
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
