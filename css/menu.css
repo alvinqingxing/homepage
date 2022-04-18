@@ -24,3 +24,13 @@
 .menu ul li:hover {
     color: gold;
 }
+
+.menu span {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    color: floralwhite;
+}
+
+.menu span:hover {
+    color: gold;
+}
