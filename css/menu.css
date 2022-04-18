@@ -25,12 +25,12 @@
     color: gold;
 }
 
-.menu span {
+.menu ul span {
     font-family: 'Courier New', Courier, monospace;
     font-weight: 800;
     color: floralwhite;
 }
 
-.menu span:hover {
+.menu ul span:hover {
     color: gold;
 }
