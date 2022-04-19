@@ -1,35 +1,35 @@
 .social {
-    position: absolute;
-    z-index: 10;
-    bottom: 2em;
-    left: 2em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: absolute;
+  z-index: 10;
+  bottom: 2em;
+  left: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .social li {
-    list-style: none;
+  list-style: none;
 }
 
 .social li a {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 1.5em;
-    padding-left: 1em;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.5em;
+  padding-left: 1em;
 }
 
-span.source-code {
-    position: absolute;
-    z-index: 10;
-    bottom: 1.2em;
-    right: 2em;
-    font-family: monospace;
-    font-size: 24px;
-    font-weight: 800;
-    color: floralwhite;
+.source-code span {
+  position: absolute;
+  z-index: 10;
+  bottom: 1.2em;
+  right: 2em;
+  font-family: monospace;
+  font-size: 24px;
+  font-weight: 800;
+  color: floralwhite;
 }
 
-span.source-code:hover {
-    color: gold;
+.source-code span:hover {
+  color: gold;
 }
