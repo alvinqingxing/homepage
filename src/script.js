@@ -63,3 +63,14 @@ mrcocktailToggle.addEventListener("click", () => {
   mrcocktailToggle.style.opacity = "1";
   savvygrannyToggle.style.opacity = "0.3";
 });
+
+const jsShowNojsHide = document.getElementById("jsShowNojsHide");
+const savvygrannyJsHideNojsShow = document.getElementById(
+  "savvygrannyJsHideNojsShow"
+);
+const mrcocktailJsHideNojsShow = document.getElementById(
+  "mrcocktailJsHideNojsShow"
+);
+jsShowNojsHide.style.display = "block";
+savvygrannyJsHideNojsShow.style.display = "none";
+mrcocktailJsHideNojsShow.style.display = "none";
