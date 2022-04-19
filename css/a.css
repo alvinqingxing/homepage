@@ -1,0 +1,9 @@
+a {
+  color: gold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: white;
+}
