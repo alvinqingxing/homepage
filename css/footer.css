@@ -1,7 +1,7 @@
 .social {
     position: absolute;
     z-index: 10;
-    bottom: 20px;
+    bottom: 2em;
     left: 2em;
     display: flex;
     justify-content: space-between;
@@ -19,9 +19,17 @@
     padding-left: 1em;
 }
 
-#source-code {
+span.source-code {
     position: absolute;
     z-index: 10;
-    bottom: 20px;
+    bottom: 1.2em;
     right: 2em;
+    font-family: monospace;
+    font-size: 24px;
+    font-weight: 800;
+    color: floralwhite;
+}
+
+span.source-code:hover {
+    color: gold;
 }
