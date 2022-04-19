@@ -2,25 +2,12 @@ const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const code = document.getElementById("code");
 const contact = document.getElementById("contact");
-// const sourceCode = document.getElementById("source-code");
 
 about.style.display = "block";
 publications.style.display = "none";
 code.style.display = "none";
 contact.style.display = "none";
-/* sourceCode.style.fontFamily = "Monospace";
-sourceCode.style.fontSize = "24px";
-sourceCode.style.fontWeight = "800";
-sourceCode.style.color = "floralwhite";
 
-sourceCode.addEventListener("mouseover", () => {
-  sourceCode.style.color = "gold";
-});
-
-sourceCode.addEventListener("mouseout", () => {
-  sourceCode.style.color = "floralwhite";
-});
-*/
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
 const contactToggle = document.getElementById("contactMenuItem");
