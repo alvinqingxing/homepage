@@ -1,4 +1,4 @@
-.social {
+footer .social {
   position: absolute;
   z-index: 10;
   bottom: 2em;
@@ -8,18 +8,18 @@
   align-items: center;
 }
 
-.social li {
+footer .social li {
   list-style: none;
 }
 
-.social li a {
+footer .social li a {
   display: inline-block;
   text-decoration: none;
   font-size: 1.5em;
   padding-left: 1em;
 }
 
-.source-code span {
+footer .source-code span {
   position: absolute;
   z-index: 10;
   bottom: 1.2em;
@@ -30,6 +30,6 @@
   color: floralwhite;
 }
 
-.source-code span:hover {
+footer .source-code span:hover {
   color: gold;
 }
