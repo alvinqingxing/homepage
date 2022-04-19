@@ -1,0 +1,13 @@
+@media (max-width: 991px) {
+  .wrapper {
+    padding-left: 2em;
+  }
+
+  .text h2 {
+    font-size: 3em;
+  }
+
+  .text h3 {
+    font-size: 2em;
+  }
+}
