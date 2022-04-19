@@ -1,4 +1,4 @@
-.showcase {
+.wrapper {
     position: absolute;
     right: 0;
     width: 100%;
@@ -11,11 +11,11 @@
     z-index: 2;
 }
 
-.showcase.active {
+.wrapper.active {
     right: 300px;
 }
 
-.showcase video {
+.wrapper video {
     position: absolute;
     top: 0;
     left: 0;
