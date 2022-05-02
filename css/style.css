@@ -1,20 +1,37 @@
 @import url(./a.css);
 @import url(./books.css);
 @import url(./code.css);
+@import url(./contact.css);
 @import url(./footer.css);
-@import url(./form.css);
 @import url(./icon.css);
 @import url(./menu.css);
 @import url(./text.css);
 @import url(./wrapper.css);
 @import url(./video.css);
 @import url(./media.css);
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+
+@media (max-width: 991px) {
+
+  .menu ul li {
+      padding: 0.6em;
+  }
+
+  .wrapper {
+      padding-left: 2em;
+  }
+
+  .text h2 {
+      font-size: 3em;
+  }
+
+  .text h3 {
+      font-size: 2em;
+  }
 }
