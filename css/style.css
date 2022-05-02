@@ -16,3 +16,51 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+form {
+  display: block;
+}
+
+label {
+  display: block;
+  text-align: left;
+  color: floralwhite;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 1em;
+  background-color: white;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type="submit"] {
+  color: #01112b;
+  background-color: gold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: floralwhite;
+}
+
+input:focus, textarea:focus {
+  outline: solid orange;
+  background-color: seashell;
+}
+
+.submit {
+  display: block;
+}
