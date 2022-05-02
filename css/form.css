@@ -37,6 +37,11 @@ input[type="submit"]:hover {
   background-color: floralwhite;
 }
 
+input:focus, textarea:focus {
+  outline: solid orange;
+  background-color: seashell;
+}
+
 .submit {
   display: block;
 }
