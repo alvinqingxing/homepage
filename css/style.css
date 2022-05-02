@@ -1,20 +1,56 @@
-@import url(./a.css);
 @import url(./books.css);
 @import url(./code.css);
 @import url(./footer.css);
 @import url(./form.css);
 @import url(./icon.css);
 @import url(./menu.css);
-@import url(./text.css);
-@import url(./wrapper.css);
 @import url(./video.css);
-@import url(./media.css);
+@import url(./wrapper.css);
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+
+a {
+  color: gold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: white;
+}
+
+h2 {
+  font-size: 5em;
+  font-weight: 800;
+  color: floralwhite;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 2em;
+  font-weight: 500;
+  color: floralwhite;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.1em;
+  color: floralwhite;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+
+.text {
+  position: relative;
+  z-index: 10;
 }
 
 @media (max-width: 991px) {
