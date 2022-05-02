@@ -9,58 +9,12 @@
 @import url(./wrapper.css);
 @import url(./video.css);
 @import url(./media.css);
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-}
-
-form {
-  display: block;
-}
-
-label {
-  display: block;
-  text-align: left;
-  color: floralwhite;
-}
-
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 4px;
-  border: none;
-  box-sizing: border-box;
-  font-size: 1em;
-  background-color: white;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
-
-input[type="submit"] {
-  color: #01112b;
-  background-color: gold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover {
-  background-color: floralwhite;
-}
-
-input:focus, textarea:focus {
-  outline: solid orange;
-  background-color: seashell;
-}
-
-.submit {
-  display: block;
 }
