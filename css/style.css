@@ -4,7 +4,6 @@
 @import url(./form.css);
 @import url(./icon.css);
 @import url(./menu.css);
-@import url(./text.css);
 @import url(./video.css);
 @import url(./wrapper.css);
 
@@ -13,6 +12,46 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+
+a {
+  color: gold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: white;
+}
+
+h2 {
+  font-family: 'Abril Fatface', serif;
+  font-size: 5em;
+  font-weight: 100;
+  color: floralwhite;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 2em;
+  font-weight: 500;
+  color: floralwhite;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.1em;
+  color: floralwhite;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+
+.text {
+  position: relative;
+  z-index: 10;
 }
 
 @media (max-width: 991px) {
