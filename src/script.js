@@ -40,6 +40,3 @@ contactToggle.addEventListener("click", () => {
   code.style.display = "none";
   contact.style.display = "block";
 });
-
-const jsShowNojsHide = document.getElementById("jsShowNojsHide");
-jsShowNojsHide.style.display = "block";
