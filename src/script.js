@@ -10,6 +10,7 @@ contact.style.display = "none";
 
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
+const codeToggle = document.getElementById("codeMenuItem");
 const contactToggle = document.getElementById("contactMenuItem");
 
 aboutToggle.addEventListener("click", () => {
@@ -26,15 +27,6 @@ publicationsToggle.addEventListener("click", () => {
   contact.style.display = "none";
 });
 
-contactToggle.addEventListener("click", () => {
-  about.style.display = "none";
-  publications.style.display = "none";
-  code.style.display = "none";
-  contact.style.display = "block";
-});
-
-const codeToggle = document.getElementById("codeMenuItem");
-
 codeToggle.addEventListener("click", () => {
   about.style.display = "none";
   publications.style.display = "none";
@@ -42,6 +34,12 @@ codeToggle.addEventListener("click", () => {
   contact.style.display = "none";
 });
 
+contactToggle.addEventListener("click", () => {
+  about.style.display = "none";
+  publications.style.display = "none";
+  code.style.display = "none";
+  contact.style.display = "block";
+});
 
 const jsShowNojsHide = document.getElementById("jsShowNojsHide");
 jsShowNojsHide.style.display = "block";
