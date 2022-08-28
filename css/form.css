@@ -1,49 +1,49 @@
 form {
-    display: block;
+  display: block;
 }
 
 label {
-    display: block;
-    text-align: left;
-    color: floralwhite;
+  display: block;
+  text-align: left;
+  color: floralwhite;
 }
 
 input[type="text"],
 select,
 textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 4px;
-    border: none;
-    box-sizing: border-box;
-    font-size: 20px;
-    font-family: "Patrick Hand", cursive, sans-serif;
-    background-color: white;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: "Patrick Hand", cursive, sans-serif;
+  background-color: white;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
 }
 
 input[type="submit"] {
-    color: #01112b;
-    background-color: gold;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 1em;
-    cursor: pointer;
+  color: #01112b;
+  background-color: gold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: floralwhite;
+  background-color: floralwhite;
 }
 
 input:focus,
 textarea:focus {
-    outline: solid orange;
-    background-color: seashell;
+  outline: solid orange;
+  background-color: seashell;
 }
 
 .submit {
-    display: block;
+  display: block;
 }
