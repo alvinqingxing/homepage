@@ -1,3 +1,5 @@
+// Virtual Tabs
+
 const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const contact = document.getElementById("contact");
@@ -5,6 +7,8 @@ const contact = document.getElementById("contact");
 about.style.display = "block";
 publications.style.display = "none";
 contact.style.display = "none";
+
+// Virtual Menu
 
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
@@ -27,6 +31,8 @@ contactToggle.addEventListener("click", () => {
   publications.style.display = "none";
   contact.style.display = "block";
 });
+
+// Boop
 
 const alvin = document.getElementById("alvin");
 
