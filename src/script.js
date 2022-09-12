@@ -30,7 +30,7 @@ contactToggle.addEventListener("click", () => {
 
 const alvin = document.getElementById("alvin");
 
-alvin.addEventListener("mouseenter", () => {
+alvin.addEventListener("pointerenter", () => {
   alvin.classList.add("boop");
 });
 
