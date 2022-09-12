@@ -27,3 +27,13 @@ contactToggle.addEventListener("click", () => {
   publications.style.display = "none";
   contact.style.display = "block";
 });
+
+const alvin = document.getElementById("alvin");
+
+alvin.addEventListener("mouseenter", () => {
+  alvin.classList.add("boop");
+});
+
+alvin.addEventListener("animationend", (e) => {
+  alvin.classList.remove("boop");
+});
