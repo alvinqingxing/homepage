@@ -9,12 +9,11 @@ a:hover {
 }
 
 h2 {
-  font-family: "Abril Fatface", serif;
-  font-size: 5em;
-  font-weight: 100;
+  font-family: "Water Brush", serif;
+  font-size: 6em;
+  font-weight: 8;
   color: floralwhite;
   line-height: 1.5em;
-  text-transform: uppercase;
 }
 
 h3 {
@@ -26,7 +25,7 @@ h3 {
 }
 
 p {
-  font-size: 1.1em;
+  font-size: 2em;
   color: floralwhite;
   margin: 20px 0;
   font-weight: 400;

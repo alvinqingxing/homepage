@@ -4,6 +4,7 @@ form {
 
 label {
   display: block;
+  font-size: 2em;
   text-align: left;
   color: floralwhite;
 }
