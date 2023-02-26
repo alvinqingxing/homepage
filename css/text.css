@@ -5,7 +5,7 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: floralwhite;
 }
 
 h2 {
@@ -13,6 +13,7 @@ h2 {
   font-size: 6em;
   font-weight: 8;
   color: floralwhite;
+  opacity: 0.8;
   line-height: 1.5em;
 }
 
@@ -20,6 +21,7 @@ h3 {
   font-size: 2em;
   font-weight: 500;
   color: floralwhite;
+  opacity: 0.8;
   line-height: 1.5em;
   text-transform: uppercase;
 }
@@ -27,6 +29,7 @@ h3 {
 p {
   font-size: 1.2em;
   color: floralwhite;
+  opacity: 0.8;
   margin: 20px 0;
   font-weight: 400;
   max-width: 700px;

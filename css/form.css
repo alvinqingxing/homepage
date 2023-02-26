@@ -7,6 +7,7 @@ label {
   font-size: 1.2em;
   text-align: left;
   color: floralwhite;
+  opacity: 0.8;
 }
 
 input[type="text"],
@@ -19,7 +20,9 @@ textarea {
   box-sizing: border-box;
   font-size: 20px;
   font-family: "Patrick Hand", cursive, sans-serif;
-  background-color: white;
+  color: whitesmoke;
+  background-color: navy;
+  opacity: 0.4;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
@@ -28,6 +31,7 @@ textarea {
 input[type="submit"] {
   color: #01112b;
   background-color: gold;
+  opacity: 0.8;
   border: none;
   border-radius: 8px;
   padding: 10px;
@@ -41,8 +45,8 @@ input[type="submit"]:hover {
 
 input:focus,
 textarea:focus {
-  outline: solid orange;
-  background-color: seashell;
+  outline: solid gold;
+  opacity: 0.8;
 }
 
 .submit {
