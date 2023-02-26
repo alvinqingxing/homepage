@@ -15,6 +15,7 @@
 .social li a {
   display: inline-block;
   text-decoration: none;
+  opacity: 0.8;
   font-size: 1.5em;
   padding-left: 1em;
 }
@@ -25,9 +26,10 @@
   bottom: 1.6em;
   right: 2em;
   font-family: monospace;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 800;
   color: floralwhite;
+  opacity: 0.8;
 }
 
 #source-code:hover {
