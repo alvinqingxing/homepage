@@ -20,18 +20,3 @@
   padding-left: 1em;
 }
 
-#source-code {
-  position: absolute;
-  z-index: 10;
-  bottom: 2.4em;
-  right: 2em;
-  font-family: monospace;
-  font-size: 18px;
-  font-weight: 800;
-  color: floralwhite;
-  opacity: 0.8;
-}
-
-#source-code:hover {
-  color: gold;
-}
