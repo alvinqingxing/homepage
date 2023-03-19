@@ -10,22 +10,9 @@
 
 #social li {
   list-style: none;
-}
-
-#social:hover li {
-  filter: blur(1px);
-}
-
-#social li:hover {
-  filter: blur(0);
-}
-
-
-#social li a {
   display: inline-block;
   text-decoration: none;
   opacity: 0.8;
   font-size: 1.5em;
   padding-left: 1em;
 }
-

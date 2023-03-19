@@ -8,7 +8,7 @@ about.style.display = "block";
 publications.style.display = "none";
 contact.style.display = "none";
 
-// Setup Event Listeners for Menu
+// Menu Event Listeners
 
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
@@ -32,7 +32,7 @@ contactToggle.addEventListener("click", () => {
   contact.style.display = "block";
 });
 
-// Source Code
+// Blur Effect
 
 const sourceCode = document.getElementById("source-code");
 const social = document.getElementById("social");

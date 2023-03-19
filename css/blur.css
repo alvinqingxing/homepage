@@ -1,0 +1,15 @@
+#menu ul:hover li {
+  filter: blur(1px);
+}
+
+#menu ul li:hover {
+  filter: blur(0);
+}
+
+#social:hover li {
+  filter: blur(1px);
+}
+
+#social li:hover {
+  filter: blur(0);
+}
