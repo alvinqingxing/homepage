@@ -1,4 +1,4 @@
-.social {
+#social {
   position: absolute;
   z-index: 10;
   bottom: 2em;
@@ -8,11 +8,20 @@
   align-items: center;
 }
 
-.social li {
+#social li {
   list-style: none;
 }
 
-.social li a {
+#social:hover li {
+  filter: blur(1px);
+}
+
+#social li:hover {
+  filter: blur(0);
+}
+
+
+#social li a {
   display: inline-block;
   text-decoration: none;
   opacity: 0.8;

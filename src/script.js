@@ -1,4 +1,4 @@
-// Virtual Tabs
+// Initialize Menu
 
 const about = document.getElementById("about");
 const publications = document.getElementById("publications");
@@ -8,7 +8,7 @@ about.style.display = "block";
 publications.style.display = "none";
 contact.style.display = "none";
 
-// Virtual Menu
+// Setup Event Listeners for Menu
 
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
@@ -30,6 +30,28 @@ contactToggle.addEventListener("click", () => {
   about.style.display = "none";
   publications.style.display = "none";
   contact.style.display = "block";
+});
+
+// Source Code
+
+const sourceCode = document.getElementById("source-code");
+const social = document.getElementById("social");
+
+sourceCode.addEventListener("pointerenter", () => {
+  social.style.filter = "blur(1px)";
+  sourceCode.style.filter = "blur(0)";
+});
+
+sourceCode.addEventListener("pointerleave", () => {
+  social.style.filter = "blur(0)";
+});
+
+social.addEventListener("pointerenter", () => {
+  sourceCode.style.filter = "blur(1px)";
+});
+
+social.addEventListener("pointerleave", () => {
+  sourceCode.style.filter = "blur(0)";
 });
 
 // Boop
