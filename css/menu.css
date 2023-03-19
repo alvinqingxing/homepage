@@ -23,6 +23,11 @@
   opacity: 0.8;
 }
 
+#menu ul:hover li {
+  filter: blur(1px);
+}
+
 #menu ul li:hover {
   color: gold;
+  filter: blur(0);
 }

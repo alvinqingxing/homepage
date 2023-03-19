@@ -16,3 +16,11 @@
   font-size: 1.5em;
   padding-left: 1em;
 }
+
+#social:hover li {
+  filter: blur(1px);
+}
+
+#social li:hover {
+  filter: blur(0);
+}
