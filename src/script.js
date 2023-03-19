@@ -39,7 +39,6 @@ const social = document.getElementById("social");
 
 sourceCode.addEventListener("pointerenter", () => {
   social.style.filter = "blur(1px)";
-  sourceCode.style.filter = "blur(0)";
 });
 
 sourceCode.addEventListener("pointerleave", () => {
