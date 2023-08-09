@@ -3,14 +3,14 @@
   width: 1em;
   height: 1em;
   background-size: cover;
-  filter: invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg)
-    brightness(105%) contrast(105%);
+  filter: invert(78%) sepia(66%) saturate(823%) hue-rotate(356deg)
+    brightness(100%) contrast(106%);
 }
 
 .icon:hover,
 .icon:focus {
-  filter: invert(78%) sepia(66%) saturate(823%) hue-rotate(356deg)
-    brightness(100%) contrast(106%);
+  filter: invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg)
+    brightness(105%) contrast(105%);
 }
 
 .icon-academia {

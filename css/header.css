@@ -19,7 +19,7 @@
   text-decoration: none;
   font-family: "Amatic SC";
   font-size: 2em;
-  color: floralwhite;
+  color: gold;
   opacity: 0.8;
 }
 
@@ -28,6 +28,6 @@
 }
 
 #menu ul li:hover {
-  color: gold;
+  color: floralwhite;
   filter: blur(0);
 }

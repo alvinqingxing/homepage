@@ -33,11 +33,11 @@
   font-family: monospace;
   font-size: 18px;
   font-weight: 800;
-  color: floralwhite;
+  color: gold;
   opacity: 0.8;
 }
 
 #source-code:hover {
-  color: gold;
+  color: floralwhite;
   filter: blur(0);
 }
