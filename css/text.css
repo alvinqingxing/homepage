@@ -1,0 +1,41 @@
+a {
+  color: gold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: floralwhite;
+}
+
+h2 {
+  font-family: "Monoton", serif;
+  font-size: 4em;
+  font-weight: 8;
+  color: gold;
+  opacity: 0.8;
+  line-height: 1.5em;
+}
+
+h2:hover {
+  font-family: "Bungee Shade", serif;
+  font-size: 3.6em;
+  font-weight: 2;
+  color: gold;
+  opacity: 0.8;
+  line-height: 1.5em;
+}
+
+p {
+  font-size: 1.2em;
+  color: floralwhite;
+  opacity: 0.8;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+
+#text {
+  position: relative;
+  z-index: 10;
+}
