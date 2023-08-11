@@ -17,6 +17,15 @@ h2 {
   line-height: 1.5em;
 }
 
+h2:hover {
+  font-family: "Bungee Shade", serif;
+  font-size: 3.6em;
+  font-weight: 2;
+  color: gold;
+  opacity: 0.8;
+  line-height: 1.5em;
+}
+
 p {
   font-size: 1.2em;
   color: floralwhite;
