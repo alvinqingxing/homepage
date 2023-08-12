@@ -1,10 +1,10 @@
 @import url(./animations.css);
-@import url(./email.css);
+@import url(./containers.css);
 @import url(./footer.css);
 @import url(./icon.css);
 @import url(./images.css);
+@import url(./mail.css);
 @import url(./menu.css);
-@import url(./wrapper.css);
 
 * {
   margin: 0;
@@ -54,11 +54,6 @@ video {
   object-fit: cover;
   overflow: hidden;
   opacity: 0.8;
-}
-
-#text {
-  position: relative;
-  z-index: 10;
 }
 
 @media (max-width: 991px) {
