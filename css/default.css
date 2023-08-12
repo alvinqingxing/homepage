@@ -1,0 +1,80 @@
+@import url(./animations.css);
+@import url(./email.css);
+@import url(./footer.css);
+@import url(./icon.css);
+@import url(./images.css);
+@import url(./menu.css);
+@import url(./wrapper.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Acme", cursive, sans-serif;
+}
+
+a {
+  color: gold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: floralwhite;
+}
+
+h2 {
+  font-size: 4em;
+  font-weight: 200;
+  color: gold;
+  opacity: 0.8;
+  line-height: 1.5em;
+  animation-name: font-carousel;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+p {
+  font-size: 1.2em;
+  color: floralwhite;
+  opacity: 0.8;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+#text {
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 991px) {
+  #menu ul li {
+    padding: 0.6em;
+  }
+
+  #wrapper {
+    padding-left: 2em;
+  }
+
+  #text h2 {
+    font-size: 2.5em;
+  }
+
+  #text h3 {
+    font-size: 2em;
+  }
+}
