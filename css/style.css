@@ -23,7 +23,7 @@ a:hover {
   color: floralwhite;
 }
 
-h2 {
+h1 {
   font-size: 4em;
   font-weight: 200;
   color: gold;
@@ -70,11 +70,7 @@ video {
     padding-left: 2em;
   }
 
-  #text h2 {
+  #text h1 {
     font-size: 2.5em;
-  }
-
-  #text h3 {
-    font-size: 2em;
   }
 }
