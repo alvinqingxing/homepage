@@ -21,6 +21,10 @@
   background-image: url(../images/amazon.svg);
 }
 
+.icon-bluesky {
+  background-image: url(../images/bluesky.svg);
+}
+
 .icon-github {
   background-image: url(../images/github.svg);
 }
