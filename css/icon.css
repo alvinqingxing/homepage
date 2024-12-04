@@ -13,10 +13,6 @@
     brightness(105%) contrast(105%);
 }
 
-.icon-academia {
-  background-image: url(../images/academia.svg);
-}
-
 .icon-amazon {
   background-image: url(../images/amazon.svg);
 }
@@ -35,8 +31,4 @@
 
 .icon-linkedin {
   background-image: url(../images/linkedin.svg);
-}
-
-.icon-worldcat {
-  background-image: url(../images/book-svgrepo-com.svg);
 }
