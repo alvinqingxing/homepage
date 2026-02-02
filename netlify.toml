@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "http://www.alvinlim.dev/*"
+  to = "https://alvinlim.dev/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.alvinlim.dev/*"
+  to = "https://alvinlim.dev/:splat"
+  status = 301
+  force = true
