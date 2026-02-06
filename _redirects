@@ -1,2 +1,2 @@
-http://www.alvinlim.dev/*  https://alvinlim.dev/  301!
-https://www.alvinlim.dev/* https://alvinlim.dev/  301!
+http://www.alvinlim.dev/*  https://alvinlim.dev/:splat  301!
+https://www.alvinlim.dev/* https://alvinlim.dev/:splat  301!
