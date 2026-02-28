@@ -5,10 +5,6 @@
   overflow: hidden;
 }
 
-#text h1 {
-  width: min-content;
-}
-
 #wrapper {
   position: absolute;
   right: 0;
