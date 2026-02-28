@@ -6,8 +6,7 @@
 
 #pubs img {
   height: auto;
-  max-height: 240px;
-  max-width: 100%;
+  width: 12em;
   padding: 8px;
 }
 
