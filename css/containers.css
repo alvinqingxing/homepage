@@ -1,6 +1,13 @@
 #text {
   position: relative;
   z-index: 10;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+#text h1 {
+  white-space: nowrap;
+  width: min-content;
 }
 
 #wrapper {
