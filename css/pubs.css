@@ -1,8 +1,0 @@
-#pubs img {
-  height: 240px;
-  padding: 8px;
-}
-
-#pubs img:hover {
-  border: 0.5px solid gold;
-}
