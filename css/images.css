@@ -4,16 +4,9 @@
   width: 12em;
 }
 
-#books {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-}
-
 #books img {
-  height: auto;
-  max-height: 240px;
-  max-width: 100%;
+  height: 240px;
+  padding: 8px;
 }
 
 #books img:hover {

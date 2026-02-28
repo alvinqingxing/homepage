@@ -49,12 +49,17 @@ video {
 }
 
 @media (max-width: 991px) {
+  #email,
+  #message {
+    width: 240px;
+  }
+
   #menu ul li {
     padding: 0.6em;
   }
 
   #wrapper {
-    padding: 2em;
+    padding-left: 2em;
   }
 
   #text h1 {

@@ -9,11 +9,10 @@ label {
   color: floralwhite;
 }
 
-input[type="email"],
+input[type="text"],
 select,
 textarea {
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
   padding: 12px;
   border-radius: 4px;
   border: none;
