@@ -4,8 +4,16 @@
   width: 12em;
 }
 
+#books {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
 #books img {
-  height: 240px;
+  height: auto;
+  max-height: 240px;
+  max-width: 100%;
   padding: 8px;
 }
 
