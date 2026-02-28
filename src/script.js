@@ -3,7 +3,6 @@
 const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const contact = document.getElementById("contact");
-const recaptcha = document.querySelector(".g-recaptcha");
 
 about.style.display = "block";
 publications.style.display = "none";
@@ -31,7 +30,6 @@ contactToggle.addEventListener("click", () => {
   about.style.display = "none";
   publications.style.display = "none";
   contact.style.display = "block";
-  recaptcha.setAttribute("data-theme", "dark");
 });
 
 // Blur Effect

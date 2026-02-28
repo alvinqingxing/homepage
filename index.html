@@ -206,7 +206,11 @@
               <input type="email" id="email" name="email" required />
               <label for="message">Message</label>
               <textarea id="message" name="message"></textarea>
-              <div data-netlify-recaptcha="true"></div>
+              <div
+                class="g-recaptcha"
+                data-theme="dark"
+                data-netlify-recaptcha="true"
+              ></div>
               <div hidden>
                 <label>
                   Don’t fill this out if you’re human:
