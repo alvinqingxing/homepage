@@ -24,15 +24,11 @@
     <meta http-equiv="Content-Security-Policy" content="object-src 'none'" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="media-src 'self' *.cloudinary.com *.cloudfront.net"
-    />
-    <meta
-      http-equiv="Content-Security-Policy"
       content="style-src 'self' fonts.googleapis.com *.cloudfront.net"
     />
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' *.cloudfront.net *.google.com *.gstatic.com"
+      content="script-src 'self' 'unsafe-inline' *.cloudfront.net *.google.com *.gstatic.com *.googletagmanager.com"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -55,6 +51,14 @@
       href="https://fonts.googleapis.com/css2?family=Kablammo&family=Water+Brush&family=Henny+Penny&family=Rubik+Moonrocks&family=Bungee+Shade&family=Monoton&text=Alvin%20Cheng-Hin%20Lim%20Publications%20Write%20To%20Me&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./css/boop.css" />
+    <link rel="stylesheet" href="./css/containers.css" />
+    <link rel="stylesheet" href="./css/font-carousel.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/icon.css" />
+    <link rel="stylesheet" href="./css/images.css" />
+    <link rel="stylesheet" href="./css/mail.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link
       rel="apple-touch-icon"
@@ -81,6 +85,7 @@
     <section id="wrapper">
       <video
         src="./images/jellyfish.mp4"
+        poster="./images/jellyfish.png"
         muted
         loop
         autoplay
@@ -88,9 +93,9 @@
 
       <nav id="menu">
         <ul>
-          <li id="aboutMenuItem">Home</li>
-          <li id="publicationsMenuItem">Books</li>
-          <li id="contactMenuItem">Email</li>
+          <li><button id="aboutMenuItem">Home</button></li>
+          <li><button id="publicationsMenuItem">Books</button></li>
+          <li><button id="contactMenuItem">Email</button></li>
         </ul>
       </nav>
       <div id="text">
@@ -197,7 +202,7 @@
               data-netlify="true"
             >
               <label for="email">Email</label>
-              <input type="text" id="email" name="email" />
+              <input type="email" id="email" name="email" />
               <label for="message">Message</label>
               <textarea id="message" name="message"></textarea>
               <div data-netlify-recaptcha="true"></div>

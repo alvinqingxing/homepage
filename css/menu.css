@@ -31,3 +31,19 @@
   color: floralwhite;
   filter: blur(0);
 }
+
+#menu ul li button {
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+#menu ul li button:focus-visible {
+  outline: 2px solid floralwhite;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
