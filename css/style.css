@@ -45,13 +45,7 @@ video {
   height: 100%;
   object-fit: cover;
   overflow: hidden;
-  opacity: 0.8;
-}
-
-#alvin {
-  border-radius: 50%;
-  height: 12em;
-  width: 12em;
+  opacity: 0.6;
 }
 
 @media (max-width: 991px) {
