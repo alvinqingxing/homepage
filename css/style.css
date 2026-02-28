@@ -48,7 +48,15 @@ video {
   opacity: 0.6;
 }
 
+/* Adjust the height for mobile view to match your media query */
 @media (max-width: 991px) {
+}
+
+@media (max-width: 991px) {
+  .header-wrapper {
+    min-height: 8em;
+  }
+
   #email,
   #message {
     width: 240px;
