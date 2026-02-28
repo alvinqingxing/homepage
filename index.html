@@ -15,6 +15,7 @@
 
       gtag("config", "G-2945KEEG0G");
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -206,7 +207,11 @@
               <input type="email" id="email" name="email" required />
               <label for="message">Message</label>
               <textarea id="message" name="message"></textarea>
-              <div data-netlify-recaptcha="true" data-theme="dark"></div>
+              <div
+                class="g-recaptcha"
+                data-sitekey="6Lec-nosAAAAACP9caeVSWC8lL_aI0CJyI5Aova2"
+                data-theme="dark"
+              ></div>
               <div hidden>
                 <label>
                   Don’t fill this out if you’re human:
