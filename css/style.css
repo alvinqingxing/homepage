@@ -54,7 +54,7 @@ video {
 
 @media (max-width: 991px) {
   .header-wrapper {
-    min-height: 8em;
+    min-height: 10em;
   }
 
   #email,
