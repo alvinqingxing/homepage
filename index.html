@@ -18,19 +18,17 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <meta
       http-equiv="Content-Security-Policy"
-      content="form-action 'self' *.netlify.com"
+      content="form-action 'self' *.netlify.com;
+        object-src 'none';
+        script-src 'self' 'unsafe-inline' *.cloudfront.net *.google.com *.gstatic.com *.googletagmanager.com;
+        style-src 'self' 'unsafe-inline' *.cloudfront.net; 
+        font-src 'self'; 
+        frame-src *.google.com;"
     />
-    <meta http-equiv="Content-Security-Policy" content="object-src 'none'" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="style-src 'self' *.cloudfront.net"
-    />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' 'unsafe-inline' *.cloudfront.net *.google.com *.gstatic.com *.googletagmanager.com"
-    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="Description"
@@ -89,7 +87,9 @@
       </nav>
       <div id="text">
         <article id="about">
-          <div class="header-wrapper"><h1>Alvin Cheng-Hin Lim</h1></div>
+          <div class="header-wrapper">
+            <h1>Alvin Cheng-Hin Lim</h1>
+          </div>
           <img
             id="alvin"
             alt="Alvin Lim"
@@ -138,7 +138,9 @@
           </p>
         </article>
         <article id="publications">
-          <div class="header-wrapper"><h1>My Books</h1></div>
+          <div class="header-wrapper">
+            <h1>My Books</h1>
+          </div>
           <div id="books">
             <a
               href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358"
@@ -181,7 +183,9 @@
           </p>
         </article>
         <article id="contact">
-          <div class="header-wrapper"><h1>Email Me</h1></div>
+          <div class="header-wrapper">
+            <h1>Email Me</h1>
+          </div>
           <div class="container">
             <form
               name="Contact"
