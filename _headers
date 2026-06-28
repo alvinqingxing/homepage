@@ -1,2 +1,2 @@
 /*
-  Content-Security-Policy: form-action 'self' https://api.web3forms.com; object-src 'none'; script-src 'self' 'unsafe-inline' *.google.com *.gstatic.com *.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src *.google.com;
+  Content-Security-Policy: form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' *.google.com *.gstatic.com *.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src *.google.com;
