@@ -15,6 +15,11 @@
 
       gtag("config", "G-2945KEEG0G");
     </script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha"
+      async
+      defer
+    ></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -194,11 +199,7 @@
               />
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
-              <div
-                class="g-recaptcha"
-                data-sitekey="6Lec-nosAAAAACP9caeVSWC8lL_aI0CJyI5Aova2"
-                data-theme="dark"
-              ></div>
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAADsVJbQMoTEVuxeY"></div>
               <input type="submit" value="Submit" class="submit" />
             </form>
           </div>
@@ -254,7 +255,6 @@
         </div>
       </footer>
     </section>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script defer src="./src/script.js"></script>
     <script defer src="./src/contact.js"></script>
   </body>
