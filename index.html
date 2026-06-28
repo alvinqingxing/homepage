@@ -17,17 +17,6 @@
     </script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="form-action 'self' *.netlify.com;
-        object-src 'none';
-        script-src 'self' 'unsafe-inline' *.cloudfront.net *.google.com *.gstatic.com *.googletagmanager.com;
-        style-src 'self' 'unsafe-inline' *.cloudfront.net; 
-        font-src 'self'; 
-        frame-src *.google.com;"
-    />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="Description"
@@ -188,27 +177,26 @@
           <div class="container">
             <form
               name="Contact"
+              action="https://api.web3forms.com/submit"
               method="POST"
-              data-netlify-recaptcha="true"
-              data-netlify-honeypot="bot-field"
-              data-netlify="true"
             >
+              <input
+                type="hidden"
+                name="access_key"
+                value="c785dd56-f55e-40bf-a507-a8669a0bdf38"
+              />
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
               <label for="email">Email</label>
               <input type="email" id="email" name="email" required />
               <label for="message">Message</label>
-              <textarea id="message" name="message"></textarea>
+              <textarea id="message" name="message" required></textarea>
               <div
                 class="g-recaptcha"
                 data-sitekey="6Lec-nosAAAAACP9caeVSWC8lL_aI0CJyI5Aova2"
                 data-theme="dark"
                 data-size="compact"
               ></div>
-              <div hidden>
-                <label>
-                  Don’t fill this out if you’re human:
-                  <input name="bot-field" />
-                </label>
-              </div>
               <input type="submit" value="Submit" class="submit" />
             </form>
           </div>
