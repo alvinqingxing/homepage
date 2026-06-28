@@ -1,5 +1,5 @@
 document
-  .getElementById("contact")
+  .getElementById("contactForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
