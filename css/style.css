@@ -38,7 +38,7 @@ p {
 }
 
 video {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -46,6 +46,7 @@ video {
   object-fit: cover;
   overflow: hidden;
   opacity: 0.6;
+  z-index: -1;
 }
 
 /* Adjust the height for mobile view to match your media query */
