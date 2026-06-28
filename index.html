@@ -175,16 +175,7 @@
             <h1>Email Me</h1>
           </div>
           <div class="container">
-            <form
-              name="Contact"
-              action="https://api.web3forms.com/submit"
-              method="POST"
-            >
-              <input
-                type="hidden"
-                name="access_key"
-                value="c785dd56-f55e-40bf-a507-a8669a0bdf38"
-              />
+            <form name="Contact" action="/functions/api/submit" method="POST">
               <label for="name">Name</label>
               <input
                 type="text"
@@ -266,5 +257,6 @@
     </section>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script defer src="./src/script.js"></script>
+    <script defer src="./src/contact.js"></script>
   </body>
 </html>
