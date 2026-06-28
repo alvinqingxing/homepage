@@ -180,7 +180,12 @@
             <h1>Email Me</h1>
           </div>
           <div class="container">
-            <form id="contactForm" name="Contact" action="/api/submit" method="POST">
+            <form
+              id="contactForm"
+              name="Contact"
+              action="/api/submit"
+              method="POST"
+            >
               <label for="name">Name</label>
               <input
                 type="text"
@@ -199,7 +204,12 @@
               />
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
-              <div class="cf-turnstile" data-sitekey="0x4AAAAAADsVJbQMoTEVuxeY" data-size="flexible"></div>
+              <div
+                class="cf-turnstile"
+                data-sitekey="0x4AAAAAADsVJbQMoTEVuxeY"
+                data-size="flexible"
+                data-theme="dark"
+              ></div>
               <input type="submit" value="Submit" class="submit" />
             </form>
           </div>
