@@ -9,6 +9,9 @@ document
     try {
       const response = await fetch("/api/submit", {
         method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
         body: formData,
       });
 
