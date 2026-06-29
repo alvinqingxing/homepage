@@ -4,22 +4,42 @@ export async function onRequestPost(context) {
     const name = data.get('name');
     const email = data.get('email');
     const message = data.get('message');
-    const turnstileResponse = data.get('cf-turnstile-response'); // 1. Extract token
+    const turnstileResponse = data.get('cf-turnstile-response');
 
+    // Check if the request expects a JSON response (AJAX fetch from src/contact.js)
+    const acceptHeader = context.request.headers.get('Accept') || '';
+    const isJsonExpected = acceptHeader.includes('application/json');
+
+    // Helper function to return either JSON or an HTML redirect fallback
+    const createResponse = (jsonPayload, status, redirectUrl) => {
+      if (isJsonExpected) {
+        return new Response(JSON.stringify(jsonPayload), {
+          status: status,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } else {
+        // Standard browser form submissions get redirected back to the homepage
+        return Response.redirect(redirectUrl, 303);
+      }
+    };
+
+    // 1. Validation Checks
     if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: 'Missing required fields' }), { 
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return createResponse(
+        { error: 'Missing required fields' }, 
+        400, 
+        `${context.request.url.replace('/api/submit', '')}?status=error&msg=missing_fields`
+      );
     }
 
     // 2. Verify Turnstile Token
     const turnstileSecretKey = context.env.TURNSTILE_SECRET_KEY;
     if (!turnstileResponse) {
-      return new Response(JSON.stringify({ error: 'Security verification token is missing.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return createResponse(
+        { error: 'Security verification token is missing.' }, 
+        400, 
+        `${context.request.url.replace('/api/submit', '')}?status=error&msg=missing_token`
+      );
     }
 
     const verificationUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -29,19 +49,20 @@ export async function onRequestPost(context) {
       body: new URLSearchParams({
         secret: turnstileSecretKey,
         response: turnstileResponse,
-        remoteip: context.request.headers.get('CF-Connecting-IP') || '' // Optional, but recommended
+        remoteip: context.request.headers.get('CF-Connecting-IP') || ''
       })
     });
 
     const verifyResult = await verifyResponse.json();
     if (!verifyResult.success) {
-      return new Response(JSON.stringify({ error: 'Security verification failed. Please try again.' }), {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return createResponse(
+        { error: 'Security verification failed. Please try again.' }, 
+        403, 
+        `${context.request.url.replace('/api/submit', '')}?status=error&msg=verification_failed`
+      );
     }
 
-    // 3. Proceed to send email if verification succeeds
+    // 3. Proceed to send email
     const resendApiKey = context.env.RESEND_API_KEY;
     const toEmail = context.env.CONTACT_EMAIL;
 
@@ -61,22 +82,28 @@ export async function onRequestPost(context) {
       }),
     });
 
+    const baseUrl = context.request.url.replace('/api/submit', '');
+
     if (response.ok) {
-      return new Response(JSON.stringify({ success: true, message: 'Thank you! Your message has been sent.' }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return createResponse(
+        { success: true, message: 'Thank you! Your message has been sent.' }, 
+        200, 
+        `${baseUrl}?status=success`
+      );
     } else {
       const errorText = await response.text();
-      return new Response(JSON.stringify({ error: `Error sending email: ${errorText}` }), { 
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return createResponse(
+        { error: `Error sending email: ${errorText}` }, 
+        500, 
+        `${baseUrl}?status=error&msg=email_failed`
+      );
     }
   } catch (err) {
-    return new Response(JSON.stringify({ error: `Server error: ${err.message}` }), { 
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const baseUrl = context.request.url.replace('/api/submit', '');
+    return createResponse(
+      { error: `Server error: ${err.message}` }, 
+      500, 
+      `${baseUrl}?status=error&msg=server_error`
+    );
   }
 }
