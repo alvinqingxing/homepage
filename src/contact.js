@@ -30,7 +30,7 @@ document
     }
   });
 
-  // --- Fallback Form Status Handler ---
+// --- Fallback Form Status Handler ---
 
 window.addEventListener("DOMContentLoaded", () => {
   // 1. Parse the URL query parameters
@@ -39,12 +39,19 @@ window.addEventListener("DOMContentLoaded", () => {
   const msgType = urlParams.get("msg");
 
   if (status) {
-    // 2. Automatically switch the active menu tab to show the Contact view
-    about.style.display = "none";
-    publications.style.display = "none";
-    contact.style.display = "block";
+    // 2. Fetch DOM elements inside the block to guarantee scope reference availability
+    const aboutEl = document.getElementById("about");
+    const publicationsEl = document.getElementById("publications");
+    const contactEl = document.getElementById("contact");
 
-    // 3. Target the message banner div we added to the HTML
+    // 3. Automatically switch the active menu tab to show the Contact view
+    if (aboutEl && publicationsEl && contactEl) {
+      aboutEl.style.display = "none";
+      publicationsEl.style.display = "none";
+      contactEl.style.display = "block";
+    }
+
+    // 4. Target the message banner div we added to the HTML
     const banner = document.getElementById("formStatusBanner");
     if (banner) {
       if (status === "success") {
@@ -54,7 +61,8 @@ window.addEventListener("DOMContentLoaded", () => {
       } else if (status === "error") {
         // Map the short backend message codes to friendly explanations
         let friendlyMessage = "Something went wrong. Please try again.";
-        if (msgType === "missing_fields") friendlyMessage = "Error: Missing required fields.";
+        if (msgType === "missing_fields")
+          friendlyMessage = "Error: Missing required fields.";
         if (msgType === "missing_token" || msgType === "verification_failed") {
           friendlyMessage = "Security verification failed. Please try again.";
         }
@@ -68,7 +76,12 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 4. Clean up the URL in the browser address bar so refreshing doesn't replay the message
-    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    // 5. Clean up the URL in the browser address bar so refreshing doesn't replay the message
+    const cleanUrl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname;
     window.history.replaceState({ path: cleanUrl }, "", cleanUrl);
   }
+});
