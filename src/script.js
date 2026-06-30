@@ -32,6 +32,39 @@ contactToggle.addEventListener("click", () => {
   contact.style.display = "block";
 });
 
+// Blur Effect
+
+const sourceCode = document.getElementById("source-code");
+const social = document.getElementById("social");
+
+sourceCode.addEventListener("pointerenter", () => {
+  social.style.filter = "blur(1px)";
+});
+
+sourceCode.addEventListener("pointerleave", () => {
+  social.style.filter = "blur(0)";
+});
+
+social.addEventListener("pointerenter", () => {
+  sourceCode.style.filter = "blur(1px)";
+});
+
+social.addEventListener("pointerleave", () => {
+  sourceCode.style.filter = "blur(0)";
+});
+
+// Boop
+
+const alvin = document.getElementById("alvin");
+
+alvin.addEventListener("pointerenter", () => {
+  alvin.classList.add("boop");
+});
+
+alvin.addEventListener("animationend", (e) => {
+  alvin.classList.remove("boop");
+});
+
 // Contact Form
 
 document
@@ -69,7 +102,7 @@ document
     }
   });
 
-// --- Fallback Form Status Handler ---
+// Fallback Form Status Handler
 
 window.addEventListener("DOMContentLoaded", () => {
   // 1. Parse the URL query parameters
@@ -123,37 +156,4 @@ window.addEventListener("DOMContentLoaded", () => {
       window.location.pathname;
     window.history.replaceState({ path: cleanUrl }, "", cleanUrl);
   }
-});
-
-// Blur Effect
-
-const sourceCode = document.getElementById("source-code");
-const social = document.getElementById("social");
-
-sourceCode.addEventListener("pointerenter", () => {
-  social.style.filter = "blur(1px)";
-});
-
-sourceCode.addEventListener("pointerleave", () => {
-  social.style.filter = "blur(0)";
-});
-
-social.addEventListener("pointerenter", () => {
-  sourceCode.style.filter = "blur(1px)";
-});
-
-social.addEventListener("pointerleave", () => {
-  sourceCode.style.filter = "blur(0)";
-});
-
-// Boop
-
-const alvin = document.getElementById("alvin");
-
-alvin.addEventListener("pointerenter", () => {
-  alvin.classList.add("boop");
-});
-
-alvin.addEventListener("animationend", (e) => {
-  alvin.classList.remove("boop");
 });
