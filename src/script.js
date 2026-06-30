@@ -75,6 +75,13 @@ document
     const form = event.target;
     const formData = new FormData(form);
 
+    if (typeof turnstile !== "undefined") {
+      const token = turnstile.getResponse();
+      if (token) {
+        formData.set("cf-turnstile-response", token);
+      }
+    }
+
     try {
       const response = await fetch("/api/submit", {
         method: "POST",
@@ -89,11 +96,17 @@ document
       if (response.ok) {
         alert(result.message || "Message sent successfully!");
         form.reset();
+        if (typeof turnstile !== "undefined") {
+          turnstile.reset();
+        }
       } else {
         alert(
           "Error: " +
             (result.error || "Something went wrong. Please try again."),
         );
+        if (typeof turnstile !== "undefined") {
+          turnstile.reset();
+        }
       }
     } catch (error) {
       alert(
@@ -105,25 +118,21 @@ document
 // Fallback Form Status Handler
 
 window.addEventListener("DOMContentLoaded", () => {
-  // 1. Parse the URL query parameters
   const urlParams = new URLSearchParams(window.location.search);
   const status = urlParams.get("status");
   const msgType = urlParams.get("msg");
 
   if (status) {
-    // 2. Fetch DOM elements inside the block to guarantee scope reference availability
     const aboutEl = document.getElementById("about");
     const publicationsEl = document.getElementById("publications");
     const contactEl = document.getElementById("contact");
 
-    // 3. Automatically switch the active menu tab to show the Contact view
     if (aboutEl && publicationsEl && contactEl) {
       aboutEl.style.display = "none";
       publicationsEl.style.display = "none";
       contactEl.style.display = "block";
     }
 
-    // 4. Target the message banner div we added to the HTML
     const banner = document.getElementById("formStatusBanner");
     if (banner) {
       if (status === "success") {
@@ -131,7 +140,6 @@ window.addEventListener("DOMContentLoaded", () => {
                               Thank you! Your message has been sent.
                             </div>`;
       } else if (status === "error") {
-        // Map the short backend message codes to friendly explanations
         let friendlyMessage = "Something went wrong. Please try again.";
         if (msgType === "missing_fields")
           friendlyMessage = "Error: Missing required fields.";
@@ -148,7 +156,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 5. Clean up the URL in the browser address bar so refreshing doesn't replay the message
     const cleanUrl =
       window.location.protocol +
       "//" +
