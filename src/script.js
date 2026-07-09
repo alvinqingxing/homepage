@@ -164,3 +164,20 @@ window.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({ path: cleanUrl }, "", cleanUrl);
   }
 });
+
+// Lazy-load Google Tag Manager
+window.addEventListener("load", () => {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    dataLayer.push(arguments);
+  };
+
+  gtag("js", new Date());
+  gtag("config", "G-2945KEEG0G");
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-2945KEEG0G";
+
+  document.head.appendChild(script);
+});
