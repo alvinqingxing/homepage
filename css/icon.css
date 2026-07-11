@@ -14,21 +14,21 @@
 }
 
 .icon-amazon {
-  background-image: url(../images/amazon.svg);
+  background-image: url(/images/amazon.svg);
 }
 
 .icon-bluesky {
-  background-image: url(../images/bluesky.svg);
+  background-image: url(/images/bluesky.svg);
 }
 
 .icon-github {
-  background-image: url(../images/github.svg);
+  background-image: url(/images/github.svg);
 }
 
 .icon-google {
-  background-image: url(../images/google.svg);
+  background-image: url(/images/google.svg);
 }
 
 .icon-linkedin {
-  background-image: url(../images/linkedin.svg);
+  background-image: url(/images/linkedin.svg);
 }
