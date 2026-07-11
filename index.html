@@ -40,13 +40,12 @@
       content="Homepage of Alvin Cheng-Hin Lim, academic turned web developer"
     />
     <link rel="canonical" href="https://alvinlim.dev" />
-    <link rel="preload" href="/css/style.css" as="style" />
     <link
       rel="preload"
       fetchpriority="high"
       as="image"
-      href="/background/jellyfish.jpg"
-      type="image/jpeg"
+      href="/background/jellyfish.webp"
+      type="image/webp"
     />
     <link
       rel="stylesheet"
@@ -153,7 +152,7 @@
     <section id="wrapper">
       <video
         id="jellyfish-video"
-        poster="/background/jellyfish.png"
+        poster="/background/jellyfish.jpg"
         muted
         loop
         autoplay
@@ -385,28 +384,30 @@
       </footer>
     </section>
     <script>
-      (async () => {
+      (() => {
         const video = document.getElementById("jellyfish-video");
         if (!video) return;
 
-        // Helper to check next-gen image support
-        const checkSupport = (format, base64Str) =>
-          new Promise((res) => {
-            const img = new Image();
-            img.onload = () => res(true);
-            img.onerror = () => res(false);
-            img.src = `data:image/${format};base64,${base64Str}`;
-          });
+        // Helper to check next-gen image support using Canvas
+        const checkSupport = (format) => {
+          try {
+            const canvas = document.createElement("canvas");
+            canvas.width = 1;
+            canvas.height = 1;
+            return (
+              canvas
+                .toDataURL(`image/${format}`)
+                .indexOf(`data:image/${format}`) === 0
+            );
+          } catch (err) {
+            return false;
+          }
+        };
 
-        // AVIF and WebP test strings
-        const avifTest =
-          "AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAACHaGRscgAAAAAAAAAacGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAiaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAkaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAFGlwcnAAAAAhaXBjbw==AAAAD2F2MUMgggE0AAAAAAAKbWFycAAAAAAkY29scm5jbHgABAAIAAYAUkhDRgAAADdpcG1hAAAAAAAAAAEAAQABMTABAQIeY2xzaQAAAAAAAQABAgAAAAFYbWRhdBIECg==";
-        const webpTest =
-          "UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuQgAAA";
-
-        if (await checkSupport("avif", avifTest)) {
+        // Synchronously check format support and assign the poster image
+        if (checkSupport("avif")) {
           video.poster = "/background/jellyfish.avif";
-        } else if (await checkSupport("webp", webpTest)) {
+        } else if (checkSupport("webp")) {
           video.poster = "/background/jellyfish.webp";
         }
       })();
