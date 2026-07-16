@@ -284,7 +284,7 @@ if (!gl) {
       }
 
       // Base color layer (Dark Slate Gray background matching CSS fallback)
-      vec3 bgColor = vec3(0.184, 0.310, 0.310);
+      vec3 bgColor = vec3(0.15, 0.18, 0.20);
       vec3 finalColor = bgColor;
 
       if (hit) {
