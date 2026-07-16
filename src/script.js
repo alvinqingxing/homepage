@@ -234,28 +234,25 @@ if (!gl) {
       return sqrt(d)*sign(max(q.z,-p.y));
     }
 
-    // Map function that morphs shapes based on time
+    // Map function that morphs strictly between Sphere and Cube
     float map(vec3 p) {
       // Rotate the coordinate space continuously over time
       p = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
 
+      // Define your two baseline shapes
       float dSphere = sdSphere(p, 1.2);
       float dBox = sdBox(p, vec3(1.0));
-      // Readjust position slightly for pyramid center alignment
-      float dPyramid = sdPyramid(p + vec3(0.0, 0.4, 0.0), 1.2);
 
-      // Create a smooth continuous cycle: 0 -> 1 -> 2 -> 0
-      float cycle = mod(uTime * 0.5, 3.0);
-      float d = 0.0;
+      // Calculate a morph factor that goes smoothly from 0.0 to 1.0 and back again.
+      // sin(uTime) oscillates between -1.0 and 1.0; multiplying by 0.5 and adding 0.5 
+      // maps it perfectly between 0.0 (Sphere) and 1.0 (Cube).
+      float morphFactor = sin(uTime * 1.0) * 0.5 + 0.5;
+      
+      // Smooth out the transition curves at the endpoints
+      morphFactor = smoothstep(0.0, 1.0, morphFactor);
 
-      if (cycle < 1.0) {
-        d = mix(dSphere, dBox, smoothstep(0.0, 1.0, cycle));
-      } else if (cycle < 2.0) {
-        d = mix(dBox, dPyramid, smoothstep(0.0, 1.0, cycle - 1.0));
-      } else {
-        d = mix(dPyramid, dSphere, smoothstep(0.0, 1.0, cycle - 2.0));
-      }
-      return d;
+      // Linearly interpolate between the two signed distance fields
+      return mix(dSphere, dBox, morphFactor);
     }
 
     void main() {
