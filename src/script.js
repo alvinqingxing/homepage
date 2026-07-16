@@ -218,22 +218,6 @@ if (!gl) {
       return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
     }
 
-    float sdPyramid(vec3 p, float h) {
-      // Approximate clean representation of a triangular prism/pyramid shape
-      float m2 = h*h + 0.25;
-      p.xz = abs(p.xz);
-      if( p.z>p.x ) p.xz = p.zx;
-      p.x -= 0.5;
-      p.z -= 0.5;
-      vec3 q = vec3( p.z, h*p.y - 0.5*p.x, h*p.x + 0.5*p.y );
-      float s = max(-q.x, 0.0);
-      float t = clamp( (q.y-0.5*p.z)/(m2+0.25), 0.0, 1.0 );
-      float a = m2*(q.x+s)*(q.x+s) + q.y*q.y;
-      float b = m2*(q.x+0.5*t)*(q.x+0.5*t) + (q.y-m2*t)*(q.y-m2*t);
-      float d = min(a,b);
-      return sqrt(d)*sign(max(q.z,-p.y));
-    }
-
     // Map function that morphs strictly between Sphere and Cube
     float map(vec3 p) {
       // Rotate the coordinate space continuously over time
@@ -285,19 +269,16 @@ if (!gl) {
       vec3 finalColor = bgColor;
 
       if (hit) {
-        // Compute surface coordinate lines for elegant wireframe grid effect
         vec3 localP = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
         
-        // Use high-frequency sine waves to check proximity to grid lines
-        float gridThickness = 0.96; 
-        float lx = smoothstep(gridThickness, 1.0, sin(localP.x * 12.0));
-        float ly = smoothstep(gridThickness, 1.0, sin(localP.y * 12.0));
-        float lz = smoothstep(gridThickness, 1.0, sin(localP.z * 12.0));
-        
-        float edge = max(lx, max(ly, lz));
+        // Anti-aliased grid logic using derivatives (fwidth)
+        vec3 fw = fwidth(localP);
+        vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
+        float line = min(min(grid.x, grid.y), grid.z);
+        float edge = 1.0 - smoothstep(0.0, 1.0, line);
 
-        // Blend the elegant thin white wireframe over the dark base background
-        finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.65);
+        // Smoothly blend the elegant thin white wireframe over your background
+        finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.45);
       }
 
       gl_FragColor = vec4(finalColor, 1.0);
