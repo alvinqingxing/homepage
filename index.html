@@ -12,19 +12,30 @@
       }
 
       body {
-        background-color: #000;
+        background-color: #2f4f4f;
+        margin: 0;
+        overflow-x: hidden;
       }
 
-      video {
+      #webgl-background {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        overflow: hidden;
-        opacity: 0.6;
+        width: 100vw;
+        height: 100vh;
         z-index: -1;
+        display: block;
+      }
+
+      .webgl-fallback {
+        background-image: url("../background/jellyfish.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      #webgl-background.hidden {
+        display: none !important;
       }
     </style>
     <script
@@ -150,17 +161,7 @@
 
   <body>
     <section id="wrapper">
-      <video
-        id="jellyfish-video"
-        poster="/background/jellyfish.jpg"
-        muted
-        loop
-        autoplay
-        playsinline
-      >
-        <source src="/background/jellyfish.webm" type="video/webm" />
-        <source src="/background/jellyfish.mp4" type="video/mp4" />
-      </video>
+      <canvas id="webgl-background"></canvas>
 
       <nav id="menu">
         <ul>
@@ -383,35 +384,6 @@
         </div>
       </footer>
     </section>
-    <script>
-      (() => {
-        const video = document.getElementById("jellyfish-video");
-        if (!video) return;
-
-        // Helper to check next-gen image support using Canvas
-        const checkSupport = (format) => {
-          try {
-            const canvas = document.createElement("canvas");
-            canvas.width = 1;
-            canvas.height = 1;
-            return (
-              canvas
-                .toDataURL(`image/${format}`)
-                .indexOf(`data:image/${format}`) === 0
-            );
-          } catch (err) {
-            return false;
-          }
-        };
-
-        // Synchronously check format support and assign the poster image
-        if (checkSupport("avif")) {
-          video.poster = "/background/jellyfish.avif";
-        } else if (checkSupport("webp")) {
-          video.poster = "/background/jellyfish.webp";
-        }
-      })();
-    </script>
     <script defer src="/src/script.js"></script>
   </body>
 </html>
