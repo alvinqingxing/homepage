@@ -193,6 +193,7 @@ if (!gl) {
 
   // Fragment Shader source (Raymarching + Morphing Shapes + Wireframe Grid)
   const fsSource = `
+#extension GL_OES_standard_derivatives : enable
     precision highp float;
     varying vec2 vUv;
     uniform vec2 uResolution;
@@ -271,8 +272,8 @@ if (!gl) {
       if (hit) {
         vec3 localP = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
         
-        // Anti-aliased grid logic using derivatives (fwidth)
-        vec3 fw = fwidth(localP);
+        // Procedural anti-aliased grid lines using the derivative extension
+        vec3 fw = fwidth(localP); 
         vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
         float line = min(min(grid.x, grid.y), grid.z);
         float edge = 1.0 - smoothstep(0.0, 1.0, line);
