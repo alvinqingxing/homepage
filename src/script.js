@@ -199,7 +199,7 @@ if (!gl) {
     uniform float uTime;
 
     // Rotation matrix helper
-    mat1 rotX(float a) {
+    mat3 rotX(float a) {
       float c = cos(a), s = sin(a);
       return mat3(1, 0, 0, 0, c, -s, 0, s, c);
     }
