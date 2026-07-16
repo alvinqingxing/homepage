@@ -167,188 +167,192 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // WebGL Morphing 3D Shape Shader Background
 
-const canvas = document.getElementById("webgl-background");
-const gl = canvas.getContext("webgl2");
+window.addEventListener("load", () => {
+  const canvas = document.getElementById("webgl-background");
+  if (!canvas) return;
 
-if (!gl) {
-  console.warn(
-    "WebGL not supported or context creation failed. Triggering image fallback.",
-  );
+  const gl = canvas.getContext("webgl2");
 
-  // 1. Hide the canvas element safely
-  canvas.classList.add("hidden");
-
-  // 2. Add the fallback class to the body to load the static image background
-  document.body.classList.add("webgl-fallback");
-} else {
-  // Vertex Shader source (Pass-through for a full-screen quad)
-  const vsSource = `#version 300 es
-    in vec2 position;
-    out vec2 vUv;
-    void main() {
-      vUv = position * 0.5 + 0.5;
-      gl_Position = vec4(position, 0.0, 1.0);
-    }
-  `;
-
-  // Fragment Shader source (Raymarching + Morphing Shapes + Wireframe Grid)
-  const fsSource = `#version 300 es
-    precision highp float;
-    in vec2 vUv;
-    uniform vec2 uResolution;
-    uniform float uTime;
-
-    // Output color variable for WebGL 2.0
-    out vec4 fragColor;
-
-    // Rotation matrix helper
-    mat3 rotX(float a) {
-      float c = cos(a), s = sin(a);
-      return mat3(1, 0, 0, 0, c, -s, 0, s, c);
-    }
-    mat3 rotY(float a) {
-      float c = cos(a), s = sin(a);
-      return mat3(c, 0, s, 0, 1, 0, -s, 0, c);
-    }
-
-    // Signed Distance Functions (SDFs)
-    float sdSphere(vec3 p, float r) {
-      return length(p) - r;
-    }
-
-    float sdBox(vec3 p, vec3 b) {
-      vec3 q = abs(p) - b;
-      return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
-    }
-
-    // Map function that morphs strictly between Sphere and Cube
-    float map(vec3 p) {
-      p = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
-
-      float dSphere = sdSphere(p, 1.2);
-      float dBox = sdBox(p, vec3(1.0));
-
-      float morphFactor = sin(uTime * 1.0) * 0.5 + 0.5;
-      morphFactor = smoothstep(0.0, 1.0, morphFactor);
-
-      return mix(dSphere, dBox, morphFactor);
-    }
-
-    void main() {
-      vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
-
-      vec3 ro = vec3(0.0, 0.0, 3.5); 
-      vec3 rd = normalize(vec3(uv, -1.0)); 
-
-      float t = 0.0;
-      vec3 p;
-      bool hit = false;
-
-      for (int i = 0; i < 64; i++) {
-        p = ro + rd * t;
-        float d = map(p);
-        if (d < 0.001) {
-          hit = true;
-          break;
-        }
-        t += d;
-        if (t > 10.0) break;
-      }
-
-      vec3 bgColor = vec3(0.15, 0.18, 0.20);
-      vec3 finalColor = bgColor;
-
-      if (hit) {
-        vec3 localP = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
-        
-        // Native WebGL 2.0 fwidth requires no extension wrappers
-        vec3 fw = fwidth(localP); 
-        vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
-        float line = min(min(grid.x, grid.y), grid.z);
-        float edge = 1.0 - smoothstep(0.0, 1.0, line);
-
-        finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.45);
-      }
-
-      // WebGL 2 modern output assignment
-      fragColor = vec4(finalColor, 1.0);
-    }
-  `;
-
-  // Helper function to create and compile shaders
-  function createShader(gl, type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error(gl.getShaderInfoLog(shader));
-      gl.deleteShader(shader);
-      return null;
-    }
-    return shader;
-  }
-
-  const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
-  const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
-
-  // Link Shaders into Program
-  const program = gl.createProgram();
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragmentShader);
-  gl.linkProgram(program);
-
-  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error("Could not initialize shaders");
-  } else {
-    gl.useProgram(program);
-
-    // Setup full-screen quad geometric coordinates (-1 to 1)
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([
-        -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
-      ]),
-      gl.STATIC_DRAW,
+  if (!gl) {
+    console.warn(
+      "WebGL not supported or context creation failed. Triggering image fallback.",
     );
 
-    const positionLocation = gl.getAttribLocation(program, "position");
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    // 1. Hide the canvas element safely
+    canvas.classList.add("hidden");
 
-    // Get uniforms pointers
-    const resolutionLocation = gl.getUniformLocation(program, "uResolution");
-    const timeLocation = gl.getUniformLocation(program, "uTime");
-
-    // Handle responsive resize updates safely
-    function resizeCanvas() {
-      if (
-        canvas.width !== window.innerWidth ||
-        canvas.height !== window.innerHeight
-      ) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    // 2. Add the fallback class to the body to load the static image background
+    document.body.classList.add("webgl-fallback");
+  } else {
+    // Vertex Shader source (Pass-through for a full-screen quad)
+    const vsSource = `#version 300 es
+      in vec2 position;
+      out vec2 vUv;
+      void main() {
+        vUv = position * 0.5 + 0.5;
+        gl_Position = vec4(position, 0.0, 1.0);
       }
+    `;
+
+    // Fragment Shader source (Raymarching + Morphing Shapes + Wireframe Grid)
+    const fsSource = `#version 300 es
+      precision highp float;
+      in vec2 vUv;
+      uniform vec2 uResolution;
+      uniform float uTime;
+
+      // Output color variable for WebGL 2.0
+      out vec4 fragColor;
+
+      // Rotation matrix helper
+      mat3 rotX(float a) {
+        float c = cos(a), s = sin(a);
+        return mat3(1, 0, 0, 0, c, -s, 0, s, c);
+      }
+      mat3 rotY(float a) {
+        float c = cos(a), s = sin(a);
+        return mat3(c, 0, s, 0, 1, 0, -s, 0, c);
+      }
+
+      // Signed Distance Functions (SDFs)
+      float sdSphere(vec3 p, float r) {
+        return length(p) - r;
+      }
+
+      float sdBox(vec3 p, vec3 b) {
+        vec3 q = abs(p) - b;
+        return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
+      }
+
+      // Map function that morphs strictly between Sphere and Cube
+      float map(vec3 p) {
+        p = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
+
+        float dSphere = sdSphere(p, 1.2);
+        float dBox = sdBox(p, vec3(1.0));
+
+        float morphFactor = sin(uTime * 1.0) * 0.5 + 0.5;
+        morphFactor = smoothstep(0.0, 1.0, morphFactor);
+
+        return mix(dSphere, dBox, morphFactor);
+      }
+
+      void main() {
+        vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
+
+        vec3 ro = vec3(0.0, 0.0, 3.5); 
+        vec3 rd = normalize(vec3(uv, -1.0)); 
+
+        float t = 0.0;
+        vec3 p;
+        bool hit = false;
+
+        for (int i = 0; i < 64; i++) {
+          p = ro + rd * t;
+          float d = map(p);
+          if (d < 0.001) {
+            hit = true;
+            break;
+          }
+          t += d;
+          if (t > 10.0) break;
+        }
+
+        vec3 bgColor = vec3(0.15, 0.18, 0.20);
+        vec3 finalColor = bgColor;
+
+        if (hit) {
+          vec3 localP = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
+          
+          // Native WebGL 2.0 fwidth requires no extension wrappers
+          vec3 fw = fwidth(localP); 
+          vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
+          float line = min(min(grid.x, grid.y), grid.z);
+          float edge = 1.0 - smoothstep(0.0, 1.0, line);
+
+          finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.45);
+        }
+
+        // WebGL 2 modern output assignment
+        fragColor = vec4(finalColor, 1.0);
+      }
+    `;
+
+    // Helper function to create and compile shaders
+    function createShader(gl, type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
     }
 
-    // Render loop
-    function render(time) {
-      resizeCanvas();
+    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+    const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
 
-      // Convert millisecond timestamps to seconds
-      gl.uniform1f(timeLocation, time * 0.001);
-      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+    // Link Shaders into Program
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
 
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error("Could not initialize shaders");
+    } else {
+      gl.useProgram(program);
+
+      // Setup full-screen quad geometric coordinates (-1 to 1)
+      const positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([
+          -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
+        ]),
+        gl.STATIC_DRAW,
+      );
+
+      const positionLocation = gl.getAttribLocation(program, "position");
+      gl.enableVertexAttribArray(positionLocation);
+      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+      // Get uniforms pointers
+      const resolutionLocation = gl.getUniformLocation(program, "uResolution");
+      const timeLocation = gl.getUniformLocation(program, "uTime");
+
+      // Handle responsive resize updates safely
+      function resizeCanvas() {
+        if (
+          canvas.width !== window.innerWidth ||
+          canvas.height !== window.innerHeight
+        ) {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        }
+      }
+
+      // Render loop
+      function render(time) {
+        resizeCanvas();
+
+        // Convert millisecond timestamps to seconds
+        gl.uniform1f(timeLocation, time * 0.001);
+        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+      }
+
+      // Kick off the animation loop
       requestAnimationFrame(render);
     }
-
-    // Kick off the animation loop
-    requestAnimationFrame(render);
   }
-}
+});
 
 // Lazy-load Google Tag Manager
 window.addEventListener("load", () => {
