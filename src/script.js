@@ -168,7 +168,7 @@ window.addEventListener("DOMContentLoaded", () => {
 // WebGL Morphing 3D Shape Shader Background
 
 const canvas = document.getElementById("webgl-background");
-const gl = canvas.getContext("webgl");
+const gl = canvas.getContext("webgl2");
 
 if (!gl) {
   console.warn(
@@ -182,9 +182,9 @@ if (!gl) {
   document.body.classList.add("webgl-fallback");
 } else {
   // Vertex Shader source (Pass-through for a full-screen quad)
-  const vsSource = `
-    attribute vec2 position;
-    varying vec2 vUv;
+  const vsSource = `#version 300 es
+    in vec2 position;
+    out vec2 vUv;
     void main() {
       vUv = position * 0.5 + 0.5;
       gl_Position = vec4(position, 0.0, 1.0);
@@ -192,12 +192,14 @@ if (!gl) {
   `;
 
   // Fragment Shader source (Raymarching + Morphing Shapes + Wireframe Grid)
-  const fsSource = `
-#extension GL_OES_standard_derivatives : enable
+  const fsSource = `#version 300 es
     precision highp float;
-    varying vec2 vUv;
+    in vec2 vUv;
     uniform vec2 uResolution;
     uniform float uTime;
+
+    // Output color variable for WebGL 2.0
+    out vec4 fragColor;
 
     // Rotation matrix helper
     mat3 rotX(float a) {
@@ -221,39 +223,27 @@ if (!gl) {
 
     // Map function that morphs strictly between Sphere and Cube
     float map(vec3 p) {
-      // Rotate the coordinate space continuously over time
       p = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
 
-      // Define your two baseline shapes
       float dSphere = sdSphere(p, 1.2);
       float dBox = sdBox(p, vec3(1.0));
 
-      // Calculate a morph factor that goes smoothly from 0.0 to 1.0 and back again.
-      // sin(uTime) oscillates between -1.0 and 1.0; multiplying by 0.5 and adding 0.5 
-      // maps it perfectly between 0.0 (Sphere) and 1.0 (Cube).
       float morphFactor = sin(uTime * 1.0) * 0.5 + 0.5;
-      
-      // Smooth out the transition curves at the endpoints
       morphFactor = smoothstep(0.0, 1.0, morphFactor);
 
-      // Linearly interpolate between the two signed distance fields
       return mix(dSphere, dBox, morphFactor);
     }
 
     void main() {
-      // Normalize aspect ratio coordinates
       vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
 
-      // Ray setup
-      vec3 ro = vec3(0.0, 0.0, 3.5); // Camera position
-      vec3 rd = normalize(vec3(uv, -1.0)); // Ray direction
+      vec3 ro = vec3(0.0, 0.0, 3.5); 
+      vec3 rd = normalize(vec3(uv, -1.0)); 
 
       float t = 0.0;
-      int maxSteps = 64;
       vec3 p;
       bool hit = false;
 
-      // Raymarching Loop
       for (int i = 0; i < 64; i++) {
         p = ro + rd * t;
         float d = map(p);
@@ -265,24 +255,23 @@ if (!gl) {
         if (t > 10.0) break;
       }
 
-      // Base color layer (Dark Slate Gray background matching CSS fallback)
       vec3 bgColor = vec3(0.15, 0.18, 0.20);
       vec3 finalColor = bgColor;
 
       if (hit) {
         vec3 localP = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
         
-        // Procedural anti-aliased grid lines using the derivative extension
+        // Native WebGL 2.0 fwidth requires no extension wrappers
         vec3 fw = fwidth(localP); 
         vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
         float line = min(min(grid.x, grid.y), grid.z);
         float edge = 1.0 - smoothstep(0.0, 1.0, line);
 
-        // Smoothly blend the elegant thin white wireframe over your background
         finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.45);
       }
 
-      gl_FragColor = vec4(finalColor, 1.0);
+      // WebGL 2 modern output assignment
+      fragColor = vec4(finalColor, 1.0);
     }
   `;
 
