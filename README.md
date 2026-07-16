@@ -27,11 +27,12 @@ This project is built using vanilla technologies to ensure maximum performance a
 ## 📂 Project Structure
 
 ```text
-├── background/         # Background image and video files
+├── background/         # SVG fallback for shader
 ├── css/                # Stylesheets
 ├── fonts/              # Font files
 ├── functions/api       # API for contact form submissions
 ├── images/             # Image files
 ├── src/                # Javascript
-├── index.html          # Main entry point (Homepage markup)
+├── index.html          # Main entry point
+├── llms.txt            # AI context guide for automated agents
 └── README.md           # Project documentation
