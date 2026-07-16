@@ -1,3 +1,14 @@
+@import "fonts.css";
+@import "containers.css";
+@import "alvin.css";
+@import "books.css";
+@import "boop.css";
+@import "font-carousel.css";
+@import "footer.css";
+@import "icon.css";
+@import "mail.css";
+@import "menu.css";
+
 a {
   color: gold;
   text-decoration: none;
