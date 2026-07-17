@@ -1,14 +1,3 @@
-@import "fonts.css";
-@import "containers.css";
-@import "alvin.css";
-@import "books.css";
-@import "boop.css";
-@import "font-carousel.css";
-@import "footer.css";
-@import "icon.css";
-@import "mail.css";
-@import "menu.css";
-
 a {
   color: gold;
   text-decoration: none;
@@ -20,8 +9,8 @@ a:hover {
 }
 
 canvas {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 h1 {
@@ -44,6 +33,392 @@ p {
   margin: 20px 0;
   font-weight: 400;
   max-width: 700px;
+}
+
+@font-face {
+  font-family: "Acme";
+  src: url("/fonts/Acme.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amatic SC";
+  src: url("/fonts/AmaticSC.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bungee Shade";
+  src: url("/fonts/BungeeShade.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Henny Penny";
+  src: url("/fonts/HennyPenny.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kablammo";
+  src: url("/fonts/Kablammo.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monoton";
+  src: url("/fonts/Monoton.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Patrick Hand";
+  src: url("/fonts/PatrickHand.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik Moonrocks";
+  src: url("/fonts/RubikMoonrocks.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Water Brush";
+  src: url("/fonts/WaterBrush.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.header-wrapper {
+  min-height: 6em;
+  display: flex;
+  align-items: center;
+}
+
+#text {
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+#wrapper {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  z-index: 2;
+  overflow-x: hidden;
+}
+
+#wrapper.active {
+  right: 300px;
+}
+
+#alvin {
+  border-radius: 50%;
+  height: 12em;
+  width: 12em;
+}
+
+#books {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+#books img {
+  height: auto;
+  width: 16em;
+  padding: 8px;
+}
+
+#books img:hover {
+  border: 0.5px solid gold;
+}
+
+.boop {
+  animation: boop 0.6s forwards;
+}
+
+@keyframes boop {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes font-carousel {
+  0% {
+    font-family: "Monoton", "Courier New", monospace;
+  }
+
+  20% {
+    font-family: "Water Brush", "Brush Script MT", cursive;
+  }
+
+  40% {
+    font-family: "Rubik Moonrocks", "Garamond", serif;
+  }
+
+  60% {
+    font-family: "Kablammo", "Georgia", serif;
+  }
+
+  80% {
+    font-family: "Bungee Shade", "Trebuchet MS", sans-serif;
+  }
+
+  100% {
+    font-family: "Henny Penny", "Tahoma", sans-serif;
+  }
+}
+
+#social {
+  position: absolute;
+  z-index: 10;
+  bottom: 2em;
+  left: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#social li {
+  list-style: none;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0.8;
+  font-size: 1.5em;
+  padding-left: 1em;
+}
+
+#social:hover li {
+  filter: blur(1px);
+}
+
+#social li:hover {
+  filter: blur(0);
+}
+
+#source-code {
+  position: absolute;
+  z-index: 10;
+  bottom: 2em;
+  right: 2em;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 800;
+  color: gold;
+  opacity: 0.8;
+}
+
+#source-code:hover {
+  color: floralwhite;
+  filter: blur(0);
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: cover;
+  filter: invert(78%) sepia(66%) saturate(823%) hue-rotate(356deg)
+    brightness(100%) contrast(106%);
+}
+
+.icon:hover,
+.icon:focus {
+  filter: invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg)
+    brightness(105%) contrast(105%);
+}
+
+.icon-amazon {
+  background-image: url(/images/amazon.svg);
+}
+
+.icon-bluesky {
+  background-image: url(/images/bluesky.svg);
+}
+
+.icon-github {
+  background-image: url(/images/github.svg);
+}
+
+.icon-google {
+  background-image: url(/images/google.svg);
+}
+
+.icon-linkedin {
+  background-image: url(/images/linkedin.svg);
+}
+
+form {
+  display: block;
+}
+
+label {
+  display: block;
+  font-size: 1.2em;
+  text-align: left;
+  color: floralwhite;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 400px;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: "Patrick Hand", cursive, sans-serif;
+  color: whitesmoke;
+  background-color: slategray;
+  opacity: 0.4;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type="email"],
+select,
+textarea {
+  width: 400px;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: "Patrick Hand", cursive, sans-serif;
+  color: whitesmoke;
+  background-color: slategray;
+  opacity: 0.4;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+#message {
+  height: 120px;
+}
+
+input:focus,
+textarea:focus {
+  outline: solid antiquewhite;
+  opacity: 0.8;
+}
+
+.submit {
+  color: gold;
+  background-color: transparent;
+  font-family: "Patrick Hand", cursive, sans-serif;
+  font-size: 1em;
+  padding: 10px;
+  border: 2px solid gold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.submit:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: floralwhite;
+  border-color: floralwhite;
+  transform: translateY(-2px);
+}
+
+.submit:active {
+  transform: translateY(0);
+}
+
+#menu {
+  position: absolute;
+  top: 0;
+  left: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+}
+
+#menu ul {
+  position: relative;
+}
+
+#menu ul li {
+  display: inline;
+  padding: 1em;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Amatic SC";
+  font-size: 2em;
+  color: gold;
+  opacity: 0.8;
+}
+
+#menu ul:hover li {
+  filter: blur(1px);
+}
+
+#menu ul li:hover {
+  color: floralwhite;
+  filter: blur(0);
+}
+
+#menu ul li button {
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+#menu ul li button:focus-visible {
+  outline: 2px solid floralwhite;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 @media (max-width: 991px) {
