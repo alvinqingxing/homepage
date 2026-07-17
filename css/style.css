@@ -19,6 +19,11 @@ a:hover {
   color: floralwhite;
 }
 
+canvas {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
 h1 {
   font-size: 4em;
   font-weight: 200;

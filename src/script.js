@@ -347,7 +347,8 @@ window.addEventListener("load", () => {
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         requestAnimationFrame(render);
       }
-
+      // Reveal the canvas now that WebGL is fully compiled and ready to draw
+      canvas.style.opacity = "1";
       // Kick off the animation loop
       requestAnimationFrame(render);
     }

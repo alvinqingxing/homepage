@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0663c3;
+  background: transparent;
   z-index: 2;
   overflow-x: hidden;
 }
