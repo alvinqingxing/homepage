@@ -53,7 +53,18 @@
       content="Homepage of Alvin Cheng-Hin Lim, academic turned web developer"
     />
     <link rel="canonical" href="https://alvinlim.dev" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="preload"
+      href="css/style.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript>
+      <link rel="stylesheet" href="css/style.css" />
+    </noscript>
     <link
       rel="apple-touch-icon"
       sizes="180x180"
