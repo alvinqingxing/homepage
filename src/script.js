@@ -201,20 +201,18 @@ window.addEventListener("load", () => {
       uniform vec2 uResolution;
       uniform float uTime;
 
-      // Output color variable for WebGL 2.0
       out vec4 fragColor;
 
-      // Rotation matrix helper
-      mat3 rotX(float a) {
-        float c = cos(a), s = sin(a);
-        return mat3(1, 0, 0, 0, c, -s, 0, s, c);
-      }
-      mat3 rotY(float a) {
-        float c = cos(a), s = sin(a);
-        return mat3(c, 0, s, 0, 1, 0, -s, 0, c);
+      // Optimized rotation helper using pre-computed values
+      mat3 getRotationMatrix(float angleX, float angleY) {
+        float cx = cos(angleX), sx = sin(angleX);
+        float cy = cos(angleY), sy = sin(angleY);
+        
+        mat3 rx = mat3(1, 0, 0, 0, cx, -sx, 0, sx, cx);
+        mat3 ry = mat3(cy, 0, sy, 0, 1, 0, -sy, 0, cy);
+        return ry * rx;
       }
 
-      // Signed Distance Functions (SDFs)
       float sdSphere(vec3 p, float r) {
         return length(p) - r;
       }
@@ -224,56 +222,57 @@ window.addEventListener("load", () => {
         return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
       }
 
-      // Map function that morphs strictly between Sphere and Cube
-      float map(vec3 p) {
-        p = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
-
+      // Eliminated rotation from map entirely to save operations in the loop
+      float map(vec3 p, float morphFactor) {
         float dSphere = sdSphere(p, 1.2);
         float dBox = sdBox(p, vec3(1.0));
-
-        float morphFactor = sin(uTime * 1.0) * 0.5 + 0.5;
-        morphFactor = smoothstep(0.0, 1.0, morphFactor);
-
         return mix(dSphere, dBox, morphFactor);
       }
 
       void main() {
         vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
 
-        vec3 ro = vec3(0.0, 0.0, 3.5); 
-        vec3 rd = normalize(vec3(uv, -1.0)); 
+        // Pre-calculate rotation matrices ONCE per pixel instead of inside the loop
+        mat3 rot = getRotationMatrix(uTime * 0.3, uTime * 0.4);
+
+        // Rotate the ray origin and ray direction instead of the scene geometry
+        vec3 ro = rot * vec3(0.0, 0.0, 3.5); 
+        vec3 rd = rot * normalize(vec3(uv, -1.0)); 
+
+        // Pre-calculate the morph factor outside the loop
+        float morphFactor = smoothstep(0.0, 1.0, sin(uTime * 1.0) * 0.5 + 0.5);
 
         float t = 0.0;
         vec3 p;
         bool hit = false;
 
-        for (int i = 0; i < 64; i++) {
+        // Reduced max loop steps from 64 to 32 for massive speedups on weak GPUs
+        for (int i = 0; i < 32; i++) {
           p = ro + rd * t;
-          float d = map(p);
+          float d = map(p, morphFactor);
           if (d < 0.001) {
             hit = true;
             break;
           }
           t += d;
-          if (t > 10.0) break;
+          if (t > 8.0) break; // Reduced max distance slightly
         }
 
         vec3 bgColor = vec3(0.15, 0.18, 0.20);
         vec3 finalColor = bgColor;
 
         if (hit) {
-          vec3 localP = rotY(uTime * 0.4) * rotX(uTime * 0.3) * p;
-          
-          // Native WebGL 2.0 fwidth requires no extension wrappers
+          // Reconstruct the stable local position for the wireframe grid
+          // rot matrix transforms camera space to object space; we invert the look direction
+          vec3 localP = ro + rd * t;
+          localP = transpose(rot) * localP; // Transpose acts as the inverse for rotation matrices
           vec3 fw = fwidth(localP); 
           vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
           float line = min(min(grid.x, grid.y), grid.z);
           float edge = 1.0 - smoothstep(0.0, 1.0, line);
-
           finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.45);
         }
 
-        // WebGL 2 modern output assignment
         fragColor = vec4(finalColor, 1.0);
       }
     `;
@@ -324,14 +323,21 @@ window.addEventListener("load", () => {
       const resolutionLocation = gl.getUniformLocation(program, "uResolution");
       const timeLocation = gl.getUniformLocation(program, "uTime");
 
-      // Handle responsive resize updates safely
+      // Handle responsive resize updates safely with performance limits
       function resizeCanvas() {
-        if (
-          canvas.width !== window.innerWidth ||
-          canvas.height !== window.innerHeight
-        ) {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
+        // Cap the pixel ratio at 1.0 for backgrounds to save older GPUs
+        const dpr = 1.0; 
+        const targetWidth = Math.floor(window.innerWidth * dpr);
+        const targetHeight = Math.floor(window.innerHeight * dpr);
+
+        if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+          canvas.width = targetWidth;
+          canvas.height = targetHeight;
+          
+          // Style coordinates remain full screen via CSS, but rendering buffer shrinks
+          canvas.style.width = window.innerWidth + "px";
+          canvas.style.height = window.innerHeight + "px";
+          
           gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
         }
       }
