@@ -433,12 +433,6 @@ textarea:focus {
   .header-wrapper {
     min-height: 12em;
   }
-}
-
-@media (max-width: 991px) {
-  .header-wrapper {
-    min-height: 12em;
-  }
 
   #name,
   #email,
