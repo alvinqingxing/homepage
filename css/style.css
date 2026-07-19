@@ -440,6 +440,7 @@ textarea:focus {
     min-height: 12em;
   }
 
+  #name,
   #email,
   #message {
     width: 240px;
