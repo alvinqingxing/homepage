@@ -165,7 +165,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// WebGL Morphing 3D Shape Shader Background
+// WebGL Distributed 3D Shapes Shader Background
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("webgl-background");
@@ -177,14 +177,9 @@ window.addEventListener("load", () => {
     console.warn(
       "WebGL not supported or context creation failed. Triggering image fallback.",
     );
-
-    // 1. Hide the canvas element safely
     canvas.classList.add("hidden");
-
-    // 2. Add the fallback class to the body to load the static image background
     document.body.classList.add("webgl-fallback");
   } else {
-    // Vertex Shader source (Pass-through for a full-screen quad)
     const vsSource = `#version 300 es
       in vec2 position;
       out vec2 vUv;
@@ -194,7 +189,7 @@ window.addEventListener("load", () => {
       }
     `;
 
-    // Fragment Shader source (Raymarching + Morphing Shapes + Wireframe Grid)
+    // Fragment Shader source
     const fsSource = `#version 300 es
       precision highp float;
       in vec2 vUv;
@@ -203,11 +198,9 @@ window.addEventListener("load", () => {
 
       out vec4 fragColor;
 
-      // Optimized rotation helper using pre-computed values
       mat3 getRotationMatrix(float angleX, float angleY) {
         float cx = cos(angleX), sx = sin(angleX);
         float cy = cos(angleY), sy = sin(angleY);
-        
         mat3 rx = mat3(1, 0, 0, 0, cx, -sx, 0, sx, cx);
         mat3 ry = mat3(cy, 0, sy, 0, 1, 0, -sy, 0, cy);
         return ry * rx;
@@ -222,62 +215,106 @@ window.addEventListener("load", () => {
         return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
       }
 
-      // Eliminated rotation from map entirely to save operations in the loop
-      float map(vec3 p, float morphFactor) {
-        float dSphere = sdSphere(p, 1.2);
-        float dBox = sdBox(p, vec3(1.0));
-        return mix(dSphere, dBox, morphFactor);
+      float sdPyramid(vec3 p, float size, float h) {
+        vec3 aP = abs(p);
+        float sides = max(aP.x + p.y * (size / h) - size, aP.z + p.y * (size / h) - size);
+        float bottom = -p.y - 0.1;
+        float top = p.y - h;
+        return max(max(sides, bottom), top);
+      }
+
+      // Fixed: Mathematical sine-based grid that guarantees solid, unbroken line generation
+      float getSolidGrid(vec3 localP, float scale) {
+        vec3 waves = abs(sin(localP * scale * 3.14159));
+        
+        // Lower threshold = thinner line. 0.06 creates distinct but fine micro-lines.
+        float threshold = 0.06; 
+        
+        float lineX = smoothstep(threshold, 0.0, waves.x);
+        float lineY = smoothstep(threshold, 0.0, waves.y);
+        float lineZ = smoothstep(threshold, 0.0, waves.z);
+        
+        // Combine them cleanly without derivative sub-pixel skipping
+        return max(max(lineX, lineY), lineZ);
+      }
+
+      float map(vec3 p, out float outLine, out int hitId) {
+        mat3 rotPyramid = getRotationMatrix(uTime * 0.4, uTime * 0.2);
+        mat3 rotCube    = getRotationMatrix(uTime * 0.3, uTime * 0.5);
+        mat3 rotSphere  = getRotationMatrix(uTime * 0.2, uTime * 0.4);
+
+        vec3 pPyramid = rotPyramid * (p - vec3(-2.6, -0.2, 0.0));
+        vec3 pCube    = rotCube * (p - vec3(0.0, 0.0, 0.0));
+        vec3 pSphere  = rotSphere * (p - vec3(2.6, 0.0, 0.0));
+
+        float dPyramid = sdPyramid(pPyramid, 0.6, 0.9);
+        float dCube    = sdBox(pCube, vec3(0.6));
+        float dSphere  = sdSphere(pSphere, 0.7);
+
+        // Compute solid line masks
+        float linePyramid = getSolidGrid(pPyramid, 2.0);
+        float lineCube    = getSolidGrid(pCube, 2.0);
+        float lineSphere  = getSolidGrid(pSphere, 3.0);
+
+        float d = 1e5;
+        outLine = 0.0;
+        hitId = 0;
+
+        if (dPyramid < d) {
+          d = dPyramid;
+          outLine = linePyramid;
+          hitId = 1;
+        }
+        if (dCube < d) {
+          d = dCube;
+          outLine = lineCube;
+          hitId = 2;
+        }
+        if (dSphere < d) {
+          d = dSphere;
+          outLine = lineSphere;
+          hitId = 3;
+        }
+
+        return d;
       }
 
       void main() {
         vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
 
-        // Pre-calculate rotation matrices ONCE per pixel instead of inside the loop
-        mat3 rot = getRotationMatrix(uTime * 0.3, uTime * 0.4);
-
-        // Rotate the ray origin and ray direction instead of the scene geometry
-        vec3 ro = rot * vec3(0.0, 0.0, 3.5); 
-        vec3 rd = rot * normalize(vec3(uv, -1.0)); 
-
-        // Pre-calculate the morph factor outside the loop
-        float morphFactor = smoothstep(0.0, 1.0, sin(uTime * 1.0) * 0.5 + 0.5);
+        vec3 ro = vec3(0.0, 0.0, 6.0); 
+        vec3 rd = normalize(vec3(uv, -1.8)); 
 
         float t = 0.0;
-        vec3 p;
+        float finalLine = 0.0;
         bool hit = false;
 
-        // Reduced max loop steps from 64 to 32 for massive speedups on weak GPUs
-        for (int i = 0; i < 32; i++) {
-          p = ro + rd * t;
-          float d = map(p, morphFactor);
+        for (int i = 0; i < 64; i++) {
+          vec3 p = ro + rd * t;
+          float localLine;
+          int hitId;
+          float d = map(p, localLine, hitId);
           if (d < 0.001) {
             hit = true;
+            finalLine = localLine;
             break;
           }
           t += d;
-          if (t > 8.0) break; // Reduced max distance slightly
+          if (t > 10.0) break;
         }
 
         vec3 bgColor = vec3(0.15, 0.18, 0.20);
         vec3 finalColor = bgColor;
 
         if (hit) {
-          // Reconstruct the stable local position for the wireframe grid
-          // rot matrix transforms camera space to object space; we invert the look direction
-          vec3 localP = ro + rd * t;
-          localP = transpose(rot) * localP; // Transpose acts as the inverse for rotation matrices
-          vec3 fw = fwidth(localP); 
-          vec3 grid = abs(fract(localP * 2.0 - 0.5) - 0.5) / (fw * 2.0);
-          float line = min(min(grid.x, grid.y), grid.z);
-          float edge = 1.0 - smoothstep(0.0, 1.0, line);
-          finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), edge * 0.45);
+          // finalLine is now directly the clean line mask (1.0 = line, 0.0 = empty space)
+          finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), finalLine * 0.85);
         }
 
         fragColor = vec4(finalColor, 1.0);
       }
     `;
 
-    // Helper function to create and compile shaders
     function createShader(gl, type, source) {
       const shader = gl.createShader(type);
       gl.shaderSource(shader, source);
@@ -293,7 +330,6 @@ window.addEventListener("load", () => {
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
 
-    // Link Shaders into Program
     const program = gl.createProgram();
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
@@ -304,7 +340,6 @@ window.addEventListener("load", () => {
     } else {
       gl.useProgram(program);
 
-      // Setup full-screen quad geometric coordinates (-1 to 1)
       const positionBuffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
       gl.bufferData(
@@ -319,43 +354,36 @@ window.addEventListener("load", () => {
       gl.enableVertexAttribArray(positionLocation);
       gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-      // Get uniforms pointers
       const resolutionLocation = gl.getUniformLocation(program, "uResolution");
       const timeLocation = gl.getUniformLocation(program, "uTime");
 
-      // Handle responsive resize updates safely with performance limits
       function resizeCanvas() {
-        // Cap the pixel ratio at 1.0 for backgrounds to save older GPUs
-        const dpr = 1.0; 
+        const dpr = 1.0;
         const targetWidth = Math.floor(window.innerWidth * dpr);
         const targetHeight = Math.floor(window.innerHeight * dpr);
 
         if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
           canvas.width = targetWidth;
           canvas.height = targetHeight;
-          
-          // Style coordinates remain full screen via CSS, but rendering buffer shrinks
+
           canvas.style.width = window.innerWidth + "px";
           canvas.style.height = window.innerHeight + "px";
-          
+
           gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
         }
       }
 
-      // Render loop
       function render(time) {
         resizeCanvas();
 
-        // Convert millisecond timestamps to seconds
         gl.uniform1f(timeLocation, time * 0.001);
         gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         requestAnimationFrame(render);
       }
-      // Reveal the canvas now that WebGL is fully compiled and ready to draw
+
       canvas.style.opacity = "1";
-      // Kick off the animation loop
       requestAnimationFrame(render);
     }
   }

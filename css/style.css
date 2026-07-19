@@ -17,7 +17,8 @@ h1 {
   font-size: 4em;
   font-weight: 200;
   color: gold;
-  opacity: 0.8;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+  opacity: 1;
   line-height: 1.5em;
   animation-name: font-carousel;
   animation-duration: 10s;
@@ -29,7 +30,8 @@ h1 {
 p {
   font-size: 1.2em;
   color: floralwhite;
-  opacity: 0.8;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+  opacity: 1;
   margin: 20px 0;
   font-weight: 400;
   max-width: 700px;
@@ -118,6 +120,13 @@ p {
   z-index: 10;
   max-width: 100%;
   overflow: hidden;
+  background: linear-gradient(
+    to right,
+    rgba(38, 46, 51, 0.85) 40%,
+    rgba(38, 46, 51, 0) 100%
+  );
+  padding: 40px;
+  border-radius: 12px;
 }
 
 #wrapper {
