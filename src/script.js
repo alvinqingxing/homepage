@@ -1,36 +1,28 @@
-// Initialize Menu
-
+// Initialize Menu Elements
 const about = document.getElementById("about");
 const publications = document.getElementById("publications");
 const contact = document.getElementById("contact");
-
-about.style.display = "block";
-publications.style.display = "none";
-contact.style.display = "none";
-
-// Menu Event Listeners
 
 const aboutToggle = document.getElementById("aboutMenuItem");
 const publicationsToggle = document.getElementById("publicationsMenuItem");
 const contactToggle = document.getElementById("contactMenuItem");
 
-aboutToggle.addEventListener("click", () => {
-  about.style.display = "block";
-  publications.style.display = "none";
-  contact.style.display = "none";
-});
+// Dynamic Section Mapping
+const sections = { about, publications, contact };
 
-publicationsToggle.addEventListener("click", () => {
-  about.style.display = "none";
-  publications.style.display = "block";
-  contact.style.display = "none";
-});
+function showSection(activeKey) {
+  Object.keys(sections).forEach((key) => {
+    sections[key].style.display = key === activeKey ? "block" : "none";
+  });
+}
 
-contactToggle.addEventListener("click", () => {
-  about.style.display = "none";
-  publications.style.display = "none";
-  contact.style.display = "block";
-});
+// Set Initial State
+showSection("about");
+
+// Menu Event Listeners
+aboutToggle.addEventListener("click", () => showSection("about"));
+publicationsToggle.addEventListener("click", () => showSection("publications"));
+contactToggle.addEventListener("click", () => showSection("contact"));
 
 // Blur Effect
 
@@ -123,15 +115,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const msgType = urlParams.get("msg");
 
   if (status) {
-    const aboutEl = document.getElementById("about");
-    const publicationsEl = document.getElementById("publications");
-    const contactEl = document.getElementById("contact");
-
-    if (aboutEl && publicationsEl && contactEl) {
-      aboutEl.style.display = "none";
-      publicationsEl.style.display = "none";
-      contactEl.style.display = "block";
-    }
+    showSection("contact");
 
     const banner = document.getElementById("formStatusBanner");
     if (banner) {
