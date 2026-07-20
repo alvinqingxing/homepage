@@ -140,10 +140,11 @@ p {
   background: transparent;
   z-index: 2;
   overflow-x: hidden;
+  transition: transform 0.3s ease-in-out; 
 }
 
 #wrapper.active {
-  right: 300px;
+  transform: translateX(-300px); 
 }
 
 #alvin {
