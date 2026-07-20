@@ -25,28 +25,28 @@ publicationsToggle.addEventListener("click", () => showSection("publications"));
 contactToggle.addEventListener("click", () => showSection("contact"));
 
 // Blur Effect
-
 const sourceCode = document.getElementById("source-code");
 const social = document.getElementById("social");
 
-sourceCode.addEventListener("pointerenter", () => {
-  social.style.filter = "blur(1px)";
-});
+if (sourceCode && social) {
+  sourceCode.addEventListener("pointerenter", () => {
+    social.style.filter = "blur(1px)";
+  });
 
-sourceCode.addEventListener("pointerleave", () => {
-  social.style.filter = "blur(0)";
-});
+  sourceCode.addEventListener("pointerleave", () => {
+    social.style.filter = "blur(0)";
+  });
 
-social.addEventListener("pointerenter", () => {
-  sourceCode.style.filter = "blur(1px)";
-});
+  social.addEventListener("pointerenter", () => {
+    sourceCode.style.filter = "blur(1px)";
+  });
 
-social.addEventListener("pointerleave", () => {
-  sourceCode.style.filter = "blur(0)";
-});
+  social.addEventListener("pointerleave", () => {
+    sourceCode.style.filter = "blur(0)";
+  });
+}
 
 // Boop
-
 const alvin = document.getElementById("alvin");
 
 alvin.addEventListener("pointerenter", () => {
@@ -79,7 +79,7 @@ if (contactForm && submitBtn) {
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: formData,
       });
@@ -93,13 +93,18 @@ if (contactForm && submitBtn) {
           turnstile.reset();
         }
       } else {
-        alert("Error: " + (result.error || "Something went wrong. Please try again."));
+        alert(
+          "Error: " +
+            (result.error || "Something went wrong. Please try again."),
+        );
         if (typeof turnstile !== "undefined") {
           turnstile.reset();
         }
       }
     } catch (error) {
-      alert("A connection error occurred. Please check your internet connection.");
+      alert(
+        "A connection error occurred. Please check your internet connection.",
+      );
     }
   });
 
@@ -364,15 +369,9 @@ window.addEventListener("load", () => {
 
       function updatePointer(e) {
         const rect = canvas.getBoundingClientRect();
-        let clientX, clientY;
 
-        if (e.touches && e.touches.length > 0) {
-          clientX = e.touches[0].clientX;
-          clientY = e.touches[0].clientY;
-        } else {
-          clientX = e.clientX;
-          clientY = e.clientY;
-        }
+        const clientX = e.clientX;
+        const clientY = e.clientY;
 
         const newPointerX = (clientX - rect.left) * (canvas.width / rect.width);
         const newPointerY =
@@ -382,9 +381,8 @@ window.addEventListener("load", () => {
         if (lastPointerX !== null && lastPointerY !== null) {
           const dx = newPointerX - lastPointerX;
           const dy = newPointerY - lastPointerY;
-          const motionThreshold = 0.5; // Filters shaky noise inputs
+          const motionThreshold = 0.5;
 
-          // Update physics targets based on physical drag vector
           if (Math.abs(dx) > motionThreshold) {
             targetDirectionX = Math.sign(dx);
           }
