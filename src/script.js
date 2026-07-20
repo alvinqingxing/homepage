@@ -443,8 +443,8 @@ window.addEventListener("load", () => {
 
         // Smooth out direction changes using linear interpolation (lerp)
         // Adjust 4.0 up for snappier responses, or down for a heavy, drifting momentum feel
-        currentDirectionX += (targetDirectionX - currentDirectionX) * 4.0 * dt;
-        currentDirectionY += (targetDirectionY - currentDirectionY) * 4.0 * dt;
+        currentDirectionX += (targetDirectionX - currentDirectionX) * 24.0 * dt;
+        currentDirectionY += (targetDirectionY - currentDirectionY) * 24.0 * dt;
 
         // Accumulate directional time steps over the delta buffer
         rotTimelineX += dt * currentDirectionX;
