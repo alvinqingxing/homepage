@@ -180,6 +180,10 @@ window.addEventListener("load", () => {
     canvas.classList.add("hidden");
     document.body.classList.add("webgl-fallback");
   } else {
+    // Keep track of the mouse position (in pixels, origin bottom-left to match WebGL)
+    let pointerX = -1000.0;
+    let pointerY = -1000.0;
+
     const vsSource = `#version 300 es
       in vec2 position;
       out vec2 vUv;
@@ -195,6 +199,7 @@ window.addEventListener("load", () => {
       in vec2 vUv;
       uniform vec2 uResolution;
       uniform float uTime;
+      uniform vec2 uMouse; // Added mouse tracking uniform
 
       out vec4 fragColor;
 
@@ -223,18 +228,14 @@ window.addEventListener("load", () => {
         return max(max(sides, bottom), top);
       }
 
-      // Fixed: Mathematical sine-based grid that guarantees solid, unbroken line generation
       float getSolidGrid(vec3 localP, float scale) {
         vec3 waves = abs(sin(localP * scale * 3.14159));
-        
-        // Lower threshold = thinner line. 0.06 creates distinct but fine micro-lines.
         float threshold = 0.06; 
         
         float lineX = smoothstep(threshold, 0.0, waves.x);
         float lineY = smoothstep(threshold, 0.0, waves.y);
         float lineZ = smoothstep(threshold, 0.0, waves.z);
         
-        // Combine them cleanly without derivative sub-pixel skipping
         return max(max(lineX, lineY), lineZ);
       }
 
@@ -251,7 +252,6 @@ window.addEventListener("load", () => {
         float dCube    = sdBox(pCube, vec3(0.6));
         float dSphere  = sdSphere(pSphere, 0.7);
 
-        // Compute solid line masks
         float linePyramid = getSolidGrid(pPyramid, 2.0);
         float lineCube    = getSolidGrid(pCube, 2.0);
         float lineSphere  = getSolidGrid(pSphere, 3.0);
@@ -307,8 +307,22 @@ window.addEventListener("load", () => {
         vec3 finalColor = bgColor;
 
         if (hit) {
-          // finalLine is now directly the clean line mask (1.0 = line, 0.0 = empty space)
-          finalColor = mix(bgColor, vec3(1.0, 1.0, 1.0), finalLine * 0.85);
+          // 1. Calculate pixel distance between current fragment and pointer
+          float distToPointer = distance(gl_FragCoord.xy, uMouse);
+
+          // 2. Proximity check (e.g., 150-pixel active glowing radius)
+          // returns 1.0 when close to mouse, 0.0 when far away
+          float proximity = smoothstep(150.0, 40.0, distToPointer);
+
+          // 3. Define White vs. Gold (RGB: 1.0, 0.84, 0.0) colors
+          vec3 whiteColor = vec3(1.0, 1.0, 1.0);
+          vec3 goldColor  = vec3(1.0, 0.84, 0.0);
+
+          // 4. Dynamically morph target line color depending on proximity
+          vec3 targetLineColor = mix(whiteColor, goldColor, proximity);
+
+          // Render line mask with the computed interactive color
+          finalColor = mix(bgColor, targetLineColor, finalLine * 0.85);
         }
 
         fragColor = vec4(finalColor, 1.0);
@@ -356,6 +370,30 @@ window.addEventListener("load", () => {
 
       const resolutionLocation = gl.getUniformLocation(program, "uResolution");
       const timeLocation = gl.getUniformLocation(program, "uTime");
+      const mouseLocation = gl.getUniformLocation(program, "uMouse"); // Added location mapping
+
+      // Track pointer movement event updates (Mouse and Touch compatibility)
+      function updatePointer(e) {
+        const rect = canvas.getBoundingClientRect();
+        let clientX, clientY;
+
+        if (e.touches && e.touches.length > 0) {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        } else {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        }
+
+        // Map standard DOM space to layout bounds
+        pointerX = (clientX - rect.left) * (canvas.width / rect.width);
+        // Invert Y axes because DOM layout starts top-left, WebGL starts bottom-left
+        pointerY =
+          (rect.height - (clientY - rect.top)) * (canvas.height / rect.height);
+      }
+
+      window.addEventListener("pointermove", updatePointer);
+      window.addEventListener("pointerdown", updatePointer);
 
       function resizeCanvas() {
         const dpr = 1.0;
@@ -378,6 +416,7 @@ window.addEventListener("load", () => {
 
         gl.uniform1f(timeLocation, time * 0.001);
         gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+        gl.uniform2f(mouseLocation, pointerX, pointerY); // Pass coordinates every tick
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         requestAnimationFrame(render);
