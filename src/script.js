@@ -58,10 +58,11 @@ alvin.addEventListener("animationend", (e) => {
 });
 
 // Contact Form
+const contactForm = document.getElementById("contactForm");
+const submitBtn = document.getElementById("submitBtn");
 
-document
-  .getElementById("contactForm")
-  .addEventListener("submit", async function (event) {
+if (contactForm && submitBtn) {
+  contactForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const form = event.target;
@@ -78,7 +79,7 @@ document
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
         },
         body: formData,
       });
@@ -92,23 +93,20 @@ document
           turnstile.reset();
         }
       } else {
-        alert(
-          "Error: " +
-            (result.error || "Something went wrong. Please try again."),
-        );
+        alert("Error: " + (result.error || "Something went wrong. Please try again."));
         if (typeof turnstile !== "undefined") {
           turnstile.reset();
         }
       }
     } catch (error) {
-      alert(
-        "A connection error occurred. Please check your internet connection.",
-      );
+      alert("A connection error occurred. Please check your internet connection.");
     }
   });
 
-// Fallback Form Status Handler
+  submitBtn.disabled = false;
+}
 
+// Fallback Form Status Handler
 window.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const status = urlParams.get("status");
