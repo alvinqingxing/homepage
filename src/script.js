@@ -152,7 +152,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// WebGL Distributed 3D Shapes Shader Background with Interactive Proximity & Rotation Direction
+// WebGL Distributed 3D Shapes Shader Background
 window.addEventListener("load", () => {
   const canvas = document.getElementById("webgl-background");
   if (!canvas) return;
@@ -166,21 +166,12 @@ window.addEventListener("load", () => {
     canvas.classList.add("hidden");
     document.body.classList.add("webgl-fallback");
   } else {
-    // Keep track of the mouse position
     let pointerX = -1000.0;
     let pointerY = -1000.0;
 
-    // Physical state tracking for rotation manipulation
-    let lastPointerX = null;
-    let lastPointerY = null;
-    let targetDirectionX = 1.0; // Default baseline spin direction
-    let targetDirectionY = 1.0;
-    let currentDirectionX = 1.0; // Interpolated smooth matching state
-    let currentDirectionY = 1.0;
-
-    // Accumulators that act as custom timelines replacing pure uTime
     let rotTimelineX = 0.0;
     let rotTimelineY = 0.0;
+    let horizontalOffset = 0.0;
     let lastTimestamp = 0;
 
     const vsSource = `#version 300 es
@@ -192,13 +183,13 @@ window.addEventListener("load", () => {
       }
     `;
 
-    // Fragment Shader source
     const fsSource = `#version 300 es
       precision highp float;
       in vec2 vUv;
       uniform vec2 uResolution;
-      uniform vec2 uRotTimelines; // Swapped out single float uTime for dynamic rotation tracking vectors
+      uniform vec2 uRotTimelines;
       uniform vec2 uMouse;
+      uniform float uOffset;
 
       out vec4 fragColor;
 
@@ -239,14 +230,17 @@ window.addEventListener("load", () => {
       }
 
       float map(vec3 p, out float outLine, out int hitId) {
-        // Shapes now rotate using the interactive timelines rather than hardcoded global clock ticks
         mat3 rotPyramid = getRotationMatrix(uRotTimelines.x * 0.4, uRotTimelines.y * 0.2);
         mat3 rotCube    = getRotationMatrix(uRotTimelines.x * 0.3, uRotTimelines.y * 0.5);
         mat3 rotSphere  = getRotationMatrix(uRotTimelines.x * 0.2, uRotTimelines.y * 0.4);
 
-        vec3 pPyramid = rotPyramid * (p - vec3(-2.6, -0.2, 0.0));
-        vec3 pCube    = rotCube * (p - vec3(0.0, 0.0, 0.0));
-        vec3 pSphere  = rotSphere * (p - vec3(2.6, 0.0, 0.0));
+        float loopWidth = 10.0;
+        float wrappedX = mod(p.x + uOffset + 5.0, loopWidth) - 5.0;
+
+        // Evenly spaced at -3.333, 0.0, and +3.333 across the 10.0 unit loop
+        vec3 pPyramid = rotPyramid * (vec3(wrappedX, p.y, p.z) - vec3(-3.333, -0.2, 0.0));
+        vec3 pCube    = rotCube * (vec3(wrappedX, p.y, p.z) - vec3(0.0, 0.0, 0.0));
+        vec3 pSphere  = rotSphere * (vec3(wrappedX, p.y, p.z) - vec3(3.333, 0.0, 0.0));
 
         float dPyramid = sdPyramid(pPyramid, 0.6, 0.9);
         float dCube    = sdBox(pCube, vec3(0.6));
@@ -366,35 +360,14 @@ window.addEventListener("load", () => {
         "uRotTimelines",
       );
       const mouseLocation = gl.getUniformLocation(program, "uMouse");
+      const offsetLocation = gl.getUniformLocation(program, "uOffset");
 
       function updatePointer(e) {
         const rect = canvas.getBoundingClientRect();
-
-        const clientX = e.clientX;
-        const clientY = e.clientY;
-
-        const newPointerX = (clientX - rect.left) * (canvas.width / rect.width);
-        const newPointerY =
-          (rect.height - (clientY - rect.top)) * (canvas.height / rect.height);
-
-        // Calculate velocity vector if this isn't the first captured point
-        if (lastPointerX !== null && lastPointerY !== null) {
-          const dx = newPointerX - lastPointerX;
-          const dy = newPointerY - lastPointerY;
-          const motionThreshold = 0.5;
-
-          if (Math.abs(dx) > motionThreshold) {
-            targetDirectionX = Math.sign(dx);
-          }
-          if (Math.abs(dy) > motionThreshold) {
-            targetDirectionY = Math.sign(dy);
-          }
-        }
-
-        pointerX = newPointerX;
-        pointerY = newPointerY;
-        lastPointerX = newPointerX;
-        lastPointerY = newPointerY;
+        pointerX = (e.clientX - rect.left) * (canvas.width / rect.width);
+        pointerY =
+          (rect.height - (e.clientY - rect.top)) *
+          (canvas.height / rect.height);
       }
 
       window.addEventListener("pointermove", updatePointer);
@@ -417,22 +390,19 @@ window.addEventListener("load", () => {
       function render(time) {
         resizeCanvas();
 
-        // Calculate delta time so rotation increments independently of frame drops
         const dt = (time - lastTimestamp) * 0.001;
         lastTimestamp = time;
 
-        // Smooth out direction changes using linear interpolation (lerp)
-        // Adjust 4.0 up for snappier responses, or down for a heavy, drifting momentum feel
-        currentDirectionX += (targetDirectionX - currentDirectionX) * 24.0 * dt;
-        currentDirectionY += (targetDirectionY - currentDirectionY) * 24.0 * dt;
+        rotTimelineX += dt * -1.0;
+        rotTimelineY += dt * -1.0;
 
-        // Accumulate directional time steps over the delta buffer
-        rotTimelineX += dt * currentDirectionX;
-        rotTimelineY += dt * currentDirectionY;
+        const driftSpeed = 1.2;
+        horizontalOffset += dt * driftSpeed;
 
         gl.uniform2f(rotTimelinesLocation, rotTimelineX, rotTimelineY);
         gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
         gl.uniform2f(mouseLocation, pointerX, pointerY);
+        gl.uniform1f(offsetLocation, horizontalOffset);
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         requestAnimationFrame(render);
