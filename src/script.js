@@ -396,7 +396,7 @@ window.addEventListener("load", () => {
         rotTimelineX += dt * -1.0;
         rotTimelineY += dt * -1.0;
 
-        const driftSpeed = 1.2;
+        const driftSpeed = 0.4;
         horizontalOffset += dt * driftSpeed;
 
         gl.uniform2f(rotTimelinesLocation, rotTimelineX, rotTimelineY);
