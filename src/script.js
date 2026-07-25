@@ -237,7 +237,6 @@ window.addEventListener("load", () => {
         float loopWidth = 10.0;
         float wrappedX = mod(p.x + uOffset + 5.0, loopWidth) - 5.0;
 
-        // Evenly spaced at -3.333, 0.0, and +3.333 across the 10.0 unit loop
         vec3 pPyramid = rotPyramid * (vec3(wrappedX, p.y, p.z) - vec3(-3.333, -0.2, 0.0));
         vec3 pCube    = rotCube * (vec3(wrappedX, p.y, p.z) - vec3(0.0, 0.0, 0.0));
         vec3 pSphere  = rotSphere * (vec3(wrappedX, p.y, p.z) - vec3(3.333, 0.0, 0.0));
@@ -351,30 +350,27 @@ window.addEventListener("load", () => {
       );
 
       const positionLocation = gl.getAttribLocation(program, "position");
-      gl.enableVertexAttribArray(positionLocation);
-      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+      if (positionLocation !== -1) {
+        gl.enableVertexAttribArray(positionLocation);
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+      }
 
       const resolutionLocation = gl.getUniformLocation(program, "uResolution");
-      const rotTimelinesLocation = gl.getUniformLocation(
-        program,
-        "uRotTimelines",
-      );
+      const rotTimelinesLocation = gl.getUniformLocation(program, "uRotTimelines");
       const mouseLocation = gl.getUniformLocation(program, "uMouse");
       const offsetLocation = gl.getUniformLocation(program, "uOffset");
 
       function updatePointer(e) {
         const rect = canvas.getBoundingClientRect();
         pointerX = (e.clientX - rect.left) * (canvas.width / rect.width);
-        pointerY =
-          (rect.height - (e.clientY - rect.top)) *
-          (canvas.height / rect.height);
+        pointerY = (rect.height - (e.clientY - rect.top)) * (canvas.height / rect.height);
       }
 
       window.addEventListener("pointermove", updatePointer);
       window.addEventListener("pointerdown", updatePointer);
 
       function resizeCanvas() {
-        const dpr = 1.0;
+        const dpr = window.devicePixelRatio || 1.0;
         const targetWidth = Math.floor(window.innerWidth * dpr);
         const targetHeight = Math.floor(window.innerHeight * dpr);
 
@@ -389,6 +385,10 @@ window.addEventListener("load", () => {
 
       function render(time) {
         resizeCanvas();
+
+        if (lastTimestamp === 0) {
+          lastTimestamp = time;
+        }
 
         const dt = (time - lastTimestamp) * 0.001;
         lastTimestamp = time;
