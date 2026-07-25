@@ -10,31 +10,7 @@ a:hover {
 
 canvas {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-h1 {
-  font-size: 4em;
-  font-weight: 200;
-  color: gold;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
-  opacity: 1;
-  line-height: 1.5em;
-  animation-name: font-carousel;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
-}
-
-p {
-  font-size: 1.2em;
-  color: floralwhite;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
-  opacity: 1;
-  margin: 20px 0;
-  font-weight: 400;
-  max-width: 700px;
+  transition: opacity 0.8s ease-in-out;
 }
 
 @font-face {
@@ -107,6 +83,30 @@ p {
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 200;
+  color: gold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+  opacity: 1;
+  line-height: 1.5em;
+  animation-name: font-carousel;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+p {
+  font-size: 1.2em;
+  color: floralwhite;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+  opacity: 1;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
 }
 
 .header-wrapper {
@@ -333,12 +333,16 @@ textarea:focus {
   opacity: 0.8;
 }
 
+.cf-turnstile {
+  margin: 10px 0;
+}
+
 .submit {
   color: gold;
   background-color: transparent;
   font-family: "Patrick Hand", cursive, sans-serif;
   font-size: 1em;
-  padding: 10px;
+  padding: 10px 20px;
   border: 2px solid gold;
   border-radius: 8px;
   cursor: pointer;
@@ -348,15 +352,22 @@ textarea:focus {
   letter-spacing: 1px;
 }
 
-.submit:hover {
+.submit:hover:not(:disabled) {
   background-color: rgba(255, 255, 255, 0.1);
   color: floralwhite;
   border-color: floralwhite;
   transform: translateY(-2px);
 }
 
-.submit:active {
+.submit:active:not(:disabled) {
   transform: translateY(0);
+}
+
+.submit:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: slategray;
+  color: slategray;
 }
 
 #menu {
@@ -414,10 +425,12 @@ textarea:focus {
     min-height: 12em;
   }
 
-  #name,
-  #email,
-  #message {
-    width: 240px;
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    max-width: 320px;
   }
 
   #menu ul li {
