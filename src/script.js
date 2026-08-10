@@ -46,18 +46,20 @@ if (sourceCode && social) {
   });
 }
 
-// Boop
+// Boop Animation
 const alvin = document.getElementById("alvin");
 
-alvin.addEventListener("pointerenter", () => {
-  alvin.classList.add("boop");
-});
+if (alvin) {
+  alvin.addEventListener("pointerenter", () => {
+    alvin.classList.add("boop");
+  });
 
-alvin.addEventListener("animationend", (e) => {
-  alvin.classList.remove("boop");
-});
+  alvin.addEventListener("animationend", () => {
+    alvin.classList.remove("boop");
+  });
+}
 
-// Contact Form
+// Contact Form Handler
 const contactForm = document.getElementById("contactForm");
 const submitBtn = document.getElementById("submitBtn");
 
@@ -151,6 +153,74 @@ window.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({ path: cleanUrl }, "", cleanUrl);
   }
 });
+
+// Lazy-load Cloudflare Turnstile via IntersectionObserver or Menu Click
+function loadTurnstile() {
+  if (window.turnstileLoaded) return;
+  window.turnstileLoaded = true;
+
+  const script = document.createElement("script");
+  script.src =
+    "https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha";
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+}
+
+const contactSection = document.getElementById("contact");
+if (contactSection) {
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      loadTurnstile();
+      observer.disconnect();
+    }
+  });
+  observer.observe(contactSection);
+}
+
+if (contactToggle) {
+  contactToggle.addEventListener("click", loadTurnstile);
+}
+
+// Deferred Google Tag Manager Loading (Avoids Forced Reflow on Critical Path)
+function loadGTM() {
+  if (window.gtmLoaded) return;
+  window.gtmLoaded = true;
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-2945KEEG0G");
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-2945KEEG0G";
+  document.head.appendChild(script);
+}
+
+const triggerGTMEvents = ["pointerdown", "scroll", "keydown"];
+function scheduleGTM() {
+  triggerGTMEvents.forEach((event) =>
+    window.removeEventListener(event, scheduleGTM),
+  );
+  loadGTM();
+}
+
+triggerGTMEvents.forEach((event) =>
+  window.addEventListener(event, scheduleGTM, { passive: true }),
+);
+
+if ("requestIdleCallback" in window) {
+  window.addEventListener("load", () => {
+    requestIdleCallback(loadGTM, { timeout: 3000 });
+  });
+} else {
+  window.addEventListener("load", () => {
+    setTimeout(loadGTM, 2500);
+  });
+}
 
 // WebGL Distributed 3D Shapes Shader Background
 window.addEventListener("load", () => {
@@ -356,14 +426,19 @@ window.addEventListener("load", () => {
       }
 
       const resolutionLocation = gl.getUniformLocation(program, "uResolution");
-      const rotTimelinesLocation = gl.getUniformLocation(program, "uRotTimelines");
+      const rotTimelinesLocation = gl.getUniformLocation(
+        program,
+        "uRotTimelines",
+      );
       const mouseLocation = gl.getUniformLocation(program, "uMouse");
       const offsetLocation = gl.getUniformLocation(program, "uOffset");
 
       function updatePointer(e) {
         const rect = canvas.getBoundingClientRect();
         pointerX = (e.clientX - rect.left) * (canvas.width / rect.width);
-        pointerY = (rect.height - (e.clientY - rect.top)) * (canvas.height / rect.height);
+        pointerY =
+          (rect.height - (e.clientY - rect.top)) *
+          (canvas.height / rect.height);
       }
 
       window.addEventListener("pointermove", updatePointer);
@@ -412,21 +487,4 @@ window.addEventListener("load", () => {
       requestAnimationFrame(render);
     }
   }
-});
-
-// Lazy-load Google Tag Manager
-window.addEventListener("load", () => {
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () {
-    dataLayer.push(arguments);
-  };
-
-  gtag("js", new Date());
-  gtag("config", "G-2945KEEG0G");
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = "https://www.googletagmanager.com/gtag/js?id=G-2945KEEG0G";
-
-  document.head.appendChild(script);
 });
