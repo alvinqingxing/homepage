@@ -79,7 +79,6 @@
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
         opacity: 1;
         line-height: 1.5em;
-        animation-name: font-carousel;
         animation-duration: 10s;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in-out;
@@ -176,32 +175,6 @@
 
         75% {
           transform: rotate(10deg);
-        }
-      }
-
-      @keyframes font-carousel {
-        0% {
-          font-family: "Monoton", "Courier New", monospace;
-        }
-
-        20% {
-          font-family: "Water Brush", "Brush Script MT", cursive;
-        }
-
-        40% {
-          font-family: "Rubik Moonrocks", "Garamond", serif;
-        }
-
-        60% {
-          font-family: "Kablammo", "Georgia", serif;
-        }
-
-        80% {
-          font-family: "Bungee Shade", "Trebuchet MS", sans-serif;
-        }
-
-        100% {
-          font-family: "Henny Penny", "Tahoma", sans-serif;
         }
       }
 
@@ -741,42 +714,60 @@
       window.addEventListener("load", () => {
         const fontStyle = document.createElement("style");
         fontStyle.innerHTML = `
-      @font-face {
-        font-family: "Patrick Hand";
-        src: url("/fonts/PatrickHand.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-      @font-face {
-        font-family: "Bungee Shade";
-        src: url("/fonts/BungeeShade.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-      @font-face {
-        font-family: "Henny Penny";
-        src: url("/fonts/HennyPenny.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-      @font-face {
-        font-family: "Kablammo";
-        src: url("/fonts/Kablammo.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-      @font-face {
-        font-family: "Monoton";
-        src: url("/fonts/Monoton.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-      @font-face {
-        font-family: "Rubik Moonrocks";
-        src: url("/fonts/RubikMoonrocks.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-      @font-face {
-        font-family: "Water Brush";
-        src: url("/fonts/WaterBrush.woff2") format("woff2");
-        font-weight: normal; font-style: normal; font-display: swap;
-      }
-    `;
+    @font-face {
+      font-family: "Patrick Hand";
+      src: url("/fonts/PatrickHand.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Bungee Shade";
+      src: url("/fonts/BungeeShade.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Henny Penny";
+      src: url("/fonts/HennyPenny.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Kablammo";
+      src: url("/fonts/Kablammo.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Monoton";
+      src: url("/fonts/Monoton.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Rubik Moonrocks";
+      src: url("/fonts/RubikMoonrocks.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Water Brush";
+      src: url("/fonts/WaterBrush.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+
+    /* Attach animation AFTER fonts load */
+    h1 {
+      animation-name: font-carousel;
+      animation-duration: 10s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+    }
+
+    @keyframes font-carousel {
+      0% { font-family: "Monoton", "Courier New", monospace; }
+      20% { font-family: "Water Brush", "Brush Script MT", cursive; }
+      40% { font-family: "Rubik Moonrocks", "Garamond", serif; }
+      60% { font-family: "Kablammo", "Georgia", serif; }
+      80% { font-family: "Bungee Shade", "Trebuchet MS", sans-serif; }
+      100% { font-family: "Henny Penny", "Tahoma", sans-serif; }
+    }
+  `;
         document.head.appendChild(fontStyle);
       });
     </script>
