@@ -182,7 +182,7 @@ if (contactToggle) {
   contactToggle.addEventListener("click", loadTurnstile);
 }
 
-// Deferred Google Tag Manager Loading (Avoids Forced Reflow on Critical Path)
+// Strict User-Interaction GTM Loading
 function loadGTM() {
   if (window.gtmLoaded) return;
   window.gtmLoaded = true;
@@ -200,10 +200,18 @@ function loadGTM() {
   document.head.appendChild(script);
 }
 
-const triggerGTMEvents = ["pointerdown", "scroll", "keydown"];
+// Fire GTM only when a real user interacts with the page
+const triggerGTMEvents = [
+  "pointerdown",
+  "mousemove",
+  "scroll",
+  "keydown",
+  "touchstart",
+];
+
 function scheduleGTM() {
   triggerGTMEvents.forEach((event) =>
-    window.removeEventListener(event, scheduleGTM),
+    window.removeEventListener(event, scheduleGTM, { passive: true }),
   );
   loadGTM();
 }
@@ -211,16 +219,6 @@ function scheduleGTM() {
 triggerGTMEvents.forEach((event) =>
   window.addEventListener(event, scheduleGTM, { passive: true }),
 );
-
-if ("requestIdleCallback" in window) {
-  window.addEventListener("load", () => {
-    requestIdleCallback(loadGTM, { timeout: 3000 });
-  });
-} else {
-  window.addEventListener("load", () => {
-    setTimeout(loadGTM, 2500);
-  });
-}
 
 // WebGL Distributed 3D Shapes Shader Background
 window.addEventListener("load", () => {
@@ -441,8 +439,8 @@ window.addEventListener("load", () => {
           (canvas.height / rect.height);
       }
 
-      window.addEventListener("pointermove", updatePointer);
-      window.addEventListener("pointerdown", updatePointer);
+      window.addEventListener("pointermove", updatePointer, { passive: true });
+      window.addEventListener("pointerdown", updatePointer, { passive: true });
 
       function resizeCanvas() {
         const dpr = window.devicePixelRatio || 1.0;
