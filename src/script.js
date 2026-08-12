@@ -225,18 +225,15 @@ window.addEventListener("load", () => {
   const canvas = document.getElementById("webgl-background");
   if (!canvas) return;
 
-  const gl = canvas.getContext("webgl2");
+  const gl = canvas.getContext("webgl2", { powerPreference: "low-power", preserveDrawingBuffer: false });
 
   if (!gl) {
-    console.warn(
-      "WebGL not supported or context creation failed. Triggering image fallback.",
-    );
+    console.warn("WebGL not supported or context creation failed. Triggering fallback.");
     canvas.classList.add("hidden");
     document.body.classList.add("webgl-fallback");
   } else {
     let pointerX = -1000.0;
     let pointerY = -1000.0;
-
     let rotTimelineX = 0.0;
     let rotTimelineY = 0.0;
     let horizontalOffset = 0.0;
@@ -264,14 +261,10 @@ window.addEventListener("load", () => {
       mat3 getRotationMatrix(float angleX, float angleY) {
         float cx = cos(angleX), sx = sin(angleX);
         float cy = cos(angleY), sy = sin(angleY);
-        mat3 rx = mat3(1, 0, 0, 0, cx, -sx, 0, sx, cx);
-        mat3 ry = mat3(cy, 0, sy, 0, 1, 0, -sy, 0, cy);
-        return ry * rx;
+        return mat3(cy, 0, sy, 0, 1, 0, -sy, 0, cy) * mat3(1, 0, 0, 0, cx, -sx, 0, sx, cx);
       }
 
-      float sdSphere(vec3 p, float r) {
-        return length(p) - r;
-      }
+      float sdSphere(vec3 p, float r) { return length(p) - r; }
 
       float sdBox(vec3 p, vec3 b) {
         vec3 q = abs(p) - b;
@@ -281,23 +274,16 @@ window.addEventListener("load", () => {
       float sdPyramid(vec3 p, float size, float h) {
         vec3 aP = abs(p);
         float sides = max(aP.x + p.y * (size / h) - size, aP.z + p.y * (size / h) - size);
-        float bottom = -p.y - 0.1;
-        float top = p.y - h;
-        return max(max(sides, bottom), top);
+        return max(max(sides, -p.y - 0.1), p.y - h);
       }
 
       float getSolidGrid(vec3 localP, float scale) {
         vec3 waves = abs(sin(localP * scale * 3.14159));
-        float threshold = 0.06; 
-        
-        float lineX = smoothstep(threshold, 0.0, waves.x);
-        float lineY = smoothstep(threshold, 0.0, waves.y);
-        float lineZ = smoothstep(threshold, 0.0, waves.z);
-        
-        return max(max(lineX, lineY), lineZ);
+        float threshold = 0.06;
+        return max(max(smoothstep(threshold, 0.0, waves.x), smoothstep(threshold, 0.0, waves.y)), smoothstep(threshold, 0.0, waves.z));
       }
 
-      float map(vec3 p, out float outLine, out int hitId) {
+      float map(vec3 p, out float outLine) {
         mat3 rotPyramid = getRotationMatrix(uRotTimelines.x * 0.4, uRotTimelines.y * 0.2);
         mat3 rotCube    = getRotationMatrix(uRotTimelines.x * 0.3, uRotTimelines.y * 0.5);
         mat3 rotSphere  = getRotationMatrix(uRotTimelines.x * 0.2, uRotTimelines.y * 0.4);
@@ -313,49 +299,30 @@ window.addEventListener("load", () => {
         float dCube    = sdBox(pCube, vec3(0.6));
         float dSphere  = sdSphere(pSphere, 0.7);
 
-        float linePyramid = getSolidGrid(pPyramid, 2.0);
-        float lineCube    = getSolidGrid(pCube, 2.0);
-        float lineSphere  = getSolidGrid(pSphere, 3.0);
+        float d = min(min(dPyramid, dCube), dSphere);
 
-        float d = 1e5;
-        outLine = 0.0;
-        hitId = 0;
-
-        if (dPyramid < d) {
-          d = dPyramid;
-          outLine = linePyramid;
-          hitId = 1;
-        }
-        if (dCube < d) {
-          d = dCube;
-          outLine = lineCube;
-          hitId = 2;
-        }
-        if (dSphere < d) {
-          d = dSphere;
-          outLine = lineSphere;
-          hitId = 3;
-        }
+        if (d == dPyramid) outLine = getSolidGrid(pPyramid, 2.0);
+        else if (d == dCube) outLine = getSolidGrid(pCube, 2.0);
+        else outLine = getSolidGrid(pSphere, 3.0);
 
         return d;
       }
 
       void main() {
         vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
-
-        vec3 ro = vec3(0.0, 0.0, 6.0); 
-        vec3 rd = normalize(vec3(uv, -1.8)); 
+        vec3 ro = vec3(0.0, 0.0, 6.0);
+        vec3 rd = normalize(vec3(uv, -1.8));
 
         float t = 0.0;
         float finalLine = 0.0;
         bool hit = false;
 
-        for (int i = 0; i < 64; i++) {
+        // Optimized raymarch loop count
+        for (int i = 0; i < 32; i++) {
           vec3 p = ro + rd * t;
           float localLine;
-          int hitId;
-          float d = map(p, localLine, hitId);
-          if (d < 0.001) {
+          float d = map(p, localLine);
+          if (d < 0.002) {
             hit = true;
             finalLine = localLine;
             break;
@@ -370,11 +337,7 @@ window.addEventListener("load", () => {
         if (hit) {
           float distToPointer = distance(gl_FragCoord.xy, uMouse);
           float proximity = smoothstep(150.0, 40.0, distToPointer);
-
-          vec3 whiteColor = vec3(1.0, 1.0, 1.0);
-          vec3 goldColor  = vec3(1.0, 0.84, 0.0);
-
-          vec3 targetLineColor = mix(whiteColor, goldColor, proximity);
+          vec3 targetLineColor = mix(vec3(1.0), vec3(1.0, 0.84, 0.0), proximity);
           finalColor = mix(bgColor, targetLineColor, finalLine * 0.85);
         }
 
@@ -404,85 +367,71 @@ window.addEventListener("load", () => {
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error("Could not initialize shaders");
-    } else {
-      gl.useProgram(program);
+      return;
+    }
 
-      const positionBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([
-          -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
-        ]),
-        gl.STATIC_DRAW,
-      );
+    gl.useProgram(program);
 
-      const positionLocation = gl.getAttribLocation(program, "position");
-      if (positionLocation !== -1) {
-        gl.enableVertexAttribArray(positionLocation);
-        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0]),
+      gl.STATIC_DRAW
+    );
+
+    const positionLocation = gl.getAttribLocation(program, "position");
+    if (positionLocation !== -1) {
+      gl.enableVertexAttribArray(positionLocation);
+      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    }
+
+    const resolutionLocation = gl.getUniformLocation(program, "uResolution");
+    const rotTimelinesLocation = gl.getUniformLocation(program, "uRotTimelines");
+    const mouseLocation = gl.getUniformLocation(program, "uMouse");
+    const offsetLocation = gl.getUniformLocation(program, "uOffset");
+
+    function updatePointer(e) {
+      pointerX = e.clientX * window.devicePixelRatio;
+      pointerY = (window.innerHeight - e.clientY) * window.devicePixelRatio;
+    }
+
+    window.addEventListener("pointermove", updatePointer, { passive: true });
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1.0, 1.5);
+      const targetWidth = Math.floor(window.innerWidth * dpr);
+      const targetHeight = Math.floor(window.innerHeight * dpr);
+
+      if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
       }
+    }
 
-      const resolutionLocation = gl.getUniformLocation(program, "uResolution");
-      const rotTimelinesLocation = gl.getUniformLocation(
-        program,
-        "uRotTimelines",
-      );
-      const mouseLocation = gl.getUniformLocation(program, "uMouse");
-      const offsetLocation = gl.getUniformLocation(program, "uOffset");
+    window.addEventListener("resize", resizeCanvas, { passive: true });
+    resizeCanvas(); // Initial call
 
-      function updatePointer(e) {
-        const rect = canvas.getBoundingClientRect();
-        pointerX = (e.clientX - rect.left) * (canvas.width / rect.width);
-        pointerY =
-          (rect.height - (e.clientY - rect.top)) *
-          (canvas.height / rect.height);
-      }
+    function render(time) {
+      if (lastTimestamp === 0) lastTimestamp = time;
+      const dt = (time - lastTimestamp) * 0.001;
+      lastTimestamp = time;
 
-      window.addEventListener("pointermove", updatePointer, { passive: true });
-      window.addEventListener("pointerdown", updatePointer, { passive: true });
+      rotTimelineX += dt * -1.0;
+      rotTimelineY += dt * -1.0;
+      horizontalOffset += dt * 0.4;
 
-      function resizeCanvas() {
-        const dpr = window.devicePixelRatio || 1.0;
-        const targetWidth = Math.floor(window.innerWidth * dpr);
-        const targetHeight = Math.floor(window.innerHeight * dpr);
+      gl.uniform2f(rotTimelinesLocation, rotTimelineX, rotTimelineY);
+      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+      gl.uniform2f(mouseLocation, pointerX, pointerY);
+      gl.uniform1f(offsetLocation, horizontalOffset);
 
-        if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
-          canvas.width = targetWidth;
-          canvas.height = targetHeight;
-          canvas.style.width = window.innerWidth + "px";
-          canvas.style.height = window.innerHeight + "px";
-          gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-        }
-      }
-
-      function render(time) {
-        resizeCanvas();
-
-        if (lastTimestamp === 0) {
-          lastTimestamp = time;
-        }
-
-        const dt = (time - lastTimestamp) * 0.001;
-        lastTimestamp = time;
-
-        rotTimelineX += dt * -1.0;
-        rotTimelineY += dt * -1.0;
-
-        const driftSpeed = 0.4;
-        horizontalOffset += dt * driftSpeed;
-
-        gl.uniform2f(rotTimelinesLocation, rotTimelineX, rotTimelineY);
-        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-        gl.uniform2f(mouseLocation, pointerX, pointerY);
-        gl.uniform1f(offsetLocation, horizontalOffset);
-
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-        requestAnimationFrame(render);
-      }
-
-      canvas.style.opacity = "1";
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
       requestAnimationFrame(render);
     }
+
+    canvas.style.opacity = "1";
+    requestAnimationFrame(render);
   }
 });

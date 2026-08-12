@@ -1,713 +1,575 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alvin Cheng-Hin Lim</title>
-    <meta
-      name="Description"
-      content="Homepage of Alvin Cheng-Hin Lim, academic turned web developer"
-    />
-    <link rel="canonical" href="https://alvinlim.dev" />
 
-    <link
-      rel="preload"
-      href="/fonts/Acme.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/AmaticSC.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alvin Cheng-Hin Lim</title>
+  <meta name="Description" content="Homepage of Alvin Cheng-Hin Lim, academic turned web developer" />
+  <link rel="canonical" href="https://alvinlim.dev" />
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Acme", cursive, sans-serif;
-      }
+  <link rel="preload" href="/fonts/Acme.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/AmaticSC.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/Kablammo.woff2" as="font" type="font/woff2" crossorigin />
 
-      body {
-        background-color: #262e33;
-        overflow-x: hidden;
-      }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Acme", cursive, sans-serif;
+    }
 
-      a {
-        color: gold;
-        text-decoration: none;
-        cursor: pointer;
-      }
+    body {
+      background-color: #262e33;
+      overflow-x: hidden;
+    }
 
-      a:hover {
-        color: floralwhite;
-      }
+    a {
+      color: gold;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-      canvas {
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out;
-      }
+    a:hover {
+      color: floralwhite;
+    }
 
-      @font-face {
-        font-family: "Acme";
-        src: url("/fonts/Acme.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+    canvas {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
 
-      @font-face {
-        font-family: "Amatic SC";
-        src: url("/fonts/AmaticSC.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+    @font-face {
+      font-family: "Acme";
+      src: url("/fonts/Acme.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-      h1 {
-        font-size: 4em;
-        font-weight: 200;
-        color: gold;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
-        opacity: 1;
-        line-height: 1.5em;
-      }
+    @font-face {
+      font-family: "Amatic SC";
+      src: url("/fonts/AmaticSC.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-      p {
-        font-size: 1.2em;
-        color: floralwhite;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
-        opacity: 1;
-        margin: 20px 0;
-        font-weight: 400;
-        max-width: 700px;
-      }
+    h1 {
+      font-size: 4em;
+      font-weight: 200;
+      color: gold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+      opacity: 1;
+      line-height: 1.5em;
+    }
 
-      .header-wrapper {
-        min-height: 6em;
-        display: flex;
-        align-items: center;
-      }
+    p {
+      font-size: 1.2em;
+      color: floralwhite;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+      opacity: 1;
+      margin: 20px 0;
+      font-weight: 400;
+      max-width: 700px;
+    }
 
-      #text {
-        position: relative;
-        z-index: 10;
-        max-width: 100%;
-        background: linear-gradient(
-          to right,
+    .header-wrapper {
+      min-height: 6em;
+      display: flex;
+      align-items: center;
+    }
+
+    #text {
+      position: relative;
+      z-index: 10;
+      max-width: 100%;
+      background: linear-gradient(to right,
           rgba(38, 46, 51, 0.85) 40%,
-          rgba(38, 46, 51, 0) 100%
-        );
-        padding: 40px;
-        border-radius: 12px;
+          rgba(38, 46, 51, 0) 100%);
+      padding: 40px;
+      border-radius: 12px;
+    }
+
+    #wrapper {
+      position: absolute;
+      right: 0;
+      width: 100%;
+      min-height: 100vh;
+      padding: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      z-index: 2;
+      overflow-x: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #wrapper.active {
+      transform: translateX(-300px);
+    }
+
+    #alvin {
+      border-radius: 50%;
+      height: 12em;
+      width: 12em;
+    }
+
+    #books {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
+    #books img {
+      height: auto;
+      width: 16em;
+      padding: 8px;
+    }
+
+    #books img:hover {
+      border: 0.5px solid gold;
+    }
+
+    .boop {
+      animation: boop 0.6s forwards;
+    }
+
+    @keyframes boop {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
       }
 
-      #wrapper {
-        position: absolute;
-        right: 0;
-        width: 100%;
-        min-height: 100vh;
-        padding: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: transparent;
-        z-index: 2;
-        overflow-x: hidden;
-        transition: transform 0.3s ease-in-out;
+      25% {
+        transform: rotate(10deg);
       }
 
-      #wrapper.active {
-        transform: translateX(-300px);
+      50% {
+        transform: rotate(-10deg);
       }
 
-      #alvin {
-        border-radius: 50%;
-        height: 12em;
-        width: 12em;
+      75% {
+        transform: rotate(10deg);
       }
+    }
 
-      #books {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1em;
-      }
+    #social {
+      position: absolute;
+      z-index: 10;
+      bottom: 2em;
+      left: 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      #books img {
-        height: auto;
-        width: 16em;
-        padding: 8px;
-      }
+    #social li {
+      list-style: none;
+      display: inline-block;
+      text-decoration: none;
+      opacity: 0.8;
+      font-size: 1.5em;
+      padding-left: 1em;
+    }
 
-      #books img:hover {
-        border: 0.5px solid gold;
-      }
+    #social:hover li {
+      filter: blur(1px);
+    }
 
-      .boop {
-        animation: boop 0.6s forwards;
-      }
+    #social li:hover {
+      filter: blur(0);
+    }
 
-      @keyframes boop {
-        0%,
-        100% {
-          transform: rotate(0deg);
-        }
+    #source-code {
+      position: absolute;
+      z-index: 10;
+      bottom: 2em;
+      right: 2em;
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: 800;
+      color: gold;
+      opacity: 0.8;
+    }
 
-        25% {
-          transform: rotate(10deg);
-        }
+    #source-code:hover {
+      color: floralwhite;
+      filter: blur(0);
+    }
 
-        50% {
-          transform: rotate(-10deg);
-        }
+    .icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background-size: cover;
+      filter: invert(78%) sepia(66%) saturate(823%) hue-rotate(356deg) brightness(100%) contrast(106%);
+    }
 
-        75% {
-          transform: rotate(10deg);
-        }
-      }
+    .icon:hover,
+    .icon:focus {
+      filter: invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%);
+    }
 
-      #social {
-        position: absolute;
-        z-index: 10;
-        bottom: 2em;
-        left: 2em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+    .icon-amazon {
+      background-image: url(/images/amazon.svg);
+    }
 
-      #social li {
-        list-style: none;
-        display: inline-block;
-        text-decoration: none;
-        opacity: 0.8;
-        font-size: 1.5em;
-        padding-left: 1em;
-      }
+    .icon-github {
+      background-image: url(/images/github.svg);
+    }
 
-      #social:hover li {
-        filter: blur(1px);
-      }
+    .icon-google {
+      background-image: url(/images/google.svg);
+    }
 
-      #social li:hover {
-        filter: blur(0);
-      }
+    .icon-linkedin {
+      background-image: url(/images/linkedin.svg);
+    }
 
-      #source-code {
-        position: absolute;
-        z-index: 10;
-        bottom: 2em;
-        right: 2em;
-        font-family: monospace;
-        font-size: 18px;
-        font-weight: 800;
-        color: gold;
-        opacity: 0.8;
-      }
+    form {
+      display: block;
+    }
 
-      #source-code:hover {
-        color: floralwhite;
-        filter: blur(0);
-      }
+    label {
+      display: block;
+      font-size: 1.2em;
+      text-align: left;
+      color: floralwhite;
+    }
 
-      .icon {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        background-size: cover;
-        filter: invert(78%) sepia(66%) saturate(823%) hue-rotate(356deg)
-          brightness(100%) contrast(106%);
-      }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 400px;
+      padding: 12px;
+      border-radius: 4px;
+      border: none;
+      box-sizing: border-box;
+      font-size: 20px;
+      font-family: "Patrick Hand", cursive, sans-serif;
+      color: whitesmoke;
+      background-color: slategray;
+      opacity: 0.4;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
 
-      .icon:hover,
-      .icon:focus {
-        filter: invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg)
-          brightness(105%) contrast(105%);
-      }
+    #message {
+      height: 120px;
+    }
 
-      .icon-amazon {
-        background-image: url(/images/amazon.svg);
-      }
+    input:focus,
+    textarea:focus {
+      outline: solid antiquewhite;
+      opacity: 0.8;
+    }
 
-      .icon-github {
-        background-image: url(/images/github.svg);
-      }
+    .cf-turnstile {
+      margin: 10px 0;
+    }
 
-      .icon-google {
-        background-image: url(/images/google.svg);
-      }
+    .submit {
+      color: gold;
+      background-color: transparent;
+      font-family: "Patrick Hand", cursive, sans-serif;
+      font-size: 1em;
+      padding: 10px 20px;
+      border: 2px solid gold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
 
-      .icon-linkedin {
-        background-image: url(/images/linkedin.svg);
-      }
+    .submit:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: floralwhite;
+      border-color: floralwhite;
+      transform: translateY(-2px);
+    }
 
-      form {
-        display: block;
-      }
+    .submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
 
-      label {
-        display: block;
-        font-size: 1.2em;
-        text-align: left;
-        color: floralwhite;
+    .submit:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      border-color: slategray;
+      color: slategray;
+    }
+
+    #menu {
+      position: absolute;
+      top: 0;
+      left: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2em;
+    }
+
+    #menu ul {
+      position: relative;
+    }
+
+    #menu ul li {
+      display: inline;
+      padding: 1em;
+      list-style: none;
+      text-decoration: none;
+      font-family: "Amatic SC";
+      font-size: 2em;
+      color: gold;
+      opacity: 0.8;
+    }
+
+    #menu ul:hover li {
+      filter: blur(1px);
+    }
+
+    #menu ul li:hover {
+      color: floralwhite;
+      filter: blur(0);
+    }
+
+    #menu ul li button {
+      background-color: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    #menu ul li button:focus-visible {
+      outline: 2px solid floralwhite;
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    body.webgl-fallback #wrapper {
+      background: transparent !important;
+    }
+
+    body.webgl-fallback #text {
+      background: linear-gradient(to right,
+          rgba(38, 46, 51, 0.65) 40%,
+          rgba(38, 46, 51, 0.1) 100%);
+
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    #webgl-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      display: block;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .webgl-fallback {
+      background-image: url("/background/shader-fallback.svg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    #webgl-background.hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 991px) {
+      .header-wrapper {
+        min-height: 12em;
       }
 
       input[type="text"],
       input[type="email"],
       select,
       textarea {
-        width: 400px;
-        padding: 12px;
-        border-radius: 4px;
-        border: none;
-        box-sizing: border-box;
-        font-size: 20px;
-        font-family: "Patrick Hand", cursive, sans-serif;
-        color: whitesmoke;
-        background-color: slategray;
-        opacity: 0.4;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-      }
-
-      #message {
-        height: 120px;
-      }
-
-      input:focus,
-      textarea:focus {
-        outline: solid antiquewhite;
-        opacity: 0.8;
-      }
-
-      .cf-turnstile {
-        margin: 10px 0;
-      }
-
-      .submit {
-        color: gold;
-        background-color: transparent;
-        font-family: "Patrick Hand", cursive, sans-serif;
-        font-size: 1em;
-        padding: 10px 20px;
-        border: 2px solid gold;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 15px;
-        opacity: 0.8;
-        letter-spacing: 1px;
-      }
-
-      .submit:hover:not(:disabled) {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: floralwhite;
-        border-color: floralwhite;
-        transform: translateY(-2px);
-      }
-
-      .submit:active:not(:disabled) {
-        transform: translateY(0);
-      }
-
-      .submit:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-        border-color: slategray;
-        color: slategray;
-      }
-
-      #menu {
-        position: absolute;
-        top: 0;
-        left: 1em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2em;
-      }
-
-      #menu ul {
-        position: relative;
+        width: 100%;
+        max-width: 320px;
       }
 
       #menu ul li {
-        display: inline;
-        padding: 1em;
-        list-style: none;
-        text-decoration: none;
-        font-family: "Amatic SC";
-        font-size: 2em;
-        color: gold;
-        opacity: 0.8;
+        padding: 0.6em;
       }
 
-      #menu ul:hover li {
-        filter: blur(1px);
+      #text h1 {
+        font-size: 2.4em;
       }
 
-      #menu ul li:hover {
-        color: floralwhite;
-        filter: blur(0);
+      #wrapper {
+        padding: 100px 20px 40px 20px;
+        flex-direction: column;
+        justify-content: flex-start;
       }
 
-      #menu ul li button {
-        background-color: transparent;
-        border: none;
-        font-family: inherit;
-        font-size: inherit;
-        color: inherit;
-        cursor: pointer;
-        padding: 0;
-      }
-
-      #menu ul li button:focus-visible {
-        outline: 2px solid floralwhite;
-        outline-offset: 4px;
-        border-radius: 4px;
-      }
-
-      body.webgl-fallback #wrapper {
-        background: transparent !important;
-      }
-
-      body.webgl-fallback #text {
-        background: linear-gradient(
-          to right,
-          rgba(38, 46, 51, 0.65) 40%,
-          rgba(38, 46, 51, 0.1) 100%
-        );
-
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-      }
-
-      #webgl-background {
-        position: fixed;
-        top: 0;
+      #menu {
+        z-index: 20;
+        width: 100%;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        display: block;
-        pointer-events: none;
-        opacity: 0;
+        justify-content: center;
+        padding: 1em 0;
       }
+    }
+  </style>
 
-      .webgl-fallback {
-        background-image: url("/background/shader-fallback.svg");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-      }
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+</head>
 
-      #webgl-background.hidden {
-        display: none !important;
-      }
+<body>
+  <section id="wrapper">
+    <canvas id="webgl-background"></canvas>
 
-      @media (max-width: 991px) {
-        .header-wrapper {
-          min-height: 12em;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        select,
-        textarea {
-          width: 100%;
-          max-width: 320px;
-        }
-
-        #menu ul li {
-          padding: 0.6em;
-        }
-
-        #text h1 {
-          font-size: 2.4em;
-        }
-
-        #wrapper {
-          padding: 100px 20px 40px 20px;
-          flex-direction: column;
-          justify-content: flex-start;
-        }
-
-        #menu {
-          z-index: 20;
-          width: 100%;
-          left: 0;
-          justify-content: center;
-          padding: 1em 0;
-        }
-      }
-    </style>
-
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/images/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/images/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/images/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-  </head>
-
-  <body>
-    <section id="wrapper">
-      <canvas id="webgl-background"></canvas>
-
-      <nav id="menu">
-        <ul>
-          <li><button id="aboutMenuItem">Home</button></li>
-          <li><button id="publicationsMenuItem">Books</button></li>
-          <li><button id="contactMenuItem">Email</button></li>
-        </ul>
-      </nav>
-      <div id="text">
-        <article id="about">
-          <div class="header-wrapper">
-            <h1>Alvin Cheng-Hin Lim</h1>
-          </div>
-          <picture>
-            <source srcset="/images/Alvin.avif" type="image/avif" />
-
-            <source srcset="/images/Alvin.webp" type="image/webp" />
-
-            <img
-              id="alvin"
-              alt="Alvin Lim"
-              src="/images/Alvin.jpg"
-              fetchpriority="high"
-              width="336"
-              height="336"
-            />
-          </picture>
-
-          <p>
-            I am a Senior Web Editor & Content Strategist at
-            <a href="https://www.htx.gov.sg/" target="_blank" rel="noopener"
-              >HTX (Home Team Science & Technology Agency)</a
-            >. I learned to code at
-            <a
-              href="https://www.lewagon.com/singapore/web-development-course/full-time"
-              target="_blank"
-              rel="noopener"
-              >Le Wagon</a
-            >
-            with support from the
-            <a href="https://www.imda.gov.sg/" target="_blank" rel="noopener"
-              >Infocomm Media Development Authority</a
-            >
-            of Singapore's Tech Immersion and Placement Programme (TIPP).
-          </p>
-          <p>
-            Before my career transition to technology, I was in academia. I
-            received my M.A. in Philosophy from the
-            <a
-              href="https://fass.nus.edu.sg/philo/"
-              target="_blank"
-              rel="noopener"
-              >National University of Singapore</a
-            >
-            and my Ph.D. in Political Science from the
-            <a
-              href="https://politicalscience.manoa.hawaii.edu/"
-              target="_blank"
-              rel="noopener"
-              >University of Hawaii at Manoa</a
-            >, and have taught at
-            <a href="http://www.puc.edu.kh/" target="_blank" rel="noopener"
-              >Pannasastra University of Cambodia</a
-            >, the University of Hawaii at Manoa, and the
-            <a href="https://www.aun.edu.ng/" target="_blank" rel="noopener"
-              >American University of Nigeria</a
-            >.
-          </p>
-        </article>
-        <article id="publications">
-          <div class="header-wrapper">
-            <h1>My Books</h1>
-          </div>
-          <div id="books">
-            <a
-              href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358"
-              target="_blank"
-              rel="noopener"
-            >
-              <picture>
-                <source srcset="/images/Cambodia.avif" type="image/avif" />
-
-                <source srcset="/images/Cambodia.webp" type="image/webp" />
-                <img
-                  src="/images/Cambodia.jpg"
-                  alt="Cambodia and the Politics of Aesthetics"
-                  width="256"
-                  height="384"
-                  loading="lazy"
-                />
-              </picture>
-            </a>
-            <a
-              href="https://www.bloomsbury.com/us/china-and-southeast-asia-in-the-xi-jinping-era-9781498581127/"
-              target="_blank"
-              rel="noopener"
-            >
-              <picture>
-                <source srcset="/images/SEA.avif" type="image/avif" />
-
-                <source srcset="/images/SEA.webp" type="image/webp" />
-                <img
-                  src="/images/SEA.jpg"
-                  alt="China and Southeast Asia in the Xi Jinping Era"
-                  width="256"
-                  height="385"
-                  loading="lazy"
-                />
-              </picture>
-            </a>
-          </div>
-          <p>
-            My publications include
-            <a
-              href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358"
-              target="_blank"
-              rel="noopener"
-              >Cambodia and the Politics of Aesthetics</a
-            >
-            and
-            <a
-              href="https://www.bloomsbury.com/us/china-and-southeast-asia-in-the-xi-jinping-era-9781498581127/"
-              target="_blank"
-              rel="noopener"
-              >China and Southeast Asia in the Xi Jinping Era</a
-            >. My full writing portfolio can be found at
-            <a
-              href="https://alvinlim.academia.edu/"
-              target="_blank"
-              rel="noopener"
-              >Academia.edu</a
-            >.
-          </p>
-        </article>
-        <article id="contact">
-          <div class="header-wrapper">
-            <h1>Email Me</h1>
-          </div>
-          <div class="container">
-            <div id="formStatusBanner"></div>
-            <form
-              id="contactForm"
-              name="Contact"
-              action="/api/submit"
-              method="POST"
-            >
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-              />
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                required
-              />
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
-              <div
-                class="cf-turnstile"
-                data-sitekey="0x4AAAAAADsVJbQMoTEVuxeY"
-                data-size="compact"
-                data-theme="dark"
-              ></div>
-              <input
-                type="submit"
-                value="Submit"
-                class="submit"
-                id="submitBtn"
-                disabled
-              />
-            </form>
-          </div>
-        </article>
-      </div>
-      <footer>
-        <ul id="social">
-          <li>
-            <a
-              href="https://www.amazon.com/Alvin-Cheng-Hin-Lim/e/B009AKHXB0%3Fref=dbs_a_mng_rwt_scns_share"
-              title="Amazon"
-              target="_blank"
-              rel="noopener"
-              ><span class="icon icon-amazon"></span
-            ></a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/alvinqingxing/"
-              title="GitHub"
-              target="_blank"
-              rel="noopener"
-              ><span class="icon icon-github"></span
-            ></a>
-          </li>
-          <li>
-            <a
-              href="https://scholar.google.com/citations?user=-85i0iwAAAAJ"
-              title="Google Scholar"
-              target="_blank"
-              rel="noopener"
-              ><span class="icon icon-google"></span
-            ></a>
-          </li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/alvin-lim-dev/"
-              title="LinkedIn"
-              target="_blank"
-              rel="noopener"
-              ><span class="icon icon-linkedin"></span
-            ></a>
-          </li>
-        </ul>
-        <div>
-          <a
-            href="https://github.com/alvinqingxing/homepage"
-            title="Source Code"
-            target="_blank"
-            rel="noopener"
-            ><span id="source-code">&lt;/&gt;</span></a
-          >
+    <nav id="menu">
+      <ul>
+        <li><button id="aboutMenuItem">Home</button></li>
+        <li><button id="publicationsMenuItem">Books</button></li>
+        <li><button id="contactMenuItem">Email</button></li>
+      </ul>
+    </nav>
+    <div id="text">
+      <article id="about">
+        <div class="header-wrapper">
+          <h1>Alvin Cheng-Hin Lim</h1>
         </div>
-      </footer>
-    </section>
-    <script>
-      window.addEventListener("load", () => {
-        const fontStyle = document.createElement("style");
-        fontStyle.innerHTML = `
+        <picture>
+          <source srcset="/images/Alvin.avif" type="image/avif" />
+
+          <source srcset="/images/Alvin.webp" type="image/webp" />
+
+          <img id="alvin" alt="Alvin Lim" src="/images/Alvin.jpg" fetchpriority="high" width="336" height="336" />
+        </picture>
+
+        <p>
+          I am a Senior Web Editor & Content Strategist at
+          <a href="https://www.htx.gov.sg/" target="_blank" rel="noopener">HTX (Home Team Science & Technology
+            Agency)</a>. I learned to code at
+          <a href="https://www.lewagon.com/singapore/web-development-course/full-time" target="_blank" rel="noopener">Le
+            Wagon</a>
+          with support from the
+          <a href="https://www.imda.gov.sg/" target="_blank" rel="noopener">Infocomm Media Development Authority</a>
+          of Singapore's Tech Immersion and Placement Programme (TIPP).
+        </p>
+        <p>
+          Before my career transition to technology, I was in academia. I
+          received my M.A. in Philosophy from the
+          <a href="https://fass.nus.edu.sg/philo/" target="_blank" rel="noopener">National University of Singapore</a>
+          and my Ph.D. in Political Science from the
+          <a href="https://politicalscience.manoa.hawaii.edu/" target="_blank" rel="noopener">University of Hawaii at
+            Manoa</a>, and have taught at
+          <a href="http://www.puc.edu.kh/" target="_blank" rel="noopener">Pannasastra University of Cambodia</a>, the
+          University of Hawaii at Manoa, and the
+          <a href="https://www.aun.edu.ng/" target="_blank" rel="noopener">American University of Nigeria</a>.
+        </p>
+      </article>
+      <article id="publications">
+        <div class="header-wrapper">
+          <h1>My Books</h1>
+        </div>
+        <div id="books">
+          <a href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358"
+            target="_blank" rel="noopener">
+            <picture>
+              <source srcset="/images/Cambodia.avif" type="image/avif" />
+
+              <source srcset="/images/Cambodia.webp" type="image/webp" />
+              <img src="/images/Cambodia.jpg" alt="Cambodia and the Politics of Aesthetics" width="256" height="384"
+                loading="lazy" />
+            </picture>
+          </a>
+          <a href="https://www.bloomsbury.com/us/china-and-southeast-asia-in-the-xi-jinping-era-9781498581127/"
+            target="_blank" rel="noopener">
+            <picture>
+              <source srcset="/images/SEA.avif" type="image/avif" />
+
+              <source srcset="/images/SEA.webp" type="image/webp" />
+              <img src="/images/SEA.jpg" alt="China and Southeast Asia in the Xi Jinping Era" width="256" height="385"
+                loading="lazy" />
+            </picture>
+          </a>
+        </div>
+        <p>
+          My publications include
+          <a href="https://www.routledge.com/Cambodia-and-the-Politics-of-Aesthetics/Lim/p/book/9781138948358"
+            target="_blank" rel="noopener">Cambodia and the Politics of Aesthetics</a>
+          and
+          <a href="https://www.bloomsbury.com/us/china-and-southeast-asia-in-the-xi-jinping-era-9781498581127/"
+            target="_blank" rel="noopener">China and Southeast Asia in the Xi Jinping Era</a>. My full writing portfolio
+          can be found at
+          <a href="https://alvinlim.academia.edu/" target="_blank" rel="noopener">Academia.edu</a>.
+        </p>
+      </article>
+      <article id="contact">
+        <div class="header-wrapper">
+          <h1>Email Me</h1>
+        </div>
+        <div class="container">
+          <div id="formStatusBanner"></div>
+          <form id="contactForm" name="Contact" action="/api/submit" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADsVJbQMoTEVuxeY" data-size="compact" data-theme="dark">
+            </div>
+            <input type="submit" value="Submit" class="submit" id="submitBtn" disabled />
+          </form>
+        </div>
+      </article>
+    </div>
+    <footer>
+      <ul id="social">
+        <li>
+          <a href="https://www.amazon.com/Alvin-Cheng-Hin-Lim/e/B009AKHXB0%3Fref=dbs_a_mng_rwt_scns_share"
+            title="Amazon" target="_blank" rel="noopener"><span class="icon icon-amazon"></span></a>
+        </li>
+        <li>
+          <a href="https://github.com/alvinqingxing/" title="GitHub" target="_blank" rel="noopener"><span
+              class="icon icon-github"></span></a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=-85i0iwAAAAJ" title="Google Scholar" target="_blank"
+            rel="noopener"><span class="icon icon-google"></span></a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/alvin-lim-dev/" title="LinkedIn" target="_blank" rel="noopener"><span
+              class="icon icon-linkedin"></span></a>
+        </li>
+      </ul>
+      <div>
+        <a href="https://github.com/alvinqingxing/homepage" title="Source Code" target="_blank" rel="noopener"><span
+            id="source-code">&lt;/&gt;</span></a>
+      </div>
+    </footer>
+  </section>
+  <script>
+    window.addEventListener("load", () => {
+      const fontStyle = document.createElement("style");
+      fontStyle.innerHTML = `
     @font-face {
       font-family: "Patrick Hand";
       src: url("/fonts/PatrickHand.woff2") format("woff2");
@@ -762,9 +624,10 @@
       100% { font-family: "Henny Penny", "Tahoma", sans-serif; }
     }
   `;
-        document.head.appendChild(fontStyle);
-      });
-    </script>
-    <script defer src="/src/script.js"></script>
-  </body>
+      document.head.appendChild(fontStyle);
+    });
+  </script>
+  <script defer src="/src/script.js"></script>
+</body>
+
 </html>
